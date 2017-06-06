@@ -4,7 +4,9 @@ using EF6Test.Data;
 namespace EF6Test
 {
     using EF6Test.Repositories;
+    using KellermanSoftware.CompareNetObjects;
     using Newtonsoft.Json;
+    using System.Security.Cryptography;
 
     internal class Program
     {
@@ -15,22 +17,49 @@ namespace EF6Test
             //var order = CreateOrder(driver.Id);
             //Console.Write($@"driverId: {driver.Id}, orderId: {order.Id}");
 
+            Console.WriteLine(1);
             var searchRepository = new SearchRepository();
             var search = searchRepository.Create(1);
             var existingSearch = searchRepository.Read(search.Id);
-            var oJson = JsonConvert.SerializeObject(search);
-            var eJson = JsonConvert.SerializeObject(existingSearch);
-            Console.WriteLine(oJson.Equals(eJson));
+            WriteComparison(search, existingSearch);
 
-            search.State = 2;
+            // 2
+            Console.WriteLine(2);
             search.AddSuggestion(100);
             search.AddSuggestion(200);
             search.AddSuggestion(300);
             searchRepository.Update(search);
             existingSearch = searchRepository.Read(search.Id);
-            oJson = JsonConvert.SerializeObject(search);
-            eJson = JsonConvert.SerializeObject(existingSearch);
-            Console.WriteLine(oJson.Equals(eJson));
+            WriteComparison(search, existingSearch);
+
+            Console.WriteLine(3);
+            search.State = 3;
+            foreach (var suggestion in search.Suggestions)
+                suggestion.State = 2;
+            searchRepository.Update(search);
+            existingSearch = searchRepository.Read(search.Id);
+            WriteComparison(search, existingSearch);
+
+            Console.WriteLine(4);
+            search = searchRepository.Read(existingSearch.Id);
+            search.State = 4;
+            foreach (var suggestion in search.Suggestions)
+                suggestion.State = 3;
+            searchRepository.Update(search);
+            existingSearch = searchRepository.Read(search.Id);
+            WriteComparison(search, existingSearch);
+
+            Console.ReadKey();
+        }
+
+        private static void WriteComparison(Domain.Search a, Domain.Search b)
+        {
+            var deepComparer = new CompareLogic();
+            //Console.WriteLine(JsonConvert.SerializeObject(a, Formatting.Indented));
+            //Console.WriteLine(JsonConvert.SerializeObject(b, Formatting.Indented));
+            var compareResult = deepComparer.Compare(a, b);
+            //Console.WriteLine(compareResult.DifferencesString);
+            Console.WriteLine(compareResult.AreEqual);
         }
 
         private static void Clean()

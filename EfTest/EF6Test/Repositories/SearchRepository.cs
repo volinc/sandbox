@@ -19,7 +19,7 @@
                 {
                     State = state,
                     ModifiedAt = now,
-                    CreatedAt = now,                    
+                    CreatedAt = now,
                 });
 
                 ctx.SaveChanges();
@@ -32,7 +32,11 @@
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var data = ctx.Searches.AsNoTracking().Include(x => x.Suggestions).Single(x => x.Id == searchId);
+                var data = ctx.Searches.Local.SingleOrDefault(x => x.Id == searchId);
+                if (data == null)
+                {
+                    data = ctx.Searches.AsNoTracking().Include(x => x.Suggestions).Single(x => x.Id == searchId);
+                }
 
                 return Search.Map.From(data);
             }
@@ -42,13 +46,24 @@
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var data = Search.Map.To(domain);
-              
-                foreach (var suggestionData in data.Suggestions)
-                    ctx.Suggestions.AddOrUpdate(suggestionData);
+                ctx.Configuration.AutoDetectChangesEnabled = false;
+
+                var newSearch = Search.Map.To(domain);
+                var oldSearch = ctx.Searches.Find(newSearch.Id);
+                ctx.Entry(oldSearch).CurrentValues.SetValues(newSearch);
+
+                foreach (var newSuggestion in newSearch.Suggestions)
+                {
+                    if (newSuggestion.Id != Guid.Empty)
+                    {
+                        var oldSuggestion = ctx.Suggestions.Find(newSuggestion.Id);
+                        ctx.Entry(oldSuggestion).CurrentValues.SetValues(newSuggestion);
+                    }
+                    else
+                        ctx.Entry(newSuggestion).State = EntityState.Added;
+                }
 
                 ctx.ChangeTracker.DetectChanges();
-
                 ctx.SaveChanges();
             }
         }
