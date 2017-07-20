@@ -2,6 +2,7 @@
 {
     using System;
     using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Migrations;
     using System.Linq;
     using EF6Test.Data;
@@ -9,48 +10,52 @@
 
     public class SearchRepository
     {
+        private readonly IDbContextFactory<ApplicationDbContext> dbContextFactory;
+
+        public SearchRepository(IDbContextFactory<ApplicationDbContext> dbContextFactory)
+        {
+            this.dbContextFactory = dbContextFactory;
+        }
+
         public Search Create(long state)
         {
-            using (var ctx = new ApplicationDbContext())
+            var ctx = dbContextFactory.Create();
+
+            var now = DateTimeOffset.Now;
+
+            var data = ctx.Searches.Add(new SearchData
             {
-                var now = DateTimeOffset.Now;
+                State = state,
+                ModifiedAt = now,
+                CreatedAt = now,                    
+            });
 
-                var data = ctx.Searches.Add(new SearchData
-                {
-                    State = state,
-                    ModifiedAt = now,
-                    CreatedAt = now,                    
-                });
+            ctx.SaveChanges();
 
-                ctx.SaveChanges();
-
-                return Search.Map.From(data);
-            }
+            return Search.Map.From(data);            
         }
 
         public Search Read(Guid searchId)
         {
-            using (var ctx = new ApplicationDbContext())
-            {
-                var data = ctx.Searches.AsNoTracking().Include(x => x.Suggestions).Single(x => x.Id == searchId);
+            var ctx = dbContextFactory.Create();
 
-                return Search.Map.From(data);
-            }
+            var data = ctx.Searches.AsNoTracking().Include(x => x.Suggestions).Single(x => x.Id == searchId);
+
+            return Search.Map.From(data);            
         }
 
         public void Update(Search domain)
         {
-            using (var ctx = new ApplicationDbContext())
-            {
-                var data = Search.Map.To(domain);
+            var ctx = dbContextFactory.Create();
+
+            var data = Search.Map.To(domain);
               
-                foreach (var suggestionData in data.Suggestions)
-                    ctx.Suggestions.AddOrUpdate(suggestionData);
+            foreach (var suggestionData in data.Suggestions)
+                ctx.Suggestions.AddOrUpdate(suggestionData);
 
-                ctx.ChangeTracker.DetectChanges();
+            ctx.ChangeTracker.DetectChanges();
 
-                ctx.SaveChanges();
-            }
+            ctx.SaveChanges();            
         }
     }
 }
