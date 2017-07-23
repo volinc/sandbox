@@ -1,28 +1,48 @@
 ﻿namespace EF6Test
 {
     using System;
+    using System.Linq;
     using EF6Test.Data;
     using EF6Test.Repositories;
     using KellermanSoftware.CompareNetObjects;
+    using EF6Test.Domain;
 
     public class TestLogic
     {
+        private readonly DriverRepository driverRepository;
+        private readonly VehicleRepository vehicleRepository;
+        private readonly ShiftRepository shiftRepository;
+        private readonly PassengerRepository passengerRepository;
         private readonly SearchRepository searchRepository;
-
-        public TestLogic(SearchRepository searchRepository)
+        private readonly OrderRepository orderRepository;
+            
+        public TestLogic(DriverRepository driverRepository, 
+                         VehicleRepository vehicleRepository, 
+                         ShiftRepository shiftRepository, 
+                         PassengerRepository passengerRepository, 
+                         SearchRepository searchRepository,
+                         OrderRepository orderRepository)
         {
+            this.driverRepository = driverRepository;
+            this.vehicleRepository = vehicleRepository;
+            this.shiftRepository = shiftRepository;
+            this.passengerRepository = passengerRepository;
             this.searchRepository = searchRepository;
+            this.orderRepository = orderRepository;
         }
 
         public void Start()
         {
             Clean();
-            //var driver = CreateDriver();
-            //var order = CreateOrder(driver.Id);
+            var driverId = 1;
+            driverRepository.Create(driverId, "Romashka", "Oduvanchikoff", "А000АА00", 2000);
+            var vehicleId = vehicleRepository.Create("AA111A11", "949525F24E1040CE9");
+            var shiftId = shiftRepository.Create(vehicleId, driverId);
+
             //Console.Write($@"driverId: {driver.Id}, orderId: {order.Id}");
 
             Console.WriteLine(1);
-            var search = searchRepository.Create(1);
+            var search = searchRepository.Create(OrderState.Scheduled);
             var existingSearch = searchRepository.Read(search.Id);
             WriteComparison(search, existingSearch);
 
@@ -35,8 +55,7 @@
             existingSearch = searchRepository.Read(search.Id);
             WriteComparison(search, existingSearch);
 
-            Console.WriteLine(3);
-            search.State = 3;
+            Console.WriteLine(3);            
             foreach (var suggestion in search.Suggestions)
                 suggestion.State = 2;
             searchRepository.Update(search);
@@ -44,10 +63,14 @@
             WriteComparison(search, existingSearch);
 
             Console.WriteLine(4);
-            search = searchRepository.Read(existingSearch.Id);
-            search.State = 4;
+            search = searchRepository.Read(existingSearch.Id);                    
             foreach (var suggestion in search.Suggestions)
                 suggestion.State = 3;
+            if (search.Suggestions.Any())
+            {
+                var firstSuggestion = search.Suggestions.First();
+                firstSuggestion.State = 4;
+            }
             searchRepository.Update(search);
             existingSearch = searchRepository.Read(search.Id);
             WriteComparison(search, existingSearch);
@@ -78,43 +101,6 @@
                 ctx.SaveChanges();
             }
         }
-
-        private static DriverData CreateDriver()
-        {
-            using (var ctx = new ApplicationDbContext())
-            {
-                var data = ctx.Drivers.Add(new DriverData
-                {
-                    ExperienceFrom = 2000,
-                    LicenseNumber = Guid.NewGuid().ToString("N"),
-                    Person = new PersonData
-                    {
-                        Id = 1,
-                        GivenNames = "Romashka",
-                        FamilyName = "Oduvanchikoff",
-                        CreatedAt = DateTimeOffset.Now,
-                    }
-                });
-
-                ctx.SaveChanges();
-                return data;
-            }
-        }
-
-        private static OrderData CreateOrder(long driverId)
-        {
-            using (var ctx = new ApplicationDbContext())
-            {
-                var data = ctx.Orders.Add(new OrderData
-                {
-                    DriverId = driverId,
-                    State = 1,
-                    CreatedAt = DateTimeOffset.Now,
-                });
-
-                ctx.SaveChanges();
-                return data;
-            }
-        }
+                
     }
 }

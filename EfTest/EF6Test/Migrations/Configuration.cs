@@ -1,5 +1,7 @@
 namespace EF6Test.Migrations
 {
+    using EF6Test.Data;
+    using System;
     using System.Data.Entity.Migrations;
 
     internal sealed class Configuration : DbMigrationsConfiguration<EF6Test.ApplicationDbContext>
@@ -22,7 +24,7 @@ namespace EF6Test.Migrations
             //      new Person { FullName = "Brice Lambson" },
             //      new Person { FullName = "Rowan Miller" }
             //    );
-            //
-        }
+            //            
+        }        
     }
 }

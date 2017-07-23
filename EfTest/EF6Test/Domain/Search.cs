@@ -7,9 +7,9 @@
 
     public class Search
     {
-        private readonly SearchData data;
+        private readonly OrderData data;
 
-        private Search(SearchData data)
+        private Search(OrderData data)
         {
             this.data = data;
         }
@@ -20,10 +20,10 @@
 
         public DateTimeOffset ModifiedAt => data.ModifiedAt;
 
-        public long State
+        public OrderState State
         {
             get => data.State;
-            set
+            private set
             {
                 data.State = value;
                 data.ModifiedAt = DateTimeOffset.Now;
@@ -37,17 +37,17 @@
             var suggestion = new Suggestion(Id, price);
             data.Suggestions.Add(Suggestion.Map.To(suggestion));
             ((ICollection<Suggestion>)Suggestions).Add(suggestion);
-            data.ModifiedAt = DateTimeOffset.Now;
+            data.State = OrderState.Searching;                      
         }
 
         public static class Map
         {
-            public static Search From(SearchData data) => new Search(data)
+            public static Search From(OrderData data) => new Search(data)
             {                                                                                                                 
                 Suggestions = data.Suggestions.Select(Suggestion.Map.From).ToList()
             };
 
-            public static SearchData To(Search domain) => domain.data;
+            public static OrderData To(Search domain) => domain.data;
         }
     }
 }

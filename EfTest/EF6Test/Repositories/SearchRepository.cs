@@ -2,72 +2,71 @@
 {
     using System;
     using System.Data.Entity;
-    using System.Data.Entity.Infrastructure;
-    using System.Data.Entity.Migrations;
     using System.Linq;
     using EF6Test.Data;
     using EF6Test.Domain;
 
     public class SearchRepository
     {
-        private readonly IDbContextFactory<ApplicationDbContext> dbContextFactory;
+        private readonly ApplicationDbContext dbContext;
 
-        public SearchRepository(IDbContextFactory<ApplicationDbContext> dbContextFactory)
+        public SearchRepository(ApplicationDbContext dbContext)
         {
-            this.dbContextFactory = dbContextFactory;
+            this.dbContext = dbContext;
         }
 
-        public Search Create(long state)
+        public Search Create(OrderState state)
         {
-            var ctx = dbContextFactory.Create();
-
             var now = DateTimeOffset.Now;
 
-            var data = ctx.Searches.Add(new SearchData
+            var data = dbContext.Orders.Add(new OrderData
             {
                 State = state,
                 ModifiedAt = now,
                 CreatedAt = now,
             });
 
-            ctx.SaveChanges();
+            dbContext.SaveChanges();
 
             return Search.Map.From(data);
         }
 
         public Search Read(Guid searchId)
         {
-            var ctx = dbContextFactory.Create();
-
-            var data = ctx.Searches.Local.SingleOrDefault(x => x.Id == searchId) ??
-                       ctx.Searches.Include(x => x.Suggestions).Single(x => x.Id == searchId);
+            var data = dbContext.Orders.Local.SingleOrDefault(x => x.Id == searchId) ??
+                       dbContext.Orders.Include(x => x.Suggestions).Single(x => x.Id == searchId);
 
             return Search.Map.From(data);
         }
 
         public void Update(Search domain)
         {
-            var ctx = dbContextFactory.Create();
-
-            ctx.Configuration.AutoDetectChangesEnabled = false;
-
-            var newSearch = Search.Map.To(domain);
-            var oldSearch = ctx.Searches.Find(newSearch.Id);
-            ctx.Entry(oldSearch).CurrentValues.SetValues(newSearch);
-
-            foreach (var newSuggestion in newSearch.Suggestions)
+            try
             {
-                if (newSuggestion.Id != Guid.Empty)
-                {
-                    var oldSuggestion = ctx.Suggestions.Find(newSuggestion.Id);
-                    ctx.Entry(oldSuggestion).CurrentValues.SetValues(newSuggestion);
-                }
-                else
-                    ctx.Entry(newSuggestion).State = EntityState.Added;
-            }
+                dbContext.Configuration.AutoDetectChangesEnabled = false;
 
-            ctx.ChangeTracker.DetectChanges();
-            ctx.SaveChanges();
+                var newSearch = Search.Map.To(domain);
+                var oldSearch = dbContext.Orders.Find(newSearch.Id);
+                dbContext.Entry(oldSearch).CurrentValues.SetValues(newSearch);
+
+                foreach (var newSuggestion in newSearch.Suggestions)
+                {
+                    if (newSuggestion.Id != Guid.Empty)
+                    {
+                        var oldSuggestion = dbContext.Suggestions.Find(newSuggestion.Id);
+                        dbContext.Entry(oldSuggestion).CurrentValues.SetValues(newSuggestion);
+                    }
+                    else
+                        dbContext.Entry(newSuggestion).State = EntityState.Added;
+                }
+
+                dbContext.ChangeTracker.DetectChanges();
+                dbContext.SaveChanges();
+            }
+            finally
+            {
+                dbContext.Configuration.AutoDetectChangesEnabled = true;
+            }
         }
     }
 }

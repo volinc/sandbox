@@ -17,7 +17,7 @@ namespace EF6Test.Domain
         {
             data = new SuggestionData
             {
-                SearchId = searchId,
+                OrderId = searchId,
                 Price = price,
                 State = 1,
             };
@@ -25,7 +25,7 @@ namespace EF6Test.Domain
 
         public Guid Id => data.Id;
 
-        public Guid SearchId => data.SearchId;
+        public Guid SearchId => data.OrderId;
 
         public decimal Price => data.Price;
 
