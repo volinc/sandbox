@@ -8,8 +8,7 @@
     public class ApplicationDbContext : CommonDbContext
     {
         public ApplicationDbContext() : base("name=ef6test")
-        {
-            //Database.SetInitializer(new CreateDatabaseIfNotExists<ApplicationDbContext>());
+        {            
         }
 
         public DbSet<PersonData> Persons { get; set; }

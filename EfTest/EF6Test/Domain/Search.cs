@@ -34,6 +34,9 @@
 
         public void AddSuggestion(decimal price)
         {
+            if (State != OrderState.Scheduled)
+                throw new InvalidOperationException();
+
             var suggestion = new Suggestion(Id, price);
             data.Suggestions.Add(Suggestion.Map.To(suggestion));
             ((ICollection<Suggestion>)Suggestions).Add(suggestion);
