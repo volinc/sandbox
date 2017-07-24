@@ -32,5 +32,3 @@ C:\Sandbox\EfTest\EF6Test\bin\Debug\Newtonsoft.Json.xml
 C:\Sandbox\EfTest\EF6Test\obj\Debug\EF6Test.csprojResolveAssemblyReference.cache
 C:\Sandbox\EfTest\EF6Test\obj\Debug\EF6Test.exe
 C:\Sandbox\EfTest\EF6Test\obj\Debug\EF6Test.pdb
-C:\Sandbox\EfTest\EF6Test\obj\Debug\EF6Test.Migrations.Initial.resources
-C:\Sandbox\EfTest\EF6Test\obj\Debug\EF6Test.csproj.GenerateResource.Cache

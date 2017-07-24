@@ -78,10 +78,6 @@
     <Compile Include="Domain\ShiftState.cs" />
     <Compile Include="Domain\Suggestion.cs" />
     <Compile Include="ExceptionExtensions.cs" />
-    <Compile Include="Migrations\201707241411067_Initial.cs" />
-    <Compile Include="Migrations\201707241411067_Initial.Designer.cs">
-      <DependentUpon>201707241411067_Initial.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -99,11 +95,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppReadme\Compare-NET-Objects-Help.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201707241411067_Initial.resx">
-      <DependentUpon>201707241411067_Initial.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
