@@ -23,6 +23,8 @@ namespace EF6Test.Repositories
                 Vin = vin,
             });
 
+            dbContext.SaveChanges();
+
             if (driverIds != null && driverIds.Any())
             {
                 var badDriverIds = dbContext.Drivers.AsNoTracking()
@@ -39,7 +41,8 @@ namespace EF6Test.Repositories
                     VehicleId = vehicleData.Id,
                 });
 
-                dbContext.DriverVehicles.AddRange(driverVehicles);
+                foreach (var data in driverVehicles)
+                    vehicleData.DriverVehicles.Add(data);
             }
 
             dbContext.SaveChanges();

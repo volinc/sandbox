@@ -10,6 +10,7 @@
 
     public class TestLogic
     {
+        private readonly ApplicationDbContext dbContext;
         private readonly DriverRepository driverRepository;
         private readonly VehicleRepository vehicleRepository;
         private readonly ShiftRepository shiftRepository;
@@ -17,13 +18,15 @@
         private readonly SearchRepository searchRepository;
         private readonly OrderRepository orderRepository;
             
-        public TestLogic(DriverRepository driverRepository, 
+        public TestLogic(ApplicationDbContext dbContext,
+                         DriverRepository driverRepository, 
                          VehicleRepository vehicleRepository, 
                          ShiftRepository shiftRepository, 
                          PassengerRepository passengerRepository, 
                          SearchRepository searchRepository,
                          OrderRepository orderRepository)
         {
+            this.dbContext = dbContext;
             this.driverRepository = driverRepository;
             this.vehicleRepository = vehicleRepository;
             this.shiftRepository = shiftRepository;
@@ -89,23 +92,19 @@
             Console.WriteLine(compareResult.AreEqual);
         }
 
-        private static void Clean()
+        private void Clean()
         {
-            using (var ctx = new ApplicationDbContext())
-            {
-                ctx.Database.ExecuteSqlCommand(@"
-                delete from [dbo].[Suggestion];
-                delete from [dbo].[AggregatorOrder];
-                delete from [dbo].[Order];                
-                delete from [dbo].[Shift];
-                delete from [dbo].[DriverVehicle];
-                delete from [dbo].[Vehicle];
-                delete from [dbo].[Driver]; 
-                delete from [dbo].[Passenger]; 
-                delete from [dbo].[Person];");
-                ctx.SaveChanges();
-            }
-        }
-                
+            dbContext.Database.ExecuteSqlCommand(@"
+            delete from [dbo].[Suggestion];
+            delete from [dbo].[AggregatorOrder];
+            delete from [dbo].[Order];                
+            delete from [dbo].[Shift];
+            delete from [dbo].[DriverVehicle];
+            delete from [dbo].[Vehicle];
+            delete from [dbo].[Driver]; 
+            delete from [dbo].[Passenger]; 
+            delete from [dbo].[Person];");
+            dbContext.SaveChanges();            
+        }                
     }
 }

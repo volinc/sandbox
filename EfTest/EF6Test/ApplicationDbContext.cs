@@ -2,14 +2,14 @@
 {
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity;
-    using System.Linq.Expressions;
     using EF6Test.Data;
 
     [DbConfigurationType(typeof(CodeBaseDbConfiguration))]
     public class ApplicationDbContext : CommonDbContext
     {
         public ApplicationDbContext() : base("name=ef6test")
-        {            
+        {
+            //Database.SetInitializer(new CreateDatabaseIfNotExists<ApplicationDbContext>());
         }
 
         public DbSet<PersonData> Persons { get; set; }
