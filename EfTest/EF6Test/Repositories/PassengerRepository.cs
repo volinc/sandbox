@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EF6Test.Repositories
 {
+    using EF6Test.Data;
+
     public class PassengerRepository
     {
         private readonly ApplicationDbContext dbContext;
@@ -13,6 +11,22 @@ namespace EF6Test.Repositories
         public PassengerRepository(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext;
+        }
+
+        public void Create(long personId, string givenName, string familyName, DateTimeOffset? birthDate = null)
+        {
+            dbContext.Passengers.Add(new PassengerData
+            {
+                BirthDate = birthDate, 
+                Person = new PersonData
+                {
+                    Id = personId,
+                    GivenNames = givenName,
+                    FamilyName = familyName,
+                }
+            });
+
+            dbContext.SaveChanges();
         }
     }
 }

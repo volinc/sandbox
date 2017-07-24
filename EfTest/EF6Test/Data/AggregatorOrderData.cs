@@ -6,6 +6,8 @@ namespace EF6Test.Data
     {
         public Guid Id { get; set; }
 
-        public Guid CompanyId { get; set; }                    
+        public Guid CompanyId { get; set; }            
+        
+        public virtual OrderData Order { get; set; }
     }
 }

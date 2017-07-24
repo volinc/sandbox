@@ -2,6 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity;
+    using System.Linq.Expressions;
     using EF6Test.Data;
 
     [DbConfigurationType(typeof(CodeBaseDbConfiguration))]
@@ -26,6 +27,8 @@
         public DbSet<OrderData> Orders { get; set; }
 
         public DbSet<AggregatorOrderData> AggregatorOrders { get; set; }
+
+        public DbSet<DriverVehicleData> DriverVehicles { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -53,6 +56,11 @@
                 builder.Property(x => x.Vin).IsRequired();
             });
 
+            modelBuilder.Entity<DriverVehicleData>(builder =>
+            {
+                builder.HasKey(x => new {x.DriverId, x.VehicleId});
+            });
+
             modelBuilder.Entity<ShiftData>(builder =>
             {
                 builder.Property(x => x.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
@@ -61,9 +69,14 @@
             modelBuilder.Entity<OrderData>(builder =>
             {
                 builder.Property(x => x.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-                builder.HasOptional(x => x.AggregatorOrder).WithOptionalDependent();
+                //builder.HasOptional(x => x.AggregatorOrder).WithOptionalDependent();
                 //builder.HasRequired(x => x.Passenger).WithMany().HasForeignKey(x => x.PassengerId);
                 //builder.HasOptional(x => x.Shift).WithMany().HasForeignKey(x => x.ShiftId);
+            });
+
+            modelBuilder.Entity<AggregatorOrderData>(builder =>
+            {
+                builder.HasRequired(x => x.Order).WithOptional(x => x.AggregatorOrder);
             });
 
             modelBuilder.Entity<SuggestionData>(builder =>

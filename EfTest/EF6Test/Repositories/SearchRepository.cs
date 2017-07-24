@@ -1,6 +1,7 @@
 ﻿namespace EF6Test.Repositories
 {
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
     using EF6Test.Data;
@@ -9,32 +10,60 @@
     public class SearchRepository
     {
         private readonly ApplicationDbContext dbContext;
+        private readonly Func<DateTimeOffset> now;
 
-        public SearchRepository(ApplicationDbContext dbContext)
+        public SearchRepository(ApplicationDbContext dbContext, Func<DateTimeOffset> now)
         {
             this.dbContext = dbContext;
+            this.now = now;
         }
 
-        public Search Create(OrderState state)
+        public Search Create(long passengerId, OrderState state, ICollection<Suggestion> suggestions = null,
+            Guid? companyId = null)
         {
-            var now = DateTimeOffset.Now;
+            if (!(state == OrderState.Searching && suggestions != null ||
+                  state == OrderState.Created && suggestions == null))
+                throw new InvalidOperationException();
 
-            var data = dbContext.Orders.Add(new OrderData
+            var currentTime = now();
+
+            var orderData = new OrderData
             {
-                State = state,
-                ModifiedAt = now,
-                CreatedAt = now,
-            });
+                PassengerId = passengerId,
+                State = OrderState.Searching,
+                ModifiedAt = currentTime,
+                CreatedAt = currentTime,
+            };
+
+            if (suggestions != null && suggestions.Any())
+            {
+                foreach (var suggestion in suggestions)
+                {
+                    var suggestionData = Suggestion.Map.To(suggestion);
+                    orderData.Suggestions.Add(suggestionData);
+                }
+            }
+
+            if (companyId.HasValue)
+            {
+                orderData.AggregatorOrder = new AggregatorOrderData
+                {
+                    CompanyId = companyId.Value,
+                };
+            }
+
+            orderData = dbContext.Orders.Add(orderData);
 
             dbContext.SaveChanges();
 
-            return Search.Map.From(data);
+            return Search.Map.From(orderData);
         }
 
         public Search Read(Guid searchId)
         {
             var data = dbContext.Orders.Local.SingleOrDefault(x => x.Id == searchId) ??
-                       dbContext.Orders.Include(x => x.Suggestions).Single(x => x.Id == searchId);
+                       dbContext.Orders.Include(x => x.AggregatorOrder).Include(x => x.Suggestions)
+                           .Single(x => x.Id == searchId);
 
             return Search.Map.From(data);
         }

@@ -3,6 +3,9 @@ using System;
 
 namespace EF6Test.Repositories
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
     public class VehicleRepository
     {
         private readonly ApplicationDbContext dbContext;
@@ -12,13 +15,34 @@ namespace EF6Test.Repositories
             this.dbContext = dbContext;
         }
 
-        public Guid Create(string registrationNumber, string vin)
+        public Guid Create(string registrationNumber, string vin, ICollection<long> driverIds = null)
         {
             var vehicleData = dbContext.Vehicles.Add(new VehicleData
             {
                 RegistrationNumber = registrationNumber,
                 Vin = vin,
             });
+
+            if (driverIds != null && driverIds.Any())
+            {
+                var badDriverIds = dbContext.Drivers.AsNoTracking()
+                    .Where(x => !driverIds.Contains(x.Id))
+                    .Select(x => x.Id)
+                    .AsEnumerable();
+
+                if (badDriverIds.Any())
+                    throw new InvalidOperationException();
+
+                var driverVehicles = driverIds.Distinct().Select(x => new DriverVehicleData
+                {
+                    DriverId = x,
+                    VehicleId = vehicleData.Id,
+                });
+
+                dbContext.DriverVehicles.AddRange(driverVehicles);
+            }
+
+            dbContext.SaveChanges();
 
             return vehicleData.Id;
         }

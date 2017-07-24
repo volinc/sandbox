@@ -11,10 +11,15 @@ namespace EF6Test
     {
         private static void Main()
         {
-            var builder = new ContainerBuilder();            
-            builder.RegisterType<ApplicationDbContext>().SingleInstance();
-            builder.RegisterType<DbContextFactory>().AsImplementedInterfaces().SingleInstance();
+            var builder = new ContainerBuilder();
+            builder.RegisterInstance(new Func<DateTimeOffset>(() => DateTimeOffset.Now)).SingleInstance();
+            builder.RegisterType<ApplicationDbContext>().SingleInstance();            
+            builder.RegisterType<DriverRepository>().SingleInstance();
+            builder.RegisterType<VehicleRepository>().SingleInstance();
+            builder.RegisterType<ShiftRepository>().SingleInstance();
+            builder.RegisterType<PassengerRepository>().SingleInstance();
             builder.RegisterType<SearchRepository>().SingleInstance();
+            builder.RegisterType<OrderRepository>().SingleInstance();
             builder.RegisterType<TestLogic>().SingleInstance();
             var container = builder.Build();
 
