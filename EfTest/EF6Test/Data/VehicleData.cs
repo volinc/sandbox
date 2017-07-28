@@ -8,6 +8,8 @@ namespace EF6Test.Data
     {
         public Guid Id { get; set; }
 
+        public long CompanyId { get; set; }
+
         public string RegistrationNumber { get; set; }
 
         public string Vin { get; set; }
