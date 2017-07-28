@@ -77,6 +77,7 @@
     <Compile Include="Domain\Search.cs" />
     <Compile Include="Domain\ShiftState.cs" />
     <Compile Include="Domain\Suggestion.cs" />
+    <Compile Include="Domain\Vehicle.cs" />
     <Compile Include="ExceptionExtensions.cs" />
     <Compile Include="Migrations\201707241501464_Initial.cs" />
     <Compile Include="Migrations\201707241501464_Initial.Designer.cs">
