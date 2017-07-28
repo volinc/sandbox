@@ -52,14 +52,10 @@
             var existingSearch = searchRepository.Read(search.Id);
             WriteComparison(search, existingSearch);
 
-            //// 2
-            //Console.WriteLine(2);
-            //search.AddSuggestion(100);
-            //search.AddSuggestion(200);
-            //search.AddSuggestion(300);
-            //searchRepository.Update(search);
-            //existingSearch = searchRepository.Read(search.Id);
-            //WriteComparison(search, existingSearch);
+            Console.WriteLine(2);                        
+            searchRepository.Update(search);
+            existingSearch = searchRepository.Read(search.Id);
+            WriteComparison(search, existingSearch);
 
             //Console.WriteLine(3);            
             //foreach (var suggestion in search.Suggestions)
