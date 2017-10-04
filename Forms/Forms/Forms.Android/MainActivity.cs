@@ -1,11 +1,12 @@
 ﻿using Android.App;
+using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 
 namespace Forms.Droid
 {
     [Activity(Label = "@string/app_name", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
+    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity, IServiceConnection
     {
         protected override void OnCreate(Bundle bundle)
         {
@@ -17,6 +18,16 @@ namespace Forms.Droid
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
             LoadApplication(new App());
+        }
+
+        public void OnServiceConnected(ComponentName name, IBinder service)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void OnServiceDisconnected(ComponentName name)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

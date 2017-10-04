@@ -17,7 +17,7 @@ namespace Forms
 
         public static void SetMainPage()
         {
-            Current.MainPage = new SignInPage();
+            Current.MainPage = new TServiceControllerPage();
         }
     }
 }
