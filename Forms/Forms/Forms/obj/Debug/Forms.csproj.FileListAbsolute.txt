@@ -1,0 +1,17 @@
+D:\Sandbox\Forms\Forms\Forms\bin\Debug\Forms.dll
+D:\Sandbox\Forms\Forms\Forms\bin\Debug\Forms.pdb
+D:\Sandbox\Forms\Forms\Forms\bin\Debug\Xamarin.Forms.Core.dll
+D:\Sandbox\Forms\Forms\Forms\bin\Debug\Xamarin.Forms.Platform.dll
+D:\Sandbox\Forms\Forms\Forms\bin\Debug\Xamarin.Forms.Xaml.dll
+D:\Sandbox\Forms\Forms\Forms\bin\Debug\Xamarin.Forms.Core.pdb
+D:\Sandbox\Forms\Forms\Forms\bin\Debug\Xamarin.Forms.Core.xml
+D:\Sandbox\Forms\Forms\Forms\bin\Debug\Xamarin.Forms.Platform.pdb
+D:\Sandbox\Forms\Forms\Forms\bin\Debug\Xamarin.Forms.Xaml.pdb
+D:\Sandbox\Forms\Forms\Forms\bin\Debug\Xamarin.Forms.Xaml.xml
+D:\Sandbox\Forms\Forms\Forms\obj\Debug\Forms.csprojResolveAssemblyReference.cache
+D:\Sandbox\Forms\Forms\Forms\obj\Debug\Forms.csproj.CoreCompileInputs.cache
+D:\Sandbox\Forms\Forms\Forms\obj\Debug\Forms.App.xaml.g.cs
+D:\Sandbox\Forms\Forms\Forms\obj\Debug\Forms.dll
+D:\Sandbox\Forms\Forms\Forms\obj\Debug\Forms.pdb
+D:\Sandbox\Forms\Forms\Forms\obj\Debug\Forms.Views.SignInPage.xaml.g.cs
+D:\Sandbox\Forms\Forms\Forms\obj\Debug\Forms.Views.MenuPage.xaml.g.cs
