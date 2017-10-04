@@ -1,10 +1,12 @@
-﻿using Android.Content;
+﻿using Android.App;
+using Android.Content;
 using Android.OS;
 using Autofac;
 using Forms.Droid.Service;
 
 namespace Forms.Droid
 {
+    [Service(Enabled = true, Exported = false, Label = "TService")]
     internal class TService : Android.App.Service
     {
         private readonly IContainer container;

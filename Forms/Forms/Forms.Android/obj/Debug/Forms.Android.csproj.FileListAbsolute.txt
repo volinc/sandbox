@@ -60,3 +60,5 @@ D:\Sandbox\Forms\Forms\Forms.Android\obj\Debug\android\assets\FormsViewGroup.dll
 D:\Sandbox\Forms\Forms\Forms.Android\obj\Debug\android\assets\Xamarin.Forms.Core.dll.mdb
 D:\Sandbox\Forms\Forms\Forms.Android\obj\Debug\android\assets\Xamarin.Forms.Platform.Android.dll.mdb
 D:\Sandbox\Forms\Forms\Forms.Android\obj\Debug\android\assets\Xamarin.Forms.Xaml.dll.mdb
+D:\Sandbox\Forms\Forms\Forms.Android\bin\Debug\Autofac.dll
+D:\Sandbox\Forms\Forms\Forms.Android\bin\Debug\Autofac.xml

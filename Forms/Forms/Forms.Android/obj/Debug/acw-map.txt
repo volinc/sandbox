@@ -1,7 +1,11 @@
-Forms.Droid.ForegroundService, Forms.Android;md530597442d9c16616274c32515fd9971c.ForegroundService
-Forms.Droid.ForegroundService, Forms.Android, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md530597442d9c16616274c32515fd9971c.ForegroundService
-Forms.Droid.ForegroundService;md530597442d9c16616274c32515fd9971c.ForegroundService
-forms.droid.ForegroundService;md530597442d9c16616274c32515fd9971c.ForegroundService
+Forms.Droid.TService, Forms.Android;md530597442d9c16616274c32515fd9971c.TService
+Forms.Droid.TService, Forms.Android, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md530597442d9c16616274c32515fd9971c.TService
+Forms.Droid.TService;md530597442d9c16616274c32515fd9971c.TService
+forms.droid.TService;md530597442d9c16616274c32515fd9971c.TService
+Forms.Droid.TServiceBinder, Forms.Android;md530597442d9c16616274c32515fd9971c.TServiceBinder
+Forms.Droid.TServiceBinder, Forms.Android, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md530597442d9c16616274c32515fd9971c.TServiceBinder
+Forms.Droid.TServiceBinder;md530597442d9c16616274c32515fd9971c.TServiceBinder
+forms.droid.TServiceBinder;md530597442d9c16616274c32515fd9971c.TServiceBinder
 Forms.Droid.MainActivity, Forms.Android;md530597442d9c16616274c32515fd9971c.MainActivity
 Forms.Droid.MainActivity, Forms.Android, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md530597442d9c16616274c32515fd9971c.MainActivity
 Forms.Droid.MainActivity;md530597442d9c16616274c32515fd9971c.MainActivity

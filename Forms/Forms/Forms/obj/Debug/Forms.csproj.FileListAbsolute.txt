@@ -13,5 +13,4 @@ D:\Sandbox\Forms\Forms\Forms\obj\Debug\Forms.csproj.CoreCompileInputs.cache
 D:\Sandbox\Forms\Forms\Forms\obj\Debug\Forms.App.xaml.g.cs
 D:\Sandbox\Forms\Forms\Forms\obj\Debug\Forms.dll
 D:\Sandbox\Forms\Forms\Forms\obj\Debug\Forms.pdb
-D:\Sandbox\Forms\Forms\Forms\obj\Debug\Forms.Views.SignInPage.xaml.g.cs
-D:\Sandbox\Forms\Forms\Forms\obj\Debug\Forms.Views.MenuPage.xaml.g.cs
+D:\Sandbox\Forms\Forms\Forms\obj\Debug\Forms.Views.TServiceControllerPage.xaml.g.cs

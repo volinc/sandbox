@@ -20,14 +20,22 @@ namespace Forms.Droid
             LoadApplication(new App());
         }
 
+        protected override void OnStart()
+        {
+            base.OnStart();
+
+            var serviceIntent = new Intent(this, typeof(TService));
+            BindService(serviceIntent, this, Bind.AutoCreate);
+        }
+
         public void OnServiceConnected(ComponentName name, IBinder service)
         {
-            throw new System.NotImplementedException();
+            
         }
 
         public void OnServiceDisconnected(ComponentName name)
         {
-            throw new System.NotImplementedException();
+            
         }
     }
 }
