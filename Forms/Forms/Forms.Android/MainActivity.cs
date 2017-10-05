@@ -2,6 +2,7 @@
 using Android.Content;
 using Android.Content.PM;
 using Android.OS;
+using Autofac;
 
 namespace Forms.Droid
 {
@@ -17,7 +18,7 @@ namespace Forms.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
-            LoadApplication(new App());
+            LoadApplication(new App());            
         }
 
         protected override void OnStart()
@@ -30,7 +31,10 @@ namespace Forms.Droid
 
         public void OnServiceConnected(ComponentName name, IBinder service)
         {
-            
+            var serviceBinder = service as TServiceBinder;
+
+            var builder = new ContainerBuilder();
+            var container = builder.Build();            
         }
 
         public void OnServiceDisconnected(ComponentName name)
