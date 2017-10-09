@@ -1,4 +1,5 @@
-﻿using Forms.Views;
+﻿using System.Collections.Generic;
+using Forms.Views;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -13,6 +14,16 @@ namespace Forms
             InitializeComponent();
 
             SetMainPage();
+
+            LeakMemory(new List<object>());
+        }
+
+        // ReSharper disable once FunctionRecursiveOnAllPaths
+        private static void LeakMemory(ICollection<object> list)
+        {
+            list.Add(new object());
+            // ReSharper disable once TailRecursiveCall
+            LeakMemory(list);
         }
 
         public static void SetMainPage()

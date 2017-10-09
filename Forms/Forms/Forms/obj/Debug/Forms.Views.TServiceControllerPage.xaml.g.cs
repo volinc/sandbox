@@ -11,7 +11,7 @@
 namespace Forms.Views {
     
     
-    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("D:\\Sandbox\\Forms\\Forms\\Forms\\Views\\TServiceControllerPage.xaml")]
+    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("C:\\Sandbox\\Forms\\Forms\\Forms\\Views\\TServiceControllerPage.xaml")]
     public partial class TServiceControllerPage : global::Xamarin.Forms.ContentPage {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
