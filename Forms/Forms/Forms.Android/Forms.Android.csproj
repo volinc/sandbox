@@ -30,7 +30,12 @@
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AndroidLinkMode>None</AndroidLinkMode>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+    <AotAssemblies>false</AotAssemblies>
+    <EnableLLVM>false</EnableLLVM>
+    <BundleAssemblies>false</BundleAssemblies>
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -118,6 +123,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Registry.cs" />
+    <Compile Include="Service\Music\MusicService.cs" />
     <Compile Include="Service\ServiceController.cs" />
     <Compile Include="Service\UndeadReceiver.cs" />
     <Compile Include="Service\UndeadService.cs" />
@@ -150,7 +156,6 @@
     <AndroidResource Include="Resources\values\strings.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Service\Music\" />
     <Folder Include="Service\Timing\" />
     <Folder Include="Service\Tracking\" />
   </ItemGroup>
@@ -159,6 +164,9 @@
       <Project>{7c8c9813-2dc6-4ac1-886e-9699b288ecbc}</Project>
       <Name>Forms</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\raw\test.mp3" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />

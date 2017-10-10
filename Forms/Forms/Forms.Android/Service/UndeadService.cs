@@ -2,6 +2,7 @@
 using Android.Content;
 using Android.OS;
 using Autofac;
+using Forms.Droid.Service.Music;
 
 namespace Forms.Droid.Service
 {
@@ -18,7 +19,8 @@ namespace Forms.Droid.Service
             binder = new UndeadServiceBinder(this);
 
             var builder = new ContainerBuilder();
-            builder.RegisterType<ServiceController>();
+            builder.RegisterType<ServiceController>();            
+            builder.RegisterType<MusicService>().AsImplementedInterfaces().SingleInstance();
             container = builder.Build();
 
             Controller = container.Resolve<ServiceController>();            

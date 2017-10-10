@@ -1,4 +1,6 @@
 ﻿using Autofac;
+using Forms.Droid.Service.Music;
+using Forms.Services;
 
 namespace Forms.Droid
 {
@@ -8,7 +10,7 @@ namespace Forms.Droid
         {
             base.RegisterDependencies(builder);
 
-            builder.RegisterType<Registry>().AsImplementedInterfaces().SingleInstance();
+            builder.RegisterType<Registry>().AsImplementedInterfaces().SingleInstance();            
         }
     }
 }

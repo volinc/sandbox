@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
+using Android;
 using Android.App;
 
 // Information about this assembly is defined by the following attributes. 
@@ -25,3 +25,6 @@ using Android.App;
 
 //[assembly: AssemblyDelaySign(false)]
 //[assembly: AssemblyKeyFile("")]
+
+[assembly: UsesPermission(Manifest.Permission.ReceiveBootCompleted)]
+[assembly: UsesPermission(Manifest.Permission.AccessNotificationPolicy)]
