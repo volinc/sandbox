@@ -2,13 +2,13 @@
 
 namespace Forms.Helpers
 {
-    public class ViewPage<TViewModel> : ContentPage where TViewModel : BaseViewModel, new()
+    public class ViewPage<TViewModel> : ContentPage where TViewModel : BaseViewModel
     {
         public TViewModel ViewModel { get; }
 
         public ViewPage()
         {
-            ViewModel = new TViewModel();
+            ViewModel = App.ViewModelFactory.Create<TViewModel>();
             BindingContext = ViewModel;
         }
     }

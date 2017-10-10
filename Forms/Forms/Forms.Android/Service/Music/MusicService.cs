@@ -1,12 +1,11 @@
 ﻿using System;
 using Android.App;
-using Android.Content;
 using Android.Media;
 using Forms.Services;
 
 namespace Forms.Droid.Service.Music
 {
-    public class MusicService : IMusicService
+    internal class MusicService : IMusicService
     {
         public event EventHandler Started;
         public event EventHandler Stoped;

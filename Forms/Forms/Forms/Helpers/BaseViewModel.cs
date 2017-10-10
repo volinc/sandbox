@@ -1,6 +1,11 @@
-﻿namespace Forms.Helpers
+﻿using System;
+
+namespace Forms.Helpers
 {
-    public class BaseViewModel : ObservableObject
+    public class BaseViewModel : ObservableObject, IDisposable
     {
+        public virtual void Dispose()
+        {
+        }
     }
 }

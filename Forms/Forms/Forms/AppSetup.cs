@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Forms.ViewModels;
 
 namespace Forms
 {
@@ -13,7 +14,8 @@ namespace Forms
 
         protected virtual void RegisterDependencies(ContainerBuilder builder)
         {
-            
+            builder.RegisterType<TrackingViewModel>().InstancePerDependency();
+            builder.RegisterType<ViewModelFactory>().SingleInstance();
         }
     }
 }

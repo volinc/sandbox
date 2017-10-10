@@ -4,20 +4,21 @@ namespace Forms.Droid.Service
 {
     internal class ServiceController
     {
-        private readonly IMusicService _musicService;
-
         private bool isStarted;
 
-        public ServiceController(IMusicService musicService)
+        public ServiceController(IMusicService musicService, ITrackingService trackingService, ITimingService timingService)
         {
-            _musicService = musicService;
+            MusicService = musicService;
+            TrackingService = trackingService;
+            TimingService = timingService;
         }
 
         public void Start()
         {
             if (isStarted) return;
 
-            _musicService.Start();
+            MusicService.Start();
+            TrackingService.Start();
 
             isStarted = true;
         }
@@ -26,7 +27,8 @@ namespace Forms.Droid.Service
         {
             if (!isStarted) return;
 
-            _musicService.Stop();
+            TrackingService.Stop();
+            MusicService.Stop();
 
             isStarted = false;
         }

@@ -27,16 +27,16 @@ namespace Forms.Droid
 
         public override void OnServiceConnected(ComponentName name, IBinder service)
         {
-            Connected?.Invoke(this, EventArgs.Empty);
-
             base.OnServiceConnected(name, service);
+
+            Connected?.Invoke(this, EventArgs.Empty);
         }
 
         public override void OnServiceDisconnected(ComponentName name)
         {
-            Disconnected?.Invoke(this, EventArgs.Empty);
-
             base.OnServiceDisconnected(name);
+
+            Disconnected?.Invoke(this, EventArgs.Empty);
         }        
     }
 }

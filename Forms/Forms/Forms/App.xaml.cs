@@ -1,6 +1,7 @@
 ﻿using System;
 using Autofac;
 using Forms.Infrastructure;
+using Forms.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,6 +13,8 @@ namespace Forms
         private readonly IContainer container;
         private IRegistry registry;
 
+        public static ViewModelFactory ViewModelFactory { get; private set; }
+
         public App(AppSetup setup)
         {
             InitializeComponent();
@@ -21,6 +24,8 @@ namespace Forms
             registry = container.Resolve<IRegistry>();
             registry.Connected += RegistryOnConnected;
             registry.Disconnected += RegistryOnDisconnected;
+
+            ViewModelFactory = container.Resolve<ViewModelFactory>();
 
             MainPage = new ContentPage
             {
@@ -44,13 +49,15 @@ namespace Forms
 
         private void RegistryOnConnected(object sender, EventArgs eventArgs)
         {
-            MainPage = new ContentPage
-            {
-                Content = new StackLayout
-                {
-                    Children = { new Label { Text = "Connected" } }
-                }
-            };
+            MainPage = new TrackingPage();
+
+            //MainPage = new ContentPage
+            //{
+            //    Content = new StackLayout
+            //    {
+            //        Children = { new Label { Text = "Connected" } }
+            //    }
+            //};
         }
     }
 }

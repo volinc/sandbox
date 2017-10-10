@@ -9,8 +9,4 @@
     <PackageReference Include="Xamarin.Forms" Version="2.4.0.282" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\" />
-  </ItemGroup>
-
 </Project>

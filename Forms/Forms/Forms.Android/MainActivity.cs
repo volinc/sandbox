@@ -27,7 +27,13 @@ namespace Forms.Droid
             var app = new App(setup);
             
             LoadApplication(app);            
-        }      
+        }
+
+        //public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+        //{
+        //    base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        //    PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        //}
 
         private void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs unobservedTaskExceptionEventArgs)
         {

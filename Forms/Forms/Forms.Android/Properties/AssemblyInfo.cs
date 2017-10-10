@@ -28,3 +28,6 @@ using Android.App;
 
 [assembly: UsesPermission(Manifest.Permission.ReceiveBootCompleted)]
 [assembly: UsesPermission(Manifest.Permission.AccessNotificationPolicy)]
+[assembly: UsesPermission(Manifest.Permission.Internet)]
+[assembly: UsesPermission(Manifest.Permission.AccessCoarseLocation)]
+[assembly: UsesPermission(Manifest.Permission.AccessFineLocation)]

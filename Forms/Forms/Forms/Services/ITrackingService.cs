@@ -4,9 +4,9 @@ namespace Forms.Services
 {
     public interface ITrackingService
     {
-        int Value { get; }
+        (double lat, double lon) Value { get; }
 
-        event EventHandler ValueChanged;
+        event EventHandler<(double lat, double lon)> ValueChanged;
 
         event EventHandler Started;
 

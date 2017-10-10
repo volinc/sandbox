@@ -1,6 +1,4 @@
 ﻿using Autofac;
-using Forms.Droid.Service.Music;
-using Forms.Services;
 
 namespace Forms.Droid
 {

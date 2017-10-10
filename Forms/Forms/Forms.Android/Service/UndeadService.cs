@@ -3,6 +3,8 @@ using Android.Content;
 using Android.OS;
 using Autofac;
 using Forms.Droid.Service.Music;
+using Forms.Droid.Service.Timing;
+using Forms.Droid.Service.Tracking;
 
 namespace Forms.Droid.Service
 {
@@ -19,8 +21,10 @@ namespace Forms.Droid.Service
             binder = new UndeadServiceBinder(this);
 
             var builder = new ContainerBuilder();
-            builder.RegisterType<ServiceController>();            
+            builder.RegisterType<ServiceController>().SingleInstance();            
             builder.RegisterType<MusicService>().AsImplementedInterfaces().SingleInstance();
+            builder.RegisterType<TrackingService>().AsImplementedInterfaces().SingleInstance();
+            builder.RegisterType<TimingService>().AsImplementedInterfaces().SingleInstance();
             container = builder.Build();
 
             Controller = container.Resolve<ServiceController>();            
