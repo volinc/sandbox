@@ -1,13 +1,13 @@
 ﻿using Android.OS;
 using Forms.Services;
 
-namespace Forms.Droid
+namespace Forms.Droid.Service
 {
-    internal class TServiceBinder : Binder
+    internal class UndeadServiceBinder : Binder
     {
-        private readonly TService service;
+        private readonly UndeadService service;
 
-        public TServiceBinder(TService service)
+        public UndeadServiceBinder(UndeadService service)
         {
             this.service = service;
         }

@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using Forms.Views;
-
+﻿using System;
+using Autofac;
+using Forms.Infrastructure;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -9,26 +9,48 @@ namespace Forms
 {
     public partial class App : Application
     {
-        public App()
+        private readonly IContainer container;
+        private IRegistry registry;
+
+        public App(AppSetup setup)
         {
             InitializeComponent();
 
-            SetMainPage();
+            container = setup.CreateContainer();
 
-            LeakMemory(new List<object>());
+            registry = container.Resolve<IRegistry>();
+            registry.Connected += RegistryOnConnected;
+            registry.Disconnected += RegistryOnDisconnected;
+
+            MainPage = new ContentPage
+            {
+                Content = new StackLayout
+                {
+                    Children = { new Label { Text = "Loading..." } }
+                }
+            };
         }
 
-        // ReSharper disable once FunctionRecursiveOnAllPaths
-        private static void LeakMemory(ICollection<object> list)
+        private void RegistryOnDisconnected(object sender, EventArgs eventArgs)
         {
-            list.Add(new object());
-            // ReSharper disable once TailRecursiveCall
-            LeakMemory(list);
+            MainPage = new ContentPage
+            {
+                Content = new StackLayout
+                {
+                    Children = { new Label { Text = "Disconnected" } }
+                }
+            };
         }
 
-        public static void SetMainPage()
+        private void RegistryOnConnected(object sender, EventArgs eventArgs)
         {
-            Current.MainPage = new TServiceControllerPage();
+            MainPage = new ContentPage
+            {
+                Content = new StackLayout
+                {
+                    Children = { new Label { Text = "Connected" } }
+                }
+            };
         }
     }
 }
