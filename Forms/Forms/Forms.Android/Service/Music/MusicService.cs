@@ -10,23 +10,23 @@ namespace Forms.Droid.Service.Music
         public event EventHandler Started;
         public event EventHandler Stoped;
 
-        private readonly MediaPlayer player;
+        private readonly MediaPlayer _player;
 
         public MusicService()
         {
-            player = MediaPlayer.Create(Application.Context, Resource.Raw.test);
-            player.Looping = true;
+            _player = MediaPlayer.Create(Application.Context, Resource.Raw.test);
+            _player.Looping = true;
         }        
 
         public void Start()
         {
-            player.Start();
+            _player.Start();
             Started?.Invoke(this, EventArgs.Empty);
         }
 
         public void Stop()
         {
-            player.Stop();
+            _player.Stop();
             Stoped?.Invoke(this, EventArgs.Empty);
         }
     }

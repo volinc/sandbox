@@ -25,7 +25,7 @@ namespace Forms.Droid.Service.Tracking
 
             if (_isStared) return;
 
-            GetLastKnownLocationAsync().Wait();
+            //GetLastKnownLocationAsync().Wait();
             
             CrossGeolocator.Current.PositionChanged += CurrentOnPositionChanged;
             CrossGeolocator.Current.StartListeningAsync(TimeSpan.FromSeconds(2), 2, true).ConfigureAwait(false).GetAwaiter();
@@ -34,12 +34,12 @@ namespace Forms.Droid.Service.Tracking
             Started?.Invoke(this, EventArgs.Empty);
         }
 
-        private async Task GetLastKnownLocationAsync()
-        {
-            var lastKnownLocation = await CrossGeolocator.Current.GetLastKnownLocationAsync();
-            Value = (lastKnownLocation.Latitude, lastKnownLocation.Longitude);
-            ValueChanged?.Invoke(this, Value);
-        }
+        //private async Task GetLastKnownLocationAsync()
+        //{
+        //    var lastKnownLocation = await CrossGeolocator.Current.GetLastKnownLocationAsync();
+        //    Value = (lastKnownLocation.Latitude, lastKnownLocation.Longitude);
+        //    ValueChanged?.Invoke(this, Value);
+        //}
 
         private void CurrentOnPositionChanged(object sender, PositionEventArgs e)
         {

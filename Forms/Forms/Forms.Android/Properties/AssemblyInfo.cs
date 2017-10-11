@@ -26,11 +26,14 @@ using Android.App;
 //[assembly: AssemblyDelaySign(false)]
 //[assembly: AssemblyKeyFile("")]
 
-[assembly: UsesPermission(Manifest.Permission.ReceiveBootCompleted)]
-[assembly: UsesPermission(Manifest.Permission.AccessNotificationPolicy)]
-[assembly: UsesPermission(Manifest.Permission.Internet)]
-[assembly: UsesPermission(Manifest.Permission.AccessCoarseLocation)]
-[assembly: UsesPermission(Manifest.Permission.AccessFineLocation)]
+// https://developer.android.com/reference/android/Manifest.permission.html#RECEIVE_BOOT_COMPLETED
+[assembly: UsesPermission(Manifest.Permission.ReceiveBootCompleted)] // ... (normal)
+[assembly: UsesPermission(Manifest.Permission.AccessNotificationPolicy)] // Marker permission for applications that wish to access notification policy. (normal)
+[assembly: UsesPermission(Manifest.Permission.Internet)] // Allows applications to open network sockets. (normal)
+[assembly: UsesPermission(Manifest.Permission.AccessCoarseLocation)] // Allows an app to access approximate location. Alternatively, you might want ACCESS_FINE_LOCATION. (dangerous)
+[assembly: UsesPermission(Manifest.Permission.AccessFineLocation)] // Allows an app to access precise location. Alternatively, you might want ACCESS_COARSE_LOCATION. (dangerous) 
+[assembly: UsesPermission(Manifest.Permission.AccessLocationExtraCommands)] // Allows an application to access extra location provider commands. (normal) ?
+[assembly: UsesPermission(Manifest.Permission.InstantAppForegroundService)] // Allows an instant app to create foreground services. (normal)
 
 [assembly: UsesFeature("android.hardware.location", Required = false)]
 [assembly: UsesFeature("android.hardware.location.gps", Required = false)]
