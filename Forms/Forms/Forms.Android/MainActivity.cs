@@ -5,6 +5,7 @@ using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using Forms.Infrastructure;
+using Plugin.Permissions;
 
 namespace Forms.Droid
 {
@@ -29,11 +30,10 @@ namespace Forms.Droid
             LoadApplication(app);            
         }
 
-        //public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
-        //{
-        //    base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-        //    PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-        //}
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
+        {
+            PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
 
         private void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs unobservedTaskExceptionEventArgs)
         {

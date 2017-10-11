@@ -12,14 +12,13 @@ namespace Forms.Views
 		    latLabel.SetBinding(Label.TextProperty, nameof(ViewModel.Lat), stringFormat: "Lat {0}");
 
 		    var lonLabel = new Label();
-		    latLabel.SetBinding(Label.TextProperty, nameof(ViewModel.Lon), stringFormat: "Lon {0}");
+		    lonLabel.SetBinding(Label.TextProperty, nameof(ViewModel.Lon), stringFormat: "Lon {0}");
 
 		    Content = new StackLayout
 		    {
 		        Children =
 		        {
-		            latLabel,
-		            lonLabel
+		            latLabel, lonLabel
 		        }
 		    };
 		}
