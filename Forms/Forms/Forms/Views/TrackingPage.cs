@@ -14,12 +14,15 @@ namespace Forms.Views
 		    var lonLabel = new Label();
 		    lonLabel.SetBinding(Label.TextProperty, nameof(ViewModel.Lon), stringFormat: "Lon {0}");
 
+            var checkPermissionButton = new Button { Text = "Check permissions" };
+            checkPermissionButton.SetBinding(Button.CommandProperty, nameof(ViewModel.CheckPermissionsCommand));
+
 		    Content = new StackLayout
 		    {
 		        Children =
 		        {
-		            latLabel, lonLabel
-		        }
+		            latLabel, lonLabel, checkPermissionButton
+                }
 		    };
 		}
 	}

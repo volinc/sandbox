@@ -5,6 +5,7 @@ using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using Forms.Infrastructure;
+using Plugin.CurrentActivity;
 using Plugin.Permissions;
 
 namespace Forms.Droid
@@ -20,8 +21,7 @@ namespace Forms.Droid
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
-            base.OnCreate(bundle);
-
+            base.OnCreate(bundle);            
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
             var setup = new Setup();

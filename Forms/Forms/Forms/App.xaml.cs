@@ -2,6 +2,9 @@
 using Autofac;
 using Forms.Infrastructure;
 using Forms.Views;
+using Plugin.Geolocator;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -58,6 +61,6 @@ namespace Forms
             //        Children = { new Label { Text = "Connected" } }
             //    }
             //};
-        }
+        }        
     }
 }

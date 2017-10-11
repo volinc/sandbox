@@ -6,6 +6,8 @@
 
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.6.1" />
+    <PackageReference Include="Plugin.Permissions" Version="2.0.1" />
+    <PackageReference Include="Xam.Plugin.Geolocator" Version="4.0.1" />
     <PackageReference Include="Xamarin.Forms" Version="2.4.0.282" />
   </ItemGroup>
 

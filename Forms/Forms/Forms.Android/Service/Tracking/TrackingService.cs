@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Forms.Services;
 using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
@@ -22,19 +23,22 @@ namespace Forms.Droid.Service.Tracking
             if (!CrossGeolocator.IsSupported)
                 return;
 
-            if (!CrossGeolocator.Current.IsGeolocationAvailable)
-                return;
-
-            if (!CrossGeolocator.Current.IsGeolocationEnabled)
-                return;
-
             if (_isStared) return;
 
+            GetLastKnownLocationAsync().Wait();
+            
             CrossGeolocator.Current.PositionChanged += CurrentOnPositionChanged;
             CrossGeolocator.Current.StartListeningAsync(TimeSpan.FromSeconds(2), 2, true).ConfigureAwait(false).GetAwaiter();
 
             _isStared = true;
             Started?.Invoke(this, EventArgs.Empty);
+        }
+
+        private async Task GetLastKnownLocationAsync()
+        {
+            var lastKnownLocation = await CrossGeolocator.Current.GetLastKnownLocationAsync();
+            Value = (lastKnownLocation.Latitude, lastKnownLocation.Longitude);
+            ValueChanged?.Invoke(this, Value);
         }
 
         private void CurrentOnPositionChanged(object sender, PositionEventArgs e)
