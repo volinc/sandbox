@@ -15,3 +15,5 @@ Forms/Forms/Forms/bin/
 Forms/Forms/Forms/obj/
 Forms/Forms/Forms.Android/bin/
 Forms/Forms/Forms.Android/obj/
+/Forms/Forms/Forms.Driving/obj
+/Forms/Forms/Forms.Driving/bin/Debug/netstandard2.0

@@ -10,13 +10,22 @@ namespace Forms.ViewModels
     {
         private readonly IPermissionsManager _permissionsManager;
         private readonly ITrackingService _trackingService;
+        private readonly ITimingService _timingService;
         
         public TrackingViewModel(IRegistry registry, IPermissionsManager permissionsManager)
         {            
             _trackingService = registry.TrackingService;
             _trackingService.ValueChanged += TrackingServiceOnValueChanged;
 
+            _timingService = registry.TimingService;
+            _timingService.ValueChanged += TimingServiceOnValueChanged;
+
             _permissionsManager = permissionsManager;
+        }
+
+        private void TimingServiceOnValueChanged(object sender, int i)
+        {
+            Second = i;
         }
 
         private void TrackingServiceOnValueChanged(object sender, (double lat, double lon) location)
@@ -39,10 +48,18 @@ namespace Forms.ViewModels
             set => SetProperty(ref _lon, value);
         }
 
+        private int _second;
+        public int Second
+        {
+            get => _second;
+            set => SetProperty(ref _second, value);
+        }
+
         public ICommand CheckPermissionsCommand => new Command(async () => await _permissionsManager.CheckPermissionsAsync());
 
         public override void Dispose()
         {
+            _timingService.ValueChanged -= TimingServiceOnValueChanged;
             _trackingService.ValueChanged -= TrackingServiceOnValueChanged;
 
             base.Dispose();            

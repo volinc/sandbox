@@ -8,7 +8,7 @@ using Xamarin.Forms.Xaml;
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Forms
 {
-    public partial class App : Application, IDisposable
+    public partial class App : IDisposable
     {
         private readonly IContainer _container;
         private readonly IRegistry _registry;

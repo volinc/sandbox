@@ -140,6 +140,7 @@
     <Compile Include="MainApplication.cs" />
     <Compile Include="PermissionsManager.cs" />
     <Compile Include="Registry.cs" />
+    <Compile Include="Service\Driving\DrivingService.cs" />
     <Compile Include="Service\Music\MusicService.cs" />
     <Compile Include="Service\ServiceController.cs" />
     <Compile Include="Service\Timing\TimingService.cs" />

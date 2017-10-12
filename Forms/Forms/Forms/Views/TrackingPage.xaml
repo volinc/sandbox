@@ -7,6 +7,7 @@
         <StackLayout>
             <Label Text="{Binding Lat, StringFormat='Lat {0}'}" />
             <Label Text="{Binding Lon, StringFormat='Lon {0}'}" />
+            <Label Text="{Binding Second, StringFormat='Second {0}'}"/>
             <Button Text="Check permissions" Command="{Binding CheckPermissionsCommand}" />
         </StackLayout>
     </ContentPage.Content>
