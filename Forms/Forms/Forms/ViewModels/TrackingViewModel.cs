@@ -11,6 +11,8 @@ namespace Forms.ViewModels
         private readonly IPermissionsManager _permissionsManager;
         private readonly ITrackingService _trackingService;
         
+        public TrackingViewModel() { }
+
         public TrackingViewModel(IRegistry registry, IPermissionsManager permissionsManager)
         {            
             _trackingService = registry.TrackingService;

@@ -4,13 +4,15 @@ namespace Forms.Services
 {
     public interface ITimingService
     {
-        int Value { get; }
-
         event EventHandler<int> ValueChanged;
 
         event EventHandler Started;
 
         event EventHandler Stoped;
+
+        int Value { get; }
+
+        bool IsStarted { get; }
 
         void Start();
 

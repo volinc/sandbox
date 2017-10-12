@@ -2,19 +2,16 @@
 using Autofac;
 using Forms.Infrastructure;
 using Forms.Views;
-using Plugin.Geolocator;
-using Plugin.Permissions;
-using Plugin.Permissions.Abstractions;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Forms
 {
-    public partial class App : Application
+    public partial class App : Application, IDisposable
     {
-        private readonly IContainer container;
-        private IRegistry registry;
+        private readonly IContainer _container;
+        private readonly IRegistry _registry;
 
         public static ViewModelFactory ViewModelFactory { get; private set; }
 
@@ -22,13 +19,13 @@ namespace Forms
         {
             InitializeComponent();
 
-            container = setup.CreateContainer();
+            _container = setup.CreateContainer();
 
-            registry = container.Resolve<IRegistry>();
-            registry.Connected += RegistryOnConnected;
-            registry.Disconnected += RegistryOnDisconnected;
+            _registry = _container.Resolve<IRegistry>();
+            _registry.Connected += RegistryOnConnected;
+            _registry.Disconnected += RegistryOnDisconnected;
 
-            ViewModelFactory = container.Resolve<ViewModelFactory>();
+            ViewModelFactory = _container.Resolve<ViewModelFactory>();
 
             MainPage = new ContentPage
             {
@@ -53,14 +50,13 @@ namespace Forms
         private void RegistryOnConnected(object sender, EventArgs eventArgs)
         {
             MainPage = new TrackingPage();
+        }
 
-            //MainPage = new ContentPage
-            //{
-            //    Content = new StackLayout
-            //    {
-            //        Children = { new Label { Text = "Connected" } }
-            //    }
-            //};
-        }        
+        public void Dispose()
+        {
+            _registry.Connected -= RegistryOnConnected;
+            _registry.Disconnected -= RegistryOnDisconnected;
+            _container?.Dispose();
+        }
     }
 }

@@ -19,6 +19,7 @@ namespace Forms.Droid.Service
 
             MusicService.Start();
             TrackingService.Start();
+            TimingService.Start();
 
             isStarted = true;
         }
@@ -27,6 +28,7 @@ namespace Forms.Droid.Service
         {
             if (!isStarted) return;
 
+            TimingService.Stop();
             TrackingService.Stop();
             MusicService.Stop();
 

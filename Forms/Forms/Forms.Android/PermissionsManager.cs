@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Android;
 using Android.App;
-
 using Android.OS;
-using Android.Support.Design.Widget;
-using Android.Support.V4.App;
-using Android.Support.V4.Content;
 using Forms.Infrastructure;
 using Plugin.CurrentActivity;
 using Plugin.Permissions;
@@ -21,34 +16,11 @@ namespace Forms.Droid
     {
         public async Task CheckPermissionsAsync()
         {
+            if (Build.VERSION.SdkInt < BuildVersionCodes.M)
+                return;
+
             try
             {
-                if (Build.VERSION.SdkInt < BuildVersionCodes.M)
-                {
-                    var context = CrossCurrentActivity.Current.Activity;
-
-                    const string permission = Manifest.Permission.AccessFineLocation;
-                    var checkResult = ContextCompat.CheckSelfPermission(context, permission);
-                    if (checkResult == Android.Content.PM.Permission.Granted)
-                        return;
-
-                    const int requestCode = 8000;
-
-                    if (ActivityCompat.ShouldShowRequestPermissionRationale(context, permission))
-                    {
-                        var activityView = GetActivityView();
-
-                        Snackbar.Make(activityView, "Location access is required to show coffee shops nearby.", Snackbar.LengthLong)                            
-                            .SetAction("Allow", view => ActivityCompat.RequestPermissions(context, new[] { Manifest.Permission.AccessFineLocation }, requestCode))
-                            //OpenPermissionSettings())
-                            .Show();
-
-                        return;
-                    }
-
-                    ActivityCompat.RequestPermissions(context, new [] { Manifest.Permission.AccessFineLocation }, requestCode);
-                }
-
                 var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
                 if (status != PermissionStatus.Granted)
                 {
@@ -57,23 +29,16 @@ namespace Forms.Droid
                         await DisplayAlert("Need location", "Gunna need that location");
                     }
 
-                    var results = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Location);
-                    //Best practice to always check that the key exists
+                    var results = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Location);                    
                     if (results.ContainsKey(Permission.Location))
                         status = results[Permission.Location];
                 }
 
                 if (status == PermissionStatus.Granted)
-                {
-                    //var results = await CrossGeolocator.Current.GetPositionAsync(TimeSpan.FromSeconds(10));
-                    //var text = "Lat: " + results.Latitude + " Long: " + results.Longitude;
-                    const string text = "---";
-                    await DisplayAlert("Granted", text);
-                }
-                else if (status != PermissionStatus.Unknown)
-                {
-                    await DisplayAlert("Location Denied", "Can not continue, try again.");
-                }
+                    return;
+
+                if (status != PermissionStatus.Unknown)
+                    await DisplayAlert("Location Denied", "Can not continue, try again.");                
             }
             catch (Exception ex)
             {
@@ -102,29 +67,6 @@ namespace Forms.Droid
             });            
         }
 
-        private static Activity GetCurrentActivity()
-        {
-            return CrossCurrentActivity.Current.Activity;
-        }
-
-        private static Android.Views.View GetActivityView()
-        {
-            return GetCurrentActivity().FindViewById(Android.Resource.Id.Content);
-        }
-
-        //private static void OpenPermissionSettings()
-        //{
-        //    var context = Android.App.Application.Context;
-
-        //    var packageName = context.PackageName;
-        //    var uri = Android.Net.Uri.Parse("package:" + packageName);
-        //    var intent = new Intent(Android.Provider.Settings.ActionApplicationDetailsSettings, uri);
-
-        //    // Этот флаг надо поставить, иначе Andorid выбросит исключение.
-        //    // Подробности: https://forums.xamarin.com/discussion/10232/calling-startactivity-from-outside-of-an-activity-context-requires-the-flag-activity-new-task-flag
-        //    intent.AddFlags(ActivityFlags.NewTask);
-
-        //    context.StartActivity(intent);
-        //}
+        private static Activity GetCurrentActivity() => CrossCurrentActivity.Current.Activity;
     }
 }

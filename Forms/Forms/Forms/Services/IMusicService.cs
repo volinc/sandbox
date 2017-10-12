@@ -8,6 +8,8 @@ namespace Forms.Services
 
         event EventHandler Stoped;
 
+        bool IsStarted { get; }
+
         void Start();
 
         void Stop();
