@@ -5,9 +5,6 @@ using Autofac;
 using Forms.Driving;
 using Forms.Driving.Infrastructure;
 using Forms.Services;
-using ConnectivityService = Forms.Driving.ConnectivityService;
-using Logger = Java.Util.Logging.Logger;
-using ServicePointManager = System.Net.ServicePointManager;
 
 namespace Forms.Droid.Service.Driving
 {

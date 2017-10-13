@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms.Android", "Forms\Form
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forms", "Forms\Forms\Forms.csproj", "{7C8C9813-2DC6-4AC1-886E-9699B288ECBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms.Driving", "Forms\Forms.Driving\Forms.Driving.csproj", "{DE9ECFF2-04D0-4A3E-B4D2-F171DAF0B453}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forms.Driving", "Forms\Forms.Driving\Forms.Driving.csproj", "{DE9ECFF2-04D0-4A3E-B4D2-F171DAF0B453}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
