@@ -9,10 +9,11 @@ namespace Forms.ViewModels
     public class TrackingViewModel : BaseViewModel
     {
         private readonly IPlatformPermissions _platformPermissions;
+        private readonly IPlatformNotifier _platformNotifier;
         private readonly ITrackingService _trackingService;
         private readonly ITimingService _timingService;
         
-        public TrackingViewModel(IRegistry registry, IPlatformPermissions platformPermissions)
+        public TrackingViewModel(IRegistry registry, IPlatformPermissions platformPermissions, IPlatformNotifier platformNotifier)
         {            
             _trackingService = registry.TrackingService;
             _trackingService.ValueChanged += TrackingServiceOnValueChanged;
@@ -21,6 +22,7 @@ namespace Forms.ViewModels
             _timingService.ValueChanged += TimingServiceOnValueChanged;
 
             _platformPermissions = platformPermissions;
+            _platformNotifier = platformNotifier;
         }
 
         private void TimingServiceOnValueChanged(object sender, int i)
@@ -59,6 +61,11 @@ namespace Forms.ViewModels
         {
             await _platformPermissions.RequestLocationAsync();
             await _platformPermissions.RequestSmsAsync();
+        });
+
+        public ICommand ShowOfferDialogCommand => new Command(async () =>
+        {
+            await _platformNotifier.ShowDialogAsync("Offfffeeeeeeeeer!!!");
         });
 
         public override void Dispose()

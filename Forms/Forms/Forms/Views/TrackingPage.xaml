@@ -9,6 +9,7 @@
             <Label Text="{Binding Lon, StringFormat='Lon {0}'}" />
             <Label Text="{Binding Second, StringFormat='Second {0}'}"/>
             <Button Text="Check permissions" Command="{Binding CheckPermissionsCommand}" />
+            <Button Text="Show offer dialog" Command="{Binding ShowOfferDialogCommand}" />
         </StackLayout>
     </ContentPage.Content>
 </views:TrackingPageBase>
