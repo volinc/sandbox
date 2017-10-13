@@ -54,8 +54,8 @@ namespace Forms.Driving.Infrastructure
             this.connectivityService = connectivityService;            
             this.requestQueue = requestQueue;
 
-            //mono workaround...
-            ServicePointManager.DnsRefreshTimeout = 0;
+            ////mono workaround...
+            //ServicePointManager.DnsRefreshTimeout = 0;
 
             BaseUri = Configuration.BaseUri;
             Timeout = Configuration.Timeout ?? TimeSpan.FromSeconds(30);
