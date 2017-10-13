@@ -12,20 +12,20 @@ namespace Forms.Driving
 {
     public class DriverEmulator : IDisposable
     { 
-        private readonly EmulatorConfig emulatorConfig;
-        private readonly DriverClient driverClient;
-        private readonly SignalRClient signalRClient;
-        private readonly NotificationEmulatorClient notificationEmulatorClient;
+        private readonly EmulatorConfig _emulatorConfig;
+        private readonly DriverClient _driverClient;
+        private readonly SignalRClient _signalRClient;
+        private readonly NotificationEmulatorClient _notificationEmulatorClient;
 
         private DateTimeOffset _startAt;
 
         public DriverEmulator(EmulatorConfig emulatorConfig, DriverClient driverClient, SignalRClient signalRClient,
             NotificationEmulatorClient notificationEmulatorClient)
         {
-            this.emulatorConfig = emulatorConfig;
-            this.driverClient = driverClient;
-            this.signalRClient = signalRClient;
-            this.notificationEmulatorClient = notificationEmulatorClient;
+            this._emulatorConfig = emulatorConfig;
+            this._driverClient = driverClient;
+            this._signalRClient = signalRClient;
+            this._notificationEmulatorClient = notificationEmulatorClient;
 
             driverClient.LoggedOut += DriverClientOnLoggedOut;
         }
@@ -33,7 +33,7 @@ namespace Forms.Driving
         private void DriverClientOnLoggedOut(object o, EventArgs eventArgs)
         {
             Console.WriteLine("Stop listening SignalR");
-            signalRClient.StopListening();
+            _signalRClient.StopListening();
             Console.WriteLine("Signed out");
         }
 
@@ -44,10 +44,10 @@ namespace Forms.Driving
             try
             {
                 _startAt = DateTimeOffset.Now;
-                Console.WriteLine($"Working with {emulatorConfig.ApiAuthority}...");
+                Console.WriteLine($"Working with {_emulatorConfig.ApiAuthority}...");
 
-                var phone = emulatorConfig.Phone;
-                var password = emulatorConfig.Password;
+                var phone = _emulatorConfig.Phone;
+                var password = _emulatorConfig.Password;
 
                 var isSigned = await TryLoginAsync(phone, password);
                 if (!isSigned)
@@ -79,7 +79,7 @@ namespace Forms.Driving
 
             try
             {
-                await driverClient.LogInAsync(phone, password);
+                await _driverClient.LogInAsync(phone, password);
                 Console.WriteLine($"User {phone} is signed in...");
                 return true;
             }
@@ -93,48 +93,48 @@ namespace Forms.Driving
         private async Task RegisterOrResetPasswordAsync(string phone, string password)
         {
             var notificationEmulatorError =
-                $"Unable to get confirmation code from emulator {emulatorConfig.ApiAuthorityEmulator}";
+                $"Unable to get confirmation code from emulator {_emulatorConfig.ApiAuthorityEmulator}";
 
             var givenNames = Guid.NewGuid().ToString("N");
             var familyName = Guid.NewGuid().ToString("N");
             try
             {
                 Console.WriteLine("Trying to register...");
-                await driverClient.RegisterDriverAsync(phone, givenNames, familyName);
+                await _driverClient.RegisterDriverAsync(phone, givenNames, familyName);
 
-                var conditional = await notificationEmulatorClient.TryGetConfirmationCodeAsync(phone);
+                var conditional = await _notificationEmulatorClient.TryGetConfirmationCodeAsync(phone);
                 if (!conditional.HasValue)
                     throw new InvalidOperationException(notificationEmulatorError);
                
-                await driverClient.ConfirmDriverAsync(phone, password, conditional.Value);
+                await _driverClient.ConfirmDriverAsync(phone, password, conditional.Value);
             }
             catch (ErrorResponseException errorResponseException)
             {
                 Console.Error.WriteLine(errorResponseException.Message);
                 Console.WriteLine("Trying to reset password...");
-                await driverClient.ResetPasswordAsync(phone);
-                var conditional = await notificationEmulatorClient.TryGetConfirmationCodeAsync(phone);
+                await _driverClient.ResetPasswordAsync(phone);
+                var conditional = await _notificationEmulatorClient.TryGetConfirmationCodeAsync(phone);
                 if (!conditional.HasValue)
                     throw new InvalidOperationException(notificationEmulatorError);
 
-                await driverClient.ResetPasswordConfirmAsync(phone, conditional.Value, password);
+                await _driverClient.ResetPasswordConfirmAsync(phone, conditional.Value, password);
             }
         }
 
         private async Task<ShiftData> ReadOrCreateShiftAsync()
         {
-            var conditional = await driverClient.TryReadStateObjectAsync();
+            var conditional = await _driverClient.TryReadStateObjectAsync();
             if (conditional.HasValue)
             {
                 var stateObject = conditional.Value;
                 if (stateObject.Shift != null)
                 {
-                    await driverClient.ShiftContinueAsync();
+                    await _driverClient.ShiftContinueAsync();
                     return stateObject.Shift;
                 }
             }
             
-            var availableVehicles = (await driverClient.ReadAllVehiclesAsync(true)).Items.ToArray();
+            var availableVehicles = (await _driverClient.ReadAllVehiclesAsync(true)).Items.ToArray();
             if (!availableVehicles.Any())
             {
                 var vehicle = Vehicle.Map.From(new VehicleData
@@ -142,22 +142,22 @@ namespace Forms.Driving
                     RegistrationNumber = Guid.NewGuid().ToString("N"),
                     DraftLicenseNumber = Guid.NewGuid().ToString("N"),
                 });
-                var brands = (await driverClient.ReadVehicleBrandsAsync()).Items.ToArray();
+                var brands = (await _driverClient.ReadVehicleBrandsAsync()).Items.ToArray();
                 var brand = brands[Random.Next(0, brands.Length - 1)];
-                var models = (await driverClient.ReadVehicleModelsAsync(brand.Id)).Items.ToArray();
+                var models = (await _driverClient.ReadVehicleModelsAsync(brand.Id)).Items.ToArray();
                 vehicle.Model = models[Random.Next(0, models.Length - 1)];
-                var bodies = (await driverClient.ReadVehicleBodiesAsync()).Items.ToArray();
+                var bodies = (await _driverClient.ReadVehicleBodiesAsync()).Items.ToArray();
                 vehicle.Body = bodies[Random.Next(0, bodies.Length - 1)];
-                var colors = (await driverClient.ReadVehicleColorsAsync()).Items.ToArray();
+                var colors = (await _driverClient.ReadVehicleColorsAsync()).Items.ToArray();
                 vehicle.Color = colors[Random.Next(0, colors.Length - 1)];
-                await driverClient.CreateVehicleAsync(vehicle);
+                await _driverClient.CreateVehicleAsync(vehicle);
 
-                availableVehicles = (await driverClient.ReadAllVehiclesAsync(true)).Items.ToArray();
+                availableVehicles = (await _driverClient.ReadAllVehiclesAsync(true)).Items.ToArray();
             }
 
             var availableVehicleId = availableVehicles[Random.Next(0, availableVehicles.Length - 1)].Id;
-            var shift = await driverClient.ShiftStartAsync(availableVehicleId, new[] { 1 }, new[] { 8 });
-            await driverClient.ShiftContinueAsync();
+            var shift = await _driverClient.ShiftStartAsync(availableVehicleId, new[] { 1 }, new[] { 8 });
+            await _driverClient.ShiftContinueAsync();
 
             return shift;
         }
@@ -167,20 +167,20 @@ namespace Forms.Driving
             Console.WriteLine("Start listening SignalR");
             await Task.Run(() =>
             {
-                signalRClient.StateChanged += async (sender, state) =>
+                _signalRClient.StateChanged += async (sender, state) =>
                 {
                     Console.WriteLine($"SignalRState {state}");
                     await Task.Delay(0);
                 };
 
-                signalRClient.NewOffer += async (sender, data) =>
+                _signalRClient.NewOffer += async (sender, data) =>
                 {
                     try
                     {
                         var offerData = JsonConvert.SerializeObject(data);
                         Console.WriteLine(offerData);
 
-                        await driverClient.SuggestionDeclineAsync(data.SuggestionId);
+                        await _driverClient.SuggestionDeclineAsync(data.SuggestionId);
                     }
                     catch (Exception exception)
                     {
@@ -188,7 +188,7 @@ namespace Forms.Driving
                     }
                 };
 
-                signalRClient.StartListening();
+                _signalRClient.StartListening();
             });
         }
 
@@ -202,7 +202,7 @@ namespace Forms.Driving
                 await WorkWithSignalRClientAsync().ConfigureAwait(false);
 
                 var i = 0;
-                while (driverClient.IsLoggedIn && !cancellationToken.IsCancellationRequested)
+                while (_driverClient.IsLoggedIn && !cancellationToken.IsCancellationRequested)
                 {
                     try
                     {                        
@@ -213,11 +213,11 @@ namespace Forms.Driving
                         {
                             OrderId = null,
                             Index = null,
-                            Location = new Location(emulatorConfig.CenterLocation.Latitude + shLat, emulatorConfig.CenterLocation.Longitude + shLon),
+                            Location = new Location(_emulatorConfig.CenterLocation.Latitude + shLat, _emulatorConfig.CenterLocation.Longitude + shLon),
                             Timestamp = DateTimeOffset.UtcNow,
                         };
 
-                        await driverClient.ShiftUpdateLocationAsync(tracking);
+                        await _driverClient.ShiftUpdateLocationAsync(tracking);
 
                         Console.WriteLine($"{i++} {tracking.Location.Latitude},{tracking.Location.Longitude}\t{tracking.Timestamp.ToString("G", CultureInfo.InvariantCulture)}");
                         await Task.Delay(TimeSpan.FromSeconds(2), cancellationToken);
@@ -244,7 +244,7 @@ namespace Forms.Driving
 
         public void Dispose()
         {
-            driverClient.LoggedOut -= DriverClientOnLoggedOut;
+            _driverClient.LoggedOut -= DriverClientOnLoggedOut;
         }
     }
 }

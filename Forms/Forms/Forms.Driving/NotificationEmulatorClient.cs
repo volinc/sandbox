@@ -9,14 +9,14 @@ namespace Forms.Driving
 {
     public class NotificationEmulatorClient
     {
-        private readonly HttpClient client;
+        private readonly HttpClient _client;
 
         public NotificationEmulatorClient(EmulatorConfig config)
         {
 #if STAGE
 #elif RELEASE
 #else
-            client = new HttpClient
+            _client = new HttpClient
             {
                 BaseAddress = new Uri($"{config.ApiAuthorityEmulator}/api/v1/", UriKind.RelativeOrAbsolute)
             };
@@ -32,7 +32,7 @@ namespace Forms.Driving
 #else
             try
             {
-                var jsonContent = await client.GetStringAsync($"notifications/last?type=Sms&clientCode={phone.Trim()}");
+                var jsonContent = await _client.GetStringAsync($"notifications/last?type=Sms&clientCode={phone.Trim()}");
                 var content = JsonConvert.DeserializeObject(jsonContent) as JObject;
                 var jsonData = content?.Property("JsonData").Value.ToString();
                 var data = JsonConvert.DeserializeObject(jsonData) as JObject;
