@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#e0e0e0">
     <android.support.v7.widget.DialogTitle
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,7 +35,8 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/textView1" />
+            android:id="@+id/textView1"
+            android:textColor="#000000" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -52,7 +54,8 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/textView2" />
+            android:id="@+id/textView2"
+            android:textColor="#000000" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -70,21 +73,23 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/textView3" />
+            android:id="@+id/textView3"
+            android:textColor="#000000" />
         <TextView
             android:text="Medium Text"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/textView4" />
+            android:id="@+id/textView4"
+            android:textColor="#000000" />
     </LinearLayout>
     <Button
-        android:text="Button"
+        android:text="Принять"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/button1" />
     <Button
-        android:text="Button"
+        android:text="Пропустить"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/button2" />
