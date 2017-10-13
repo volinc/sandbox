@@ -67,6 +67,7 @@ namespace Forms.Droid.Service.Driving
             builder.RegisterType<Logger>().AsImplementedInterfaces().SingleInstance();
             builder.RegisterType<DriverClient>().SingleInstance();
             builder.RegisterType<SignalRClient>().SingleInstance();
+            builder.RegisterType<TaskQueue>().SingleInstance();
             return builder.Build();
         }
     }
