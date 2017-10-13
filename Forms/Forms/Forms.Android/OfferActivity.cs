@@ -11,7 +11,8 @@ namespace Forms.Droid
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            
+
+            SetContentView(Resource.Layout.Offer);
             Window.SetLayout(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
             Window.AddFlags(WindowManagerFlags.ForceNotFullscreen | WindowManagerFlags.TurnScreenOn);
         }        

@@ -11,7 +11,7 @@ namespace Forms.Droid
         //https://stackoverflow.com/questions/39479508/show-dialog-activity-over-another-app-from-background
         public async Task<bool> ShowDialogAsync(string message)
         {
-            await Task.Delay(TimeSpan.FromSeconds(10));
+            await Task.Delay(TimeSpan.FromSeconds(5));
 
             var context = Application.Context;
             

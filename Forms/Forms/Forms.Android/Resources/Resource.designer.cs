@@ -1173,44 +1173,44 @@ namespace Forms.Droid
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f0d004a
-			public const int abc_background_cache_hint_selector_material_dark = 2131558474;
-			
 			// aapt resource value: 0x7f0d004b
-			public const int abc_background_cache_hint_selector_material_light = 2131558475;
+			public const int abc_background_cache_hint_selector_material_dark = 2131558475;
 			
 			// aapt resource value: 0x7f0d004c
-			public const int abc_btn_colored_borderless_text_material = 2131558476;
+			public const int abc_background_cache_hint_selector_material_light = 2131558476;
 			
 			// aapt resource value: 0x7f0d004d
-			public const int abc_btn_colored_text_material = 2131558477;
+			public const int abc_btn_colored_borderless_text_material = 2131558477;
 			
 			// aapt resource value: 0x7f0d004e
-			public const int abc_color_highlight_material = 2131558478;
+			public const int abc_btn_colored_text_material = 2131558478;
 			
 			// aapt resource value: 0x7f0d004f
-			public const int abc_hint_foreground_material_dark = 2131558479;
+			public const int abc_color_highlight_material = 2131558479;
 			
 			// aapt resource value: 0x7f0d0050
-			public const int abc_hint_foreground_material_light = 2131558480;
+			public const int abc_hint_foreground_material_dark = 2131558480;
+			
+			// aapt resource value: 0x7f0d0051
+			public const int abc_hint_foreground_material_light = 2131558481;
 			
 			// aapt resource value: 0x7f0d0005
 			public const int abc_input_method_navigation_guard = 2131558405;
 			
-			// aapt resource value: 0x7f0d0051
-			public const int abc_primary_text_disable_only_material_dark = 2131558481;
-			
 			// aapt resource value: 0x7f0d0052
-			public const int abc_primary_text_disable_only_material_light = 2131558482;
+			public const int abc_primary_text_disable_only_material_dark = 2131558482;
 			
 			// aapt resource value: 0x7f0d0053
-			public const int abc_primary_text_material_dark = 2131558483;
+			public const int abc_primary_text_disable_only_material_light = 2131558483;
 			
 			// aapt resource value: 0x7f0d0054
-			public const int abc_primary_text_material_light = 2131558484;
+			public const int abc_primary_text_material_dark = 2131558484;
 			
 			// aapt resource value: 0x7f0d0055
-			public const int abc_search_url_text = 2131558485;
+			public const int abc_primary_text_material_light = 2131558485;
+			
+			// aapt resource value: 0x7f0d0056
+			public const int abc_search_url_text = 2131558486;
 			
 			// aapt resource value: 0x7f0d0006
 			public const int abc_search_url_text_normal = 2131558406;
@@ -1221,32 +1221,32 @@ namespace Forms.Droid
 			// aapt resource value: 0x7f0d0008
 			public const int abc_search_url_text_selected = 2131558408;
 			
-			// aapt resource value: 0x7f0d0056
-			public const int abc_secondary_text_material_dark = 2131558486;
-			
 			// aapt resource value: 0x7f0d0057
-			public const int abc_secondary_text_material_light = 2131558487;
+			public const int abc_secondary_text_material_dark = 2131558487;
 			
 			// aapt resource value: 0x7f0d0058
-			public const int abc_tint_btn_checkable = 2131558488;
+			public const int abc_secondary_text_material_light = 2131558488;
 			
 			// aapt resource value: 0x7f0d0059
-			public const int abc_tint_default = 2131558489;
+			public const int abc_tint_btn_checkable = 2131558489;
 			
 			// aapt resource value: 0x7f0d005a
-			public const int abc_tint_edittext = 2131558490;
+			public const int abc_tint_default = 2131558490;
 			
 			// aapt resource value: 0x7f0d005b
-			public const int abc_tint_seek_thumb = 2131558491;
+			public const int abc_tint_edittext = 2131558491;
 			
 			// aapt resource value: 0x7f0d005c
-			public const int abc_tint_spinner = 2131558492;
+			public const int abc_tint_seek_thumb = 2131558492;
 			
 			// aapt resource value: 0x7f0d005d
-			public const int abc_tint_switch_thumb = 2131558493;
+			public const int abc_tint_spinner = 2131558493;
 			
 			// aapt resource value: 0x7f0d005e
-			public const int abc_tint_switch_track = 2131558494;
+			public const int abc_tint_switch_thumb = 2131558494;
+			
+			// aapt resource value: 0x7f0d005f
+			public const int abc_tint_switch_track = 2131558495;
 			
 			// aapt resource value: 0x7f0d0009
 			public const int accent_material_dark = 2131558409;
@@ -1305,8 +1305,8 @@ namespace Forms.Droid
 			// aapt resource value: 0x7f0d003f
 			public const int design_bottom_navigation_shadow_color = 2131558463;
 			
-			// aapt resource value: 0x7f0d005f
-			public const int design_error = 2131558495;
+			// aapt resource value: 0x7f0d0060
+			public const int design_error = 2131558496;
 			
 			// aapt resource value: 0x7f0d0040
 			public const int design_fab_shadow_end_color = 2131558464;
@@ -1338,8 +1338,8 @@ namespace Forms.Droid
 			// aapt resource value: 0x7f0d0049
 			public const int design_textinput_error_color_light = 2131558473;
 			
-			// aapt resource value: 0x7f0d0060
-			public const int design_tint_password_toggle = 2131558496;
+			// aapt resource value: 0x7f0d0061
+			public const int design_tint_password_toggle = 2131558497;
 			
 			// aapt resource value: 0x7f0d0017
 			public const int dim_foreground_disabled_material_dark = 2131558423;
@@ -1458,17 +1458,20 @@ namespace Forms.Droid
 			// aapt resource value: 0x7f0d003c
 			public const int switch_thumb_disabled_material_light = 2131558460;
 			
-			// aapt resource value: 0x7f0d0061
-			public const int switch_thumb_material_dark = 2131558497;
-			
 			// aapt resource value: 0x7f0d0062
-			public const int switch_thumb_material_light = 2131558498;
+			public const int switch_thumb_material_dark = 2131558498;
+			
+			// aapt resource value: 0x7f0d0063
+			public const int switch_thumb_material_light = 2131558499;
 			
 			// aapt resource value: 0x7f0d003d
 			public const int switch_thumb_normal_material_dark = 2131558461;
 			
 			// aapt resource value: 0x7f0d003e
 			public const int switch_thumb_normal_material_light = 2131558462;
+			
+			// aapt resource value: 0x7f0d004a
+			public const int theme_devicedefault_background = 2131558474;
 			
 			static Color()
 			{
@@ -2865,6 +2868,12 @@ namespace Forms.Droid
 			// aapt resource value: 0x7f090028
 			public const int bottom = 2131296296;
 			
+			// aapt resource value: 0x7f0900bd
+			public const int button1 = 2131296445;
+			
+			// aapt resource value: 0x7f0900be
+			public const int button2 = 2131296446;
+			
 			// aapt resource value: 0x7f09004b
 			public const int buttonPanel = 2131296331;
 			
@@ -2931,6 +2940,9 @@ namespace Forms.Droid
 			// aapt resource value: 0x7f09007c
 			public const int design_navigation_view = 2131296380;
 			
+			// aapt resource value: 0x7f0900b2
+			public const int dialogTitle1 = 2131296434;
+			
 			// aapt resource value: 0x7f090012
 			public const int disableHome = 2131296274;
 			
@@ -2988,6 +3000,15 @@ namespace Forms.Droid
 			// aapt resource value: 0x7f090046
 			public const int image = 2131296326;
 			
+			// aapt resource value: 0x7f0900b4
+			public const int imageView1 = 2131296436;
+			
+			// aapt resource value: 0x7f0900b7
+			public const int imageView2 = 2131296439;
+			
+			// aapt resource value: 0x7f0900ba
+			public const int imageView3 = 2131296442;
+			
 			// aapt resource value: 0x7f0900a8
 			public const int info = 2131296424;
 			
@@ -3006,14 +3027,23 @@ namespace Forms.Droid
 			// aapt resource value: 0x7f0900af
 			public const int line3 = 2131296431;
 			
+			// aapt resource value: 0x7f0900b3
+			public const int linearLayout1 = 2131296435;
+			
+			// aapt resource value: 0x7f0900b6
+			public const int linearLayout2 = 2131296438;
+			
+			// aapt resource value: 0x7f0900b9
+			public const int linearLayout3 = 2131296441;
+			
 			// aapt resource value: 0x7f09000f
 			public const int listMode = 2131296271;
 			
 			// aapt resource value: 0x7f090048
 			public const int list_item = 2131296328;
 			
-			// aapt resource value: 0x7f0900b5
-			public const int masked = 2131296437;
+			// aapt resource value: 0x7f0900c2
+			public const int masked = 2131296450;
 			
 			// aapt resource value: 0x7f0900a1
 			public const int media_actions = 2131296417;
@@ -3213,8 +3243,8 @@ namespace Forms.Droid
 			// aapt resource value: 0x7f090017
 			public const int showTitle = 2131296279;
 			
-			// aapt resource value: 0x7f0900b2
-			public const int sliding_tabs = 2131296434;
+			// aapt resource value: 0x7f0900bf
+			public const int sliding_tabs = 2131296447;
 			
 			// aapt resource value: 0x7f090073
 			public const int smallLabel = 2131296371;
@@ -3270,6 +3300,18 @@ namespace Forms.Droid
 			// aapt resource value: 0x7f090051
 			public const int textSpacerNoTitle = 2131296337;
 			
+			// aapt resource value: 0x7f0900b5
+			public const int textView1 = 2131296437;
+			
+			// aapt resource value: 0x7f0900b8
+			public const int textView2 = 2131296440;
+			
+			// aapt resource value: 0x7f0900bb
+			public const int textView3 = 2131296443;
+			
+			// aapt resource value: 0x7f0900bc
+			public const int textView4 = 2131296444;
+			
 			// aapt resource value: 0x7f090080
 			public const int text_input_password_toggle = 2131296384;
 			
@@ -3291,8 +3333,8 @@ namespace Forms.Droid
 			// aapt resource value: 0x7f090057
 			public const int title_template = 2131296343;
 			
-			// aapt resource value: 0x7f0900b3
-			public const int toolbar = 2131296435;
+			// aapt resource value: 0x7f0900c0
+			public const int toolbar = 2131296448;
 			
 			// aapt resource value: 0x7f090029
 			public const int top = 2131296297;
@@ -3318,8 +3360,8 @@ namespace Forms.Droid
 			// aapt resource value: 0x7f09000e
 			public const int view_offset_helper = 2131296270;
 			
-			// aapt resource value: 0x7f0900b4
-			public const int visible = 2131296436;
+			// aapt resource value: 0x7f0900c1
+			public const int visible = 2131296449;
 			
 			// aapt resource value: 0x7f090093
 			public const int volume_item_container = 2131296403;
@@ -3598,22 +3640,25 @@ namespace Forms.Droid
 			public const int notification_template_part_time = 2130903101;
 			
 			// aapt resource value: 0x7f03003e
-			public const int select_dialog_item_material = 2130903102;
+			public const int Offer = 2130903102;
 			
 			// aapt resource value: 0x7f03003f
-			public const int select_dialog_multichoice_material = 2130903103;
+			public const int select_dialog_item_material = 2130903103;
 			
 			// aapt resource value: 0x7f030040
-			public const int select_dialog_singlechoice_material = 2130903104;
+			public const int select_dialog_multichoice_material = 2130903104;
 			
 			// aapt resource value: 0x7f030041
-			public const int support_simple_spinner_dropdown_item = 2130903105;
+			public const int select_dialog_singlechoice_material = 2130903105;
 			
 			// aapt resource value: 0x7f030042
-			public const int Tabbar = 2130903106;
+			public const int support_simple_spinner_dropdown_item = 2130903106;
 			
 			// aapt resource value: 0x7f030043
-			public const int Toolbar = 2130903107;
+			public const int Tabbar = 2130903107;
+			
+			// aapt resource value: 0x7f030044
+			public const int Toolbar = 2130903108;
 			
 			static Layout()
 			{
@@ -4715,6 +4760,9 @@ namespace Forms.Droid
 			
 			// aapt resource value: 0x7f0c011e
 			public const int Theme_AppCompat_NoActionBar = 2131493150;
+			
+			// aapt resource value: 0x7f0c018c
+			public const int Theme_Custom = 2131493260;
 			
 			// aapt resource value: 0x7f0c017a
 			public const int Theme_Design = 2131493242;
