@@ -21,7 +21,7 @@ namespace Forms.Droid.Service
             MusicService.Start();
             TrackingService.Start();
             TimingService.Start();
-            DrivingService.Start();            
+            //DrivingService.Start();            
 
             _isStarted = true;
         }
