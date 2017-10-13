@@ -165,7 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainApplication.cs" />
-    <Compile Include="PermissionsManager.cs" />
+    <Compile Include="PlatformPermissions.cs" />
     <Compile Include="Registry.cs" />
     <Compile Include="Service\Driving\DrivingService.cs" />
     <Compile Include="Service\Music\MusicService.cs" />

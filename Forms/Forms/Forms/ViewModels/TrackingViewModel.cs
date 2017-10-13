@@ -8,11 +8,11 @@ namespace Forms.ViewModels
 {
     public class TrackingViewModel : BaseViewModel
     {
-        private readonly IPermissionsManager _permissionsManager;
+        private readonly IPlatformPermissions _platformPermissions;
         private readonly ITrackingService _trackingService;
         private readonly ITimingService _timingService;
         
-        public TrackingViewModel(IRegistry registry, IPermissionsManager permissionsManager)
+        public TrackingViewModel(IRegistry registry, IPlatformPermissions platformPermissions)
         {            
             _trackingService = registry.TrackingService;
             _trackingService.ValueChanged += TrackingServiceOnValueChanged;
@@ -20,7 +20,7 @@ namespace Forms.ViewModels
             _timingService = registry.TimingService;
             _timingService.ValueChanged += TimingServiceOnValueChanged;
 
-            _permissionsManager = permissionsManager;
+            _platformPermissions = platformPermissions;
         }
 
         private void TimingServiceOnValueChanged(object sender, int i)
@@ -57,8 +57,8 @@ namespace Forms.ViewModels
 
         public ICommand CheckPermissionsCommand => new Command(async () =>
         {
-            await _permissionsManager.CheckLocationAsync();
-            await _permissionsManager.CheckSmsAsync();
+            await _platformPermissions.RequestLocationAsync();
+            await _platformPermissions.RequestSmsAsync();
         });
 
         public override void Dispose()

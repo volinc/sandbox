@@ -8,7 +8,7 @@ namespace Forms.Droid
         {
             base.RegisterDependencies(builder);
 
-            builder.RegisterType<PermissionsManager>().AsImplementedInterfaces().SingleInstance();
+            builder.RegisterType<PlatformPermissions>().AsImplementedInterfaces().SingleInstance();
             builder.RegisterType<Registry>().AsImplementedInterfaces().SingleInstance();            
         }
     }

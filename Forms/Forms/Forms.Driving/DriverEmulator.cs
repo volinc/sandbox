@@ -7,7 +7,6 @@ using Forms.Driving.Data;
 using Forms.Driving.Domain.Entities;
 using Forms.Driving.Infrastructure;
 using Newtonsoft.Json;
-using Plugin.Notifications;
 
 namespace Forms.Driving
 {
@@ -34,15 +33,7 @@ namespace Forms.Driving
         private void DriverClientOnLoggedOut(object o, EventArgs eventArgs)
         {
             Console.WriteLine("Stop listening SignalR");
-            _signalRClient.StopListening();
-            
-            CrossNotifications.Current.Send(new Notification
-            {
-                Id = 9000,
-                Message = "Signed out",
-                Vibrate = true,
-
-            }).GetAwaiter();
+            _signalRClient.StopListening();                        
 
             Console.WriteLine("Signed out");
         }
