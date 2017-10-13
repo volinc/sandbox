@@ -4,6 +4,8 @@ namespace Forms.Infrastructure
 {
     public interface IPermissionsManager
     {
-        Task CheckPermissionsAsync();
+        Task CheckLocationAsync();
+
+        Task CheckSmsAsync();
     }
 }

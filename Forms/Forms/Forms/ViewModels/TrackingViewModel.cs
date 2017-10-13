@@ -55,7 +55,11 @@ namespace Forms.ViewModels
             set => SetProperty(ref _second, value);
         }
 
-        public ICommand CheckPermissionsCommand => new Command(async () => await _permissionsManager.CheckPermissionsAsync());
+        public ICommand CheckPermissionsCommand => new Command(async () =>
+        {
+            await _permissionsManager.CheckLocationAsync();
+            await _permissionsManager.CheckSmsAsync();
+        });
 
         public override void Dispose()
         {

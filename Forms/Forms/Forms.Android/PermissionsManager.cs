@@ -14,31 +14,41 @@ namespace Forms.Droid
 {
     internal class PermissionsManager : IPermissionsManager
     {
-        public async Task CheckPermissionsAsync()
+        public async Task CheckLocationAsync()
+        {
+            await CheckPermissionsAsync(Permission.Location);
+        }
+
+        public async Task CheckSmsAsync()
+        {
+            await CheckPermissionsAsync(Permission.Sms);
+        }
+
+        private async Task CheckPermissionsAsync(Permission permission)
         {
             if (Build.VERSION.SdkInt < BuildVersionCodes.M)
                 return;
 
             try
             {
-                var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
+                var status = await CrossPermissions.Current.CheckPermissionStatusAsync(permission);
                 if (status != PermissionStatus.Granted)
                 {
-                    if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Location))
+                    if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(permission))
                     {
-                        await DisplayAlert("Need location", "Gunna need that location");
+                        await DisplayAlert("Need permission", "Gunna need that permission");
                     }
 
-                    var results = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Location);                    
-                    if (results.ContainsKey(Permission.Location))
-                        status = results[Permission.Location];
+                    var results = await CrossPermissions.Current.RequestPermissionsAsync(permission);                    
+                    if (results.ContainsKey(permission))
+                        status = results[permission];
                 }
 
                 if (status == PermissionStatus.Granted)
                     return;
 
                 if (status != PermissionStatus.Unknown)
-                    await DisplayAlert("Location Denied", "Can not continue, try again.");                
+                    await DisplayAlert("Permission Denied", "Can not continue, try again.");                
             }
             catch (Exception ex)
             {
@@ -67,6 +77,6 @@ namespace Forms.Droid
             });            
         }
 
-        private static Activity GetCurrentActivity() => CrossCurrentActivity.Current.Activity;
+        private static Activity GetCurrentActivity() => CrossCurrentActivity.Current.Activity;        
     }
 }

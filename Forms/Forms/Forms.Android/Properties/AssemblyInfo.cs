@@ -34,6 +34,8 @@ using Android.App;
 [assembly: UsesPermission(Manifest.Permission.AccessFineLocation)] // Allows an app to access precise location. Alternatively, you might want ACCESS_COARSE_LOCATION. (dangerous) 
 [assembly: UsesPermission(Manifest.Permission.AccessLocationExtraCommands)] // Allows an application to access extra location provider commands. (normal) ?
 [assembly: UsesPermission(Manifest.Permission.InstantAppForegroundService)] // Allows an instant app to create foreground services. (normal)
+[assembly: UsesPermission(Manifest.Permission.ReceiveSms)]
+[assembly: UsesPermission(Manifest.Permission.ReadSms)]
 
 [assembly: UsesFeature("android.hardware.location", Required = false)]
 [assembly: UsesFeature("android.hardware.location.gps", Required = false)]

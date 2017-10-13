@@ -9,9 +9,10 @@ namespace Forms.Droid.Service
     [BroadcastReceiver(Enabled = true, Exported = true, Label = nameof(UndeadReceiver))]
     [IntentFilter(new[]
     {
+        "android.provider.Telephony.SMS_RECEIVED",
         Intent.ActionReboot,
         Intent.ActionBootCompleted,
-        Intent.ActionLockedBootCompleted,
+        Intent.ActionLockedBootCompleted,        
         ActionQuickbootPowerOn,
         ActionHtcQuickbootPowerOn,        
     })]
@@ -21,22 +22,20 @@ namespace Forms.Droid.Service
         public const string ActionHtcQuickbootPowerOn = "com.htc.intent.action.QUICKBOOT_POWERON";
 
         public override void OnReceive(Context context, Intent intent)
-        {
-            if (!IsKnownAction(intent.Action)) return;
-
+        {            
             Toast.MakeText(context, $"Received intent! {intent.Action}", ToastLength.Short).Show();
-            
-            var serviceIntent = new Intent(context, typeof(UndeadService));
-            context.StartService(serviceIntent);            
-        }
 
-        private bool IsKnownAction(string action)
-        {
-            var knownActions = GetType().GetCustomAttributes(false)
-                .OfType<IntentFilterAttribute>()
-                .SelectMany(x => x.Actions);
-
-            return knownActions.Contains(action, StringComparer.OrdinalIgnoreCase);
-        }
+            switch (intent.Action)
+            {
+                case Intent.ActionReboot:
+                case Intent.ActionBootCompleted:
+                case Intent.ActionLockedBootCompleted:
+                case ActionQuickbootPowerOn:
+                case ActionHtcQuickbootPowerOn:
+                    var serviceIntent = new Intent(context, typeof(UndeadService));
+                    context.StartService(serviceIntent);
+                    break;
+            }
+        }        
     }
 }
