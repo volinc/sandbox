@@ -15,7 +15,7 @@ namespace Forms.Driving.Infrastructure
     public abstract class ServiceClient
     {
         public const string JsonMediaType = "application/json";
-        private readonly TimeSpan defaultDnsRefreshTimeout = TimeSpan.FromSeconds(90);
+        
         protected ServiceClientConfiguration Configuration { get; }
 
         protected Uri BaseUri { get; }
@@ -24,8 +24,7 @@ namespace Forms.Driving.Infrastructure
         protected TokenStore TokenStore { get; }
         protected HttpClient HttpClient { get; set; }
 
-        private readonly IConnectivityService connectivityService;
-        private readonly IServicePointManager servicePointManager;
+        private readonly IConnectivityService connectivityService;        
         private readonly TaskQueue requestQueue;
 
         public virtual event EventHandler LoggedIn;
@@ -48,14 +47,15 @@ namespace Forms.Driving.Infrastructure
         }
 
         protected ServiceClient(ServiceClientConfiguration configuration, HttpMessageHandler authMessageHandler,
-                                TokenStore tokenStore, IConnectivityService connectivityService,
-                                IServicePointManager servicePointManager, TaskQueue requestQueue)
+                                TokenStore tokenStore, IConnectivityService connectivityService, TaskQueue requestQueue)
         {
             Configuration = configuration;
             TokenStore = tokenStore;
-            this.connectivityService = connectivityService;
-            this.servicePointManager = servicePointManager;
+            this.connectivityService = connectivityService;            
             this.requestQueue = requestQueue;
+
+            //mono workaround...
+            ServicePointManager.DnsRefreshTimeout = 0;
 
             BaseUri = Configuration.BaseUri;
             Timeout = Configuration.Timeout ?? TimeSpan.FromSeconds(30);
@@ -112,10 +112,6 @@ namespace Forms.Driving.Infrastructure
         {
             var responseMessage = await httpClient.SendAsync(requestMessage, cancellationToken);
 
-            //mono workaround...
-            if (servicePointManager.DnsRefreshTimeout == 0)
-                servicePointManager.DnsRefreshTimeout = defaultDnsRefreshTimeout.Milliseconds;
-
             return await HandleNotSuccessHttpStatusCodeAsync(responseMessage, acceptableStatuses, cancellationToken);
         }
 
@@ -170,9 +166,6 @@ namespace Forms.Driving.Infrastructure
 
         protected virtual ConditionalValue<Exception> TryHandleWebExceptionAsync(WebException webException)
         {
-            //mono workaround...
-            servicePointManager.DnsRefreshTimeout = 0;
-
             if (!connectivityService.IsConnected)
                 throw new InvalidOperationException("Нет соединения с Интернетом.", webException);
             

@@ -12,8 +12,8 @@ namespace Forms.Driving.Infrastructure
     public class DriverClient : ServiceClient
     {
         public DriverClient(ServiceClientConfiguration configuration, TokenStore tokenStore, HttpMessageHandler authMessageHandler,
-            IConnectivityService connectivityService, IServicePointManager servicePointManager, TaskQueue requestQueue)
-            : base(configuration, authMessageHandler, tokenStore, connectivityService, servicePointManager, requestQueue)
+            IConnectivityService connectivityService, TaskQueue requestQueue)
+            : base(configuration, authMessageHandler, tokenStore, connectivityService, requestQueue)
         {
         }
 

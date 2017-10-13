@@ -63,8 +63,7 @@ namespace Forms.Droid.Service.Driving
             builder.RegisterType<Settings>().AsImplementedInterfaces().SingleInstance();
             builder.RegisterType<TokenStore>().SingleInstance();
             builder.RegisterType<OAuthMessageHandler>().As<HttpMessageHandler>().SingleInstance();
-            builder.RegisterType<ConnectivityService>().AsImplementedInterfaces().SingleInstance();
-            builder.RegisterType<ServicePointManager>().AsImplementedInterfaces().SingleInstance();
+            builder.RegisterType<ConnectivityService>().AsImplementedInterfaces().SingleInstance();            
             builder.RegisterType<Logger>().AsImplementedInterfaces().SingleInstance();
             builder.RegisterType<DriverClient>().SingleInstance();
             builder.RegisterType<SignalRClient>().SingleInstance();
