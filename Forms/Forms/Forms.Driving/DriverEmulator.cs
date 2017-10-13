@@ -7,6 +7,7 @@ using Forms.Driving.Data;
 using Forms.Driving.Domain.Entities;
 using Forms.Driving.Infrastructure;
 using Newtonsoft.Json;
+using Plugin.Notifications;
 
 namespace Forms.Driving
 {
@@ -34,6 +35,15 @@ namespace Forms.Driving
         {
             Console.WriteLine("Stop listening SignalR");
             _signalRClient.StopListening();
+            
+            CrossNotifications.Current.Send(new Notification
+            {
+                Id = 9000,
+                Message = "Signed out",
+                Vibrate = true,
+
+            }).GetAwaiter();
+
             Console.WriteLine("Signed out");
         }
 
@@ -179,7 +189,7 @@ namespace Forms.Driving
                     {
                         var offerData = JsonConvert.SerializeObject(data);
                         Console.WriteLine(offerData);
-
+                        
                         await _driverClient.SuggestionDeclineAsync(data.SuggestionId);
                     }
                     catch (Exception exception)

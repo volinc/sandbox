@@ -42,7 +42,10 @@ namespace Forms.Droid.Service
                     var message = messages
                         .Where(x => Senders.Contains(x.OriginatingAddress))
                         .OrderByDescending(x => x.TimestampMillis)
-                        .First();
+                        .FirstOrDefault();
+
+                    if (message == null)
+                        break;
 
                     Toast.MakeText(context, message.MessageBody, ToastLength.Long).Show();
                     MessagingCenter.Send(this, nameof(ActionSmsReceived), message.MessageBody);

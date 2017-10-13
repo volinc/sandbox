@@ -33,7 +33,7 @@ namespace Forms
                 {
                     Children = { new Label { Text = "Loading..." } }
                 }
-            };
+            };            
         }
 
         private void RegistryOnDisconnected(object sender, EventArgs eventArgs)
