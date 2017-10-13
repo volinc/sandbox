@@ -167,11 +167,11 @@ namespace Forms.Driving
             Console.WriteLine("Start listening SignalR");
             await Task.Run(() =>
             {
-                //signalRClient.Connected += async (sender, state) =>
-                //{
-                //    Console.WriteLine($"SignalRState {state}");
-                //    await Task.Delay(0);
-                //};
+                signalRClient.StateChanged += async (sender, state) =>
+                {
+                    Console.WriteLine($"SignalRState {state}");
+                    await Task.Delay(0);
+                };
 
                 signalRClient.NewOffer += async (sender, data) =>
                 {
