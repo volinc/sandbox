@@ -57,15 +57,49 @@ namespace Forms.ViewModels
             set => SetProperty(ref _second, value);
         }
 
+        public override bool IsBusy
+        {
+            get => base.IsBusy;
+            protected set
+            {
+                base.IsBusy = value;
+                OnPropertyChanged(nameof(IsCommandEnabled));
+            }
+        }
+
+        public bool IsCommandEnabled => !IsBusy;
+
         public ICommand CheckPermissionsCommand => new Command(async () =>
         {
-            await _platformPermissions.RequestLocationAsync();
-            await _platformPermissions.RequestSmsAsync();
+            if (IsBusy) return;
+
+            try
+            {
+                IsBusy = true;
+
+                await _platformPermissions.RequestLocationAsync();
+                await _platformPermissions.RequestSmsAsync();
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         });
 
         public ICommand ShowOfferDialogCommand => new Command(async () =>
         {
-            await _platformNotifier.ShowDialogAsync("Offfffeeeeeeeeer!!!");
+            if (IsBusy) return;
+
+            try
+            {
+                IsBusy = true;
+
+                await _platformNotifier.ShowDialogAsync("Offfffeeeeeeeeer!!!");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         });
 
         public override void Dispose()
