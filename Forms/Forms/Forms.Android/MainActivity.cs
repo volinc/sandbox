@@ -4,8 +4,6 @@ using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
-using Forms.Infrastructure;
-using Plugin.CurrentActivity;
 using Plugin.Permissions;
 
 namespace Forms.Droid
@@ -24,8 +22,8 @@ namespace Forms.Droid
             base.OnCreate(bundle);            
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
-            var setup = new Setup();
-            var app = new App(setup);
+            var module = new IocModule();
+            var app = new App(module);
             
             LoadApplication(app);            
         }

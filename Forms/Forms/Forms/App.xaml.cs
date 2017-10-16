@@ -1,8 +1,8 @@
 ﻿using System;
 using Autofac;
 using Forms.Infrastructure;
+using Forms.ViewModels;
 using Forms.Views;
-using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
@@ -10,16 +10,16 @@ namespace Forms
 {
     public partial class App : IDisposable
     {
+        public static ViewModelFactory ViewModelFactory { get; private set; }
+
         private readonly IContainer _container;
         private readonly IRegistry _registry;
 
-        public static ViewModelFactory ViewModelFactory { get; private set; }
-
-        public App(AppSetup setup)
+        public App(Module module)
         {
             InitializeComponent();
 
-            _container = setup.CreateContainer();
+            _container = CreateContainer(module);
 
             _registry = _container.Resolve<IRegistry>();
             _registry.Connected += RegistryOnConnected;
@@ -27,36 +27,37 @@ namespace Forms
 
             ViewModelFactory = _container.Resolve<ViewModelFactory>();
 
-            MainPage = new ContentPage
-            {
-                Content = new StackLayout
-                {
-                    Children = { new Label { Text = "Loading..." } }
-                }
-            };            
-        }
-
-        private void RegistryOnDisconnected(object sender, EventArgs eventArgs)
-        {
-            MainPage = new ContentPage
-            {
-                Content = new StackLayout
-                {
-                    Children = { new Label { Text = "Disconnected" } }
-                }
-            };
-        }
-
-        private void RegistryOnConnected(object sender, EventArgs eventArgs)
-        {
-            MainPage = new TrackingPage();
-        }
+            MainPage = new LoadingPage();
+        }        
 
         public void Dispose()
         {
             _registry.Connected -= RegistryOnConnected;
             _registry.Disconnected -= RegistryOnDisconnected;
             _container?.Dispose();
+        }
+
+        private static IContainer CreateContainer(params Module[] modules)
+        {
+            var builder = new ContainerBuilder();
+
+            builder.RegisterType<TrackingViewModel>().InstancePerDependency();
+            builder.RegisterType<ViewModelFactory>().SingleInstance();
+
+            foreach (var module in modules)
+                builder.RegisterModule(module);
+
+            return builder.Build();
+        }
+
+        private void RegistryOnDisconnected(object sender, EventArgs eventArgs)
+        {
+            MainPage = new UnexpectedErrorPage();
+        }
+
+        private void RegistryOnConnected(object sender, EventArgs eventArgs)
+        {
+            MainPage = new TrackingPage();
         }
     }
 }
