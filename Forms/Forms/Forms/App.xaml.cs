@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Autofac;
 using Forms.Infrastructure;
 using Forms.ViewModels;
@@ -55,8 +56,10 @@ namespace Forms
             MainPage = new UnexpectedErrorPage();
         }
 
-        private void RegistryOnConnected(object sender, EventArgs eventArgs)
+        private async void RegistryOnConnected(object sender, EventArgs eventArgs)
         {
+            await Task.Delay(TimeSpan.FromSeconds(3));
+
             MainPage = new TrackingPage();
         }
     }

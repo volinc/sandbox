@@ -6,7 +6,7 @@
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Loading..." VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
-            <ActivityIndicator IsEnabled="True" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+            <ActivityIndicator IsRunning="True" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
