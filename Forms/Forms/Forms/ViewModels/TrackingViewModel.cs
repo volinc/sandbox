@@ -43,6 +43,7 @@ namespace Forms.ViewModels
 
         public int Second { get; set; }
 
+        //https://github.com/Fody/PropertyChanged/wiki/Options
         [AlsoNotifyFor(nameof(IsCommandEnabled))]
         public override bool IsBusy
         {
