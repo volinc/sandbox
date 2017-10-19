@@ -3,6 +3,7 @@ using Forms.Helpers;
 using Forms.Infrastructure;
 using Forms.Services;
 using Xamarin.Forms;
+using PropertyChanged;
 
 namespace Forms.ViewModels
 {
@@ -36,35 +37,17 @@ namespace Forms.ViewModels
             Lon = location.lon;
         }
 
-        private double _lat;
-        public double Lat
-        {
-            get => _lat;
-            set => SetProperty(ref _lat, value);
-        }
+        public double Lat { get; set; }
 
-        private double _lon;
-        public double Lon
-        {
-            get => _lon;
-            set => SetProperty(ref _lon, value);
-        }
+        public double Lon { get; set; }
 
-        private int _second;
-        public int Second
-        {
-            get => _second;
-            set => SetProperty(ref _second, value);
-        }
+        public int Second { get; set; }
 
+        [AlsoNotifyFor(nameof(IsCommandEnabled))]
         public override bool IsBusy
         {
             get => base.IsBusy;
-            protected set
-            {
-                base.IsBusy = value;
-                OnPropertyChanged(nameof(IsCommandEnabled));
-            }
+            set => base.IsBusy = value;
         }
 
         public bool IsCommandEnabled => !IsBusy;

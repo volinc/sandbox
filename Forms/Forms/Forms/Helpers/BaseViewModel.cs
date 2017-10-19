@@ -8,12 +8,6 @@ namespace Forms.Helpers
         {
         }
 
-        private bool _isBusy;
-
-        public virtual bool IsBusy
-        {
-            get => _isBusy;
-            protected set => SetProperty(ref _isBusy, value);
-        }
+        public virtual bool IsBusy { get; set; }
     }
 }
