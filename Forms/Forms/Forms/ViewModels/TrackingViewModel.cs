@@ -37,9 +37,17 @@ namespace Forms.ViewModels
             Lon = location.lon;
         }
 
-        public double Lat { get; set; }
+        public double Lat
+        {
+            get => GetPersistentValue<double>();
+            set => SetPersistentValue(value);
+        }
 
-        public double Lon { get; set; }
+        public double Lon
+        {
+            get => GetPersistentValue<double>();
+            set => SetPersistentValue(value);
+        }
 
         public int Second { get; set; }
 
