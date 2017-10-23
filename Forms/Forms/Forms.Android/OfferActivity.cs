@@ -2,6 +2,7 @@
 using Android.Content.PM;
 using Android.OS;
 using Android.Views;
+using Java.Interop;
 
 namespace Forms.Droid
 {
@@ -15,6 +16,18 @@ namespace Forms.Droid
             SetContentView(Resource.Layout.Offer);
             Window.SetLayout(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
             Window.AddFlags(WindowManagerFlags.ForceNotFullscreen | WindowManagerFlags.TurnScreenOn);
-        }        
+        }
+
+        [Export("buttonAcceptClick")]
+        public void ButtonAcceptClick(View view)
+        {
+            Finish();
+        }
+
+        [Export("buttonDeclineClick")]
+        public void ButtonDeclineClick(View view)
+        {
+            Finish();
+        }
     }
 }
