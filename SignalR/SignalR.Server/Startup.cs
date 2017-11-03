@@ -9,9 +9,8 @@ namespace SignalR.Server
     {
         public void Configuration(IAppBuilder appBuilder)
         {
-            HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute(name: "DefaultApi", routeTemplate: "api/{controller}/{id}", defaults: new { id = RouteParameter.Optional });
-
+            var config = new HttpConfiguration();
+            
             appBuilder.UseWebApi(config);
 
             appBuilder.UseCors(CorsOptions.AllowAll);

@@ -6,12 +6,11 @@ namespace Forms.Droid.Service
     {
         private bool _isStarted;
 
-        public ServiceController(IMusicService musicService, ITrackingService trackingService, ITimingService timingService, IDrivingService drivingService)
+        public ServiceController(IMusicService musicService, ITrackingService trackingService, ITimingService timingService)
         {
             MusicService = musicService;
             TrackingService = trackingService;
-            TimingService = timingService;
-            DrivingService = drivingService;
+            TimingService = timingService;            
         }
 
         public void Start()
@@ -20,8 +19,7 @@ namespace Forms.Droid.Service
 
             MusicService.Start();
             TrackingService.Start();
-            TimingService.Start();
-            //DrivingService.Start();            
+            TimingService.Start();                
 
             _isStarted = true;
         }

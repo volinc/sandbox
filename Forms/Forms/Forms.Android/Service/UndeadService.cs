@@ -2,7 +2,6 @@
 using Android.Content;
 using Android.OS;
 using Autofac;
-using Forms.Droid.Service.Driving;
 using Forms.Droid.Service.Music;
 using Forms.Droid.Service.Timing;
 using Forms.Droid.Service.Tracking;
@@ -51,8 +50,7 @@ namespace Forms.Droid.Service
             builder.RegisterType<MusicService>().AsImplementedInterfaces().SingleInstance();
             builder.RegisterType<TrackingService>().AsImplementedInterfaces().SingleInstance();
             builder.RegisterType<TimingService>().AsImplementedInterfaces().SingleInstance();
-            builder.RegisterType<DrivingService>().AsImplementedInterfaces().SingleInstance();
-
+            
             return builder.Build();
         }
 

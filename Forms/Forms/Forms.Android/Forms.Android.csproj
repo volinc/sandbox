@@ -171,7 +171,6 @@
     <Compile Include="PlatformNotifier.cs" />
     <Compile Include="PlatformPermissions.cs" />
     <Compile Include="Registry.cs" />
-    <Compile Include="Service\Driving\DrivingService.cs" />
     <Compile Include="Service\Music\MusicService.cs" />
     <Compile Include="Service\ServiceController.cs" />
     <Compile Include="Service\Timing\TimingService.cs" />
@@ -214,10 +213,6 @@
     <AndroidResource Include="Resources\values\theme.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Forms.Driving\Forms.Driving.csproj">
-      <Project>{de9ecff2-04d0-4a3e-b4d2-f171daf0b453}</Project>
-      <Name>Forms.Driving</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Forms\Forms.csproj">
       <Project>{7c8c9813-2dc6-4ac1-886e-9699b288ecbc}</Project>
       <Name>Forms</Name>

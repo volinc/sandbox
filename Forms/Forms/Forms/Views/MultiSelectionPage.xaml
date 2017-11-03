@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Forms.Views.MultiSelectionPage"
+             BackgroundColor="Transparent"
+             x:Name="BrowseItemsPage">
+    <RelativeLayout>
+        <StackLayout RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Constant=25}"
+                     RelativeLayout.YConstraint="{ConstraintExpression Type=Constant, Constant=25}"
+                     RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Constant=-50}"
+                     RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Constant=-50}"
+                     BackgroundColor="DarkGray">
+            <ListView x:Name="ItemsListView"
+                      HasUnevenRows="False"
+                      IsPullToRefreshEnabled="False"
+                      ItemsSource="{Binding Items}"
+                      VerticalOptions="FillAndExpand">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" Spacing="0" Padding="5">
+                                <Label Text="{Binding Name}" HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
+                                <Switch IsToggled="{Binding Value}" HorizontalOptions="End" VerticalOptions="Center"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackLayout Orientation="Horizontal" VerticalOptions="End">
+                <Button Text="Отменить" Command="{Binding CancelCommand}" />
+                <Button Text="Применить" Command="{Binding AcceptCommand}" />
+            </StackLayout>
+        </StackLayout>
+    </RelativeLayout>
+</ContentPage>

@@ -2,6 +2,7 @@
 using Forms.Helpers;
 using Forms.Infrastructure;
 using Forms.Services;
+using Forms.Views;
 using Xamarin.Forms;
 using PropertyChanged;
 
@@ -60,6 +61,22 @@ namespace Forms.ViewModels
         }
 
         public bool IsCommandEnabled => !IsBusy;
+
+        public ICommand ShowMultiSelectionCommand => new Command(async () =>
+        {
+            if (IsBusy) return;
+
+            try
+            {
+                IsBusy = true;
+
+                await Application.Current.MainPage.Navigation.PushModalAsync(new MultiSelectionPage());
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        });
 
         public ICommand CheckPermissionsCommand => new Command(async () =>
         {
