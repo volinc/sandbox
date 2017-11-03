@@ -2,6 +2,6 @@
 {
     public class ApiConfig
     {
-        public string Url { get; set; }        
+        public string Url { get; set; } = "http://localhost:9000";
     }
 }
