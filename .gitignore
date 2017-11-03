@@ -18,3 +18,10 @@ Forms/Forms/Forms.Android/bin
 Forms/Forms/Forms.Android/obj
 Forms/Forms/Forms.Driving/bin
 Forms/Forms/Forms.Driving/obj
+/SignalR/packages
+/SignalR/SignalR.Client/bin/Debug
+/SignalR/SignalR.Client/obj/Debug
+/SignalR/SignalR.Server/bin/Debug
+/SignalR/SignalR.Server/obj/Debug
+/SignalR/.vs/SignalR/v15
+/SignalR/.vs/config
