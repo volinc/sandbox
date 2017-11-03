@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR.Client;
 using Microsoft.AspNet.SignalR.Client.Http;
 using Microsoft.AspNet.SignalR.Client.Transports;
+using Newtonsoft.Json;
 
 namespace SignalR.Client
 {
@@ -37,6 +38,9 @@ namespace SignalR.Client
             hubConnection.StateChanged += HubConnectionOnStateChanged;
             hubConnection.ConnectionSlow += HubConnectionOnConnectionSlow;
 
+            hubConnection.TraceLevel = TraceLevels.All;
+            hubConnection.TraceWriter = Console.Out;
+
             SubscribeProxy();
         }
 
@@ -65,7 +69,7 @@ namespace SignalR.Client
         {
             Trace(new Dictionary<string, object>
             {
-                {nameof(stateChange), stateChange}
+                {nameof(stateChange), $"{stateChange.OldState} -> {stateChange.NewState}"}
             });
         }
 
@@ -110,8 +114,6 @@ namespace SignalR.Client
 
             if (disposing)
             {
-                delayCancellation?.Dispose();
-
                 UnsubscribeProxy();
 
                 hubConnection.Error -= HubConnectionOnError;
@@ -204,12 +206,11 @@ namespace SignalR.Client
         {
             infos = infos ?? new Dictionary<string, object>();
 
-            var strings = new List<string>(infos.Select(info => $"{info.Key}={info.Value}"));
+            var strings = new List<string>(infos.Select(info => $"{info.Key} = {info.Value}"));
             
             var log = string.Join(";", strings);
 
             Console.WriteLine($"{caller} {log};");
-        }
-        
+        }        
     }    
 }
