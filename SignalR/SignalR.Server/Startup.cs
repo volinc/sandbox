@@ -2,6 +2,7 @@
 using Autofac.Integration.SignalR;
 using Autofac.Integration.WebApi;
 using Microsoft.AspNet.SignalR;
+using Microsoft.AspNet.SignalR.Infrastructure;
 using Microsoft.Owin.Cors;
 using Owin;
 using System.Reflection;
@@ -13,30 +14,32 @@ namespace SignalR.Server
     {
         public void Configuration(IAppBuilder appBuilder)
         {
+            var config = new HttpConfiguration();
+            var hubConfiguration = new HubConfiguration();
+
             var builder = new ContainerBuilder();
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
             builder.RegisterHubs(Assembly.GetExecutingAssembly());
+            builder.Register(i => hubConfiguration.Resolver.Resolve<IConnectionManager>().GetHubContext<NotificationHub, INotificationHub>()).ExternallyOwned();
             var container = builder.Build();
 
-            var config = new HttpConfiguration
-            {
-                DependencyResolver = new AutofacWebApiDependencyResolver(container)
-            };
+            config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+            hubConfiguration.Resolver = new AutofacDependencyResolver(container);
+
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
+
+            hubConfiguration.EnableDetailedErrors = true;
+            hubConfiguration.EnableJavaScriptProxies = true;
+            hubConfiguration.EnableJSONP = true;                       
 
             appBuilder.UseAutofacMiddleware(container);
             appBuilder.UseAutofacWebApi(config);
             appBuilder.UseWebApi(config);
-
-            appBuilder.UseCors(CorsOptions.AllowAll);
-
-            var hubConfiguration = new HubConfiguration
-            {
-                EnableDetailedErrors = true,
-                EnableJavaScriptProxies = true,
-                EnableJSONP = true,
-                Resolver = new AutofacDependencyResolver(container)
-            };
-
+            appBuilder.UseCors(CorsOptions.AllowAll);                       
             appBuilder.MapSignalR(hubConfiguration);                        
         }
     }

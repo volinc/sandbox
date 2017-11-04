@@ -5,15 +5,10 @@ using System;
 
 namespace SignalR.Server
 {
-    public class NotificationHub : Hub
+    public class NotificationHub : Hub<INotificationHub>
     {
         private readonly static ConnectionMapping<string> _connections =
             new ConnectionMapping<string>();
-
-        public void SendNewOffer(Offer offer)
-        {
-            Clients.All.NewOffer(offer);
-        }
 
         public override Task OnConnected()
         {
