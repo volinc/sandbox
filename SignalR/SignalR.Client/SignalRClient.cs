@@ -195,9 +195,14 @@ namespace SignalR.Client
 
         private static void Trace(Exception exception, [CallerMemberName] string caller = null)
         {
+            Trace(nameof(exception), exception, caller);
+        }
+
+        private static void Trace(string key, object value, [CallerMemberName] string caller = null)
+        {
             Trace(new Dictionary<string, object>
             {
-                {nameof(exception), exception}
+                {key, value}
 
             }, caller);
         }

@@ -6,7 +6,7 @@
         {
             return new TokenResponse
             {
-                AccessToken = string.Empty                
+                AccessToken = "1"
             };
         }
     }

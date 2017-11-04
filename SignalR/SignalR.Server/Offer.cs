@@ -1,4 +1,4 @@
-﻿namespace SignalR.Client
+﻿namespace SignalR.Server
 {
     public class Offer
     {

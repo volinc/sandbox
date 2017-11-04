@@ -1,52 +1,65 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR;
+using System.Linq;
 using System;
-using System.Runtime.CompilerServices;
-using System.Collections.Generic;
 
 namespace SignalR.Server
 {
     public class NotificationHub : Hub
     {
+        private readonly static ConnectionMapping<string> _connections =
+            new ConnectionMapping<string>();
+
+        public void SendNewOffer(Offer offer)
+        {
+            Clients.All.NewOffer(offer);
+        }
+
         public override Task OnConnected()
         {
-            Trace(new Dictionary<string, object>
-            {
-                { nameof(Context.ConnectionId), Context.ConnectionId }
-            });
+            var client = GetClient();
+
+            _connections.Add(client.userName, Context.ConnectionId);
 
             return base.OnConnected();
         }
 
         public override Task OnDisconnected(bool stopCalled)
         {
-            Trace(new Dictionary<string, object>
-            {
-                { nameof(Context.ConnectionId), Context.ConnectionId }
-            });
+            var client = GetClient();
+
+            _connections.Remove(client.userName, Context.ConnectionId);
 
             return base.OnDisconnected(stopCalled);
         }
 
         public override Task OnReconnected()
         {
-            Trace(new Dictionary<string, object>
+            var client = GetClient();
+
+            if (!_connections.GetConnections(client.userName).Contains(Context.ConnectionId))
             {
-                { nameof(Context.ConnectionId), Context.ConnectionId }
-            });
+                _connections.Add(client.userName, Context.ConnectionId);
+            }
 
             return base.OnReconnected();
         }
-
-        private void Trace(IDictionary<string, object> infos, [CallerMemberName] string caller = null)
+        
+        private (string userName, string userAgent) GetClient()
         {
-            var strings = new List<string>(infos.Count);
-            foreach (var info in infos)
-                strings.Add($"{info.Key}={info.Value}");
+            var token = Context.Headers["Authorization"];
 
-            var log = string.Join(";", strings);
-
-            Console.WriteLine($"{caller}: {log};");
+            switch (token)
+            {
+                case "Bearer 1":
+                    return (userName: "driver-1", userAgent: "driver-mobile");
+                case "Bearer 2":
+                    return (userName: "driver-2", userAgent: "driver-mobile");
+                case "Bearer 3":
+                    return (userName: "driver-3", userAgent: "driver-mobile");
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(token));
+            }            
         }
     }
 }
