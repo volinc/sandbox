@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR.Client;
 using Microsoft.AspNet.SignalR.Client.Http;
 using Microsoft.AspNet.SignalR.Client.Transports;
-using Newtonsoft.Json;
 
 namespace SignalR.Client
 {
@@ -44,9 +43,15 @@ namespace SignalR.Client
             SubscribeProxy();
         }
 
-        private void HubConnectionOnError(Exception exception)
+        private async void HubConnectionOnError(Exception exception)
         {
             Trace(exception);
+
+            if (exception is TimeoutException)
+            {
+                // https://github.com/SignalR/SignalR/issues/2824
+                await EstablishConnectionAsync();
+            }
         }
 
         private void HubConnectionOnReconnecting()
@@ -62,7 +67,7 @@ namespace SignalR.Client
         private async void HubConnectionOnClosed()
         {
             if (tryingToReconnect)
-                await EstablishConnectionAsync().ConfigureAwait(false);
+                await EstablishConnectionAsync();
         }
 
         private void HubConnectionOnStateChanged(StateChange stateChange)
@@ -143,8 +148,8 @@ namespace SignalR.Client
                     }
 
                     SetAuthorizationHeader();
-                    await hubConnection.Start(new AutoTransport(new DefaultHttpClient()));
 
+                    await hubConnection.Start(new AutoTransport(new DefaultHttpClient()));
                     return;
                 }
                 catch (Exception exception)
