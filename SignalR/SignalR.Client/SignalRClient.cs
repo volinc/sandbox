@@ -21,8 +21,7 @@ namespace SignalR.Client
 
         private IReadOnlyList<IDisposable> localMethods;
         private IHubProxy hubProxy;
-        private bool tryingToReconnect;
-
+        
         public SignalRClient(ApiConfig apiConfig, TokenStore tokenStore, ConnectivityService connectivityService)
         {
             this.tokenStore = tokenStore;
@@ -31,8 +30,6 @@ namespace SignalR.Client
             hubConnection = new HubConnection(apiConfig.Url);
 
             hubConnection.Error += HubConnectionOnError;
-            hubConnection.Reconnecting += HubConnectionOnReconnecting;
-            hubConnection.Reconnected += HubConnectionOnReconnected;
             hubConnection.Closed += HubConnectionOnClosed;
             hubConnection.StateChanged += HubConnectionOnStateChanged;
             hubConnection.ConnectionSlow += HubConnectionOnConnectionSlow;
@@ -43,31 +40,14 @@ namespace SignalR.Client
             SubscribeProxy();
         }
 
-        private async void HubConnectionOnError(Exception exception)
+        private void HubConnectionOnError(Exception exception)
         {
             Trace(exception);
-
-            if (exception is TimeoutException)
-            {
-                // https://github.com/SignalR/SignalR/issues/2824
-                await EstablishConnectionAsync();
-            }
-        }
-
-        private void HubConnectionOnReconnecting()
-        {
-            tryingToReconnect = true;
-        }
-
-        private void HubConnectionOnReconnected()
-        {
-            tryingToReconnect = false;
         }
 
         private async void HubConnectionOnClosed()
         {
-            if (tryingToReconnect)
-                await EstablishConnectionAsync();
+            await EstablishConnectionAsync();
         }
 
         private void HubConnectionOnStateChanged(StateChange stateChange)
@@ -122,8 +102,6 @@ namespace SignalR.Client
                 UnsubscribeProxy();
 
                 hubConnection.Error -= HubConnectionOnError;
-                hubConnection.Reconnecting -= HubConnectionOnReconnecting;
-                hubConnection.Reconnected -= HubConnectionOnReconnected;
                 hubConnection.Closed -= HubConnectionOnClosed;
                 hubConnection.StateChanged -= HubConnectionOnStateChanged;
                 hubConnection.ConnectionSlow -= HubConnectionOnConnectionSlow;
@@ -146,6 +124,9 @@ namespace SignalR.Client
                         await Delay();
                         continue;
                     }
+
+                    if (hubConnection.State != ConnectionState.Disconnected)
+                        return;
 
                     SetAuthorizationHeader();
 
