@@ -53,6 +53,8 @@ namespace SignalR.Client
 
         private async void HubConnectionOnClosed()
         {
+            Trace();
+
             await EstablishConnectionAsync();
         }
 
@@ -111,6 +113,8 @@ namespace SignalR.Client
                 hubConnection.Closed -= HubConnectionOnClosed;
                 hubConnection.StateChanged -= HubConnectionOnStateChanged;
                 hubConnection.ConnectionSlow -= HubConnectionOnConnectionSlow;
+                hubConnection.Reconnecting -= HubConnectionOnReconnecting;
+                hubConnection.Reconnected -= HubConnectionOnReconnected;
                 hubConnection.Stop();
                 hubConnection.Dispose();
 
