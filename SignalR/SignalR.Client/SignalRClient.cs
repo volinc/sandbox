@@ -33,12 +33,18 @@ namespace SignalR.Client
             hubConnection.Closed += HubConnectionOnClosed;
             hubConnection.StateChanged += HubConnectionOnStateChanged;
             hubConnection.ConnectionSlow += HubConnectionOnConnectionSlow;
+            hubConnection.Reconnecting += HubConnectionOnReconnecting;
+            hubConnection.Reconnected += HubConnectionOnReconnected;
 
             hubConnection.TraceLevel = TraceLevels.All;
             hubConnection.TraceWriter = Console.Out;
 
             SubscribeProxy();
         }
+
+        private void HubConnectionOnReconnecting() => Trace();
+
+        private void HubConnectionOnReconnected() => Trace();
 
         private void HubConnectionOnError(Exception exception)
         {
