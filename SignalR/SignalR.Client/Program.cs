@@ -1,6 +1,7 @@
 ﻿using System;
 using Autofac;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace SignalR.Client
 {
@@ -22,8 +23,14 @@ namespace SignalR.Client
 
         private static void SignalRClientOnNewOffer(object sender, Offer offer)
         {
-            var json = JsonConvert.SerializeObject(offer, Formatting.Indented);
+            var json = JsonConvert.SerializeObject(offer, Formatting.Indented);            
             Console.WriteLine($"###{Environment.NewLine}{json}{Environment.NewLine}###");
+
+            var offerRepository = new OfferRepository();
+
+            offerRepository.Create(offer);
+            var offers = offerRepository.ReadAll();
+            Console.WriteLine(string.Join(",", offers.Select(x => x.Id)));
         }
 
         private static IContainer BuildContainer()
