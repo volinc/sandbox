@@ -1,6 +1,6 @@
 ﻿namespace SignalR.Server
 {
-    public interface INotificationHub
+    public interface IHubClient
     {
         void NewOffer(Offer offer);
     }

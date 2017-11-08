@@ -6,9 +6,9 @@ namespace SignalR.Server
 {
     public class OffersController : ApiController
     {
-        private readonly IHubContext<INotificationHub> hubContext;
+        private readonly IHubContext<IHubClient> hubContext;
 
-        public OffersController(IHubContext<INotificationHub> hubContext)
+        public OffersController(IHubContext<IHubClient> hubContext)
         {
             this.hubContext = hubContext;
         }
