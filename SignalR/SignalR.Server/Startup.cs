@@ -24,7 +24,7 @@ namespace SignalR.Server
             builder.RegisterType<UserIdProvider>().As<IUserIdProvider>().SingleInstance();
             builder.RegisterType<NotificationSender>().SingleInstance();
             builder.Register(i => hubConfiguration.Resolver.Resolve<IConnectionManager>().GetHubContext<NotificationHub, INotificationHubProxy>()).ExternallyOwned();
-            //builder.RegisterType<CustomAuthMiddleware>().SingleInstance();
+            builder.RegisterType<CustomAuthMiddleware>().SingleInstance();
             var container = builder.Build();
 
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);

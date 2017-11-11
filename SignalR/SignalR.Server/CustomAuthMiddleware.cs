@@ -8,7 +8,7 @@ namespace SignalR.Server
 {    
     public class CustomAuthMiddleware : OwinMiddleware
     {
-        protected CustomAuthMiddleware(OwinMiddleware next) : base(next)
+        public CustomAuthMiddleware(OwinMiddleware next) : base(next)
         {
         }
 
