@@ -18,11 +18,13 @@ namespace SignalR.Server
             var config = new HttpConfiguration();
             var hubConfiguration = new HubConfiguration();
 
-            var builder = new ContainerBuilder();
+            var builder = new ContainerBuilder();            
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
-            builder.RegisterHubs(Assembly.GetExecutingAssembly());
-            builder.Register(i => hubConfiguration.Resolver.Resolve<IConnectionManager>().GetHubContext<NotificationHub, IHubClient>()).ExternallyOwned();
-            builder.RegisterType<ConnectionRepository>().SingleInstance();
+            builder.RegisterHubs(Assembly.GetExecutingAssembly());            
+            builder.RegisterType<UserIdProvider>().As<IUserIdProvider>().SingleInstance();
+            builder.RegisterType<NotificationSender>().SingleInstance();
+            builder.Register(i => hubConfiguration.Resolver.Resolve<IConnectionManager>().GetHubContext<NotificationHub, INotificationHubProxy>()).ExternallyOwned();
+            //builder.RegisterType<CustomAuthMiddleware>().SingleInstance();
             var container = builder.Build();
 
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
@@ -35,13 +37,13 @@ namespace SignalR.Server
             hubConfiguration.Resolver = new AutofacDependencyResolver(container);
             hubConfiguration.EnableDetailedErrors = true;
             hubConfiguration.EnableJavaScriptProxies = true;
-            hubConfiguration.EnableJSONP = true;                       
+            hubConfiguration.EnableJSONP = false;
 
-            appBuilder.UseAutofacMiddleware(container);
             appBuilder.UseAutofacWebApi(config);
+            appBuilder.UseAutofacMiddleware(container);
             appBuilder.UseCors(CorsOptions.AllowAll);
             appBuilder.UseWebApi(config);            
-            appBuilder.MapSignalR(hubConfiguration);                        
+            appBuilder.MapSignalR(hubConfiguration);            
         }
     }
 }
