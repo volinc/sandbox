@@ -7,7 +7,7 @@ namespace SignalR.Server
     public class NotificationHub : Hub<INotificationHubProxy>
     {
         public override Task OnConnected()
-        {        
+        {                    
             return base.OnConnected();
         }
 
