@@ -2,12 +2,6 @@
 {
     public class TokenStore
     {
-        public TokenResponse Get()
-        {
-            return new TokenResponse
-            {
-                AccessToken = "driver-1"
-            };
-        }
+        public string AccessToken => "driver-1";
     }
 }

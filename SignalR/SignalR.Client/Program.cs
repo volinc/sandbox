@@ -7,17 +7,15 @@ namespace SignalR.Client
 {
     internal class Program
     {
-        private static IContainer container;
+        private static IContainer _container;
 
         private static void Main()
         {
-            container = BuildContainer();
+            _container = BuildContainer();
 
-            var signalRClient = container.Resolve<SignalRClient>();
-
-            signalRClient.NewOffer += SignalRClientOnNewOffer;
-            signalRClient.Start();
-
+            var notificationListener = _container.Resolve<NotificationListener>();
+            notificationListener.NewOffer += SignalRClientOnNewOffer;
+            
             Console.ReadLine();
         }
 
@@ -37,7 +35,7 @@ namespace SignalR.Client
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterType<SignalRClient>().SingleInstance();
+            builder.RegisterType<NotificationListener>().SingleInstance();
             builder.RegisterType<ConnectivityService>().SingleInstance();
             builder.RegisterType<ApiConfig>().SingleInstance();
             builder.RegisterType<TokenStore>().SingleInstance();
