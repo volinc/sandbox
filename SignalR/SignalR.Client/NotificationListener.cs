@@ -17,9 +17,9 @@ namespace SignalR.Client
         private readonly ConnectivityService _connectivityService;
 
         private readonly HubConnection _hubConnection;
-        private readonly IClientTransport _clientTransport;
+        private readonly OAuthHttpClient _authHttpClient;
         private readonly IHubProxy _hubProxy;        
-        
+
         private IReadOnlyList<IDisposable> _localMethods;
 
         public NotificationListener(ApiConfig apiConfig, OAuthMessageHandlerFactory authMessageHandlerFactory,
@@ -34,9 +34,8 @@ namespace SignalR.Client
             _hubConnection.TraceLevel = TraceLevels.All;
             _hubConnection.TraceWriter = Console.Out;
 
-            var authHttpClient = new OAuthHttpClient(authMessageHandlerFactory);
-            _clientTransport = new ServerSentEventsTransport(authHttpClient);
-
+            _authHttpClient = new OAuthHttpClient(authMessageHandlerFactory);
+            
             _hubProxy = _hubConnection.CreateHubProxy(HubName);
 
             SubscribeHubProxy();
@@ -70,6 +69,7 @@ namespace SignalR.Client
 
         private async void HubConnectionOnClosed()
         {
+            await Delay();
             await EstablishConnectionAsync();
         }
 
@@ -93,11 +93,12 @@ namespace SignalR.Client
                 if (_hubConnection.State != ConnectionState.Disconnected)
                     return;
 
-                await _hubConnection.Start(_clientTransport);
+                var clientTransport = new AutoTransport(_authHttpClient);
+                await _hubConnection.Start(clientTransport);
             }
             catch (Exception exception)
             {                
-                Console.Error.WriteLine(exception);
+                Console.Error.WriteLine(exception.Message);                
             }                                        
         }
         
@@ -123,6 +124,6 @@ namespace SignalR.Client
             }
         }
 
-        private static Task Delay() => Task.Delay(TimeSpan.FromSeconds(2));              
+        private static Task Delay(TimeSpan? delay = null) => Task.Delay(delay ?? TimeSpan.FromSeconds(2));              
     }    
 }

@@ -29,12 +29,6 @@ namespace SignalR.Server
             var container = builder.Build();
 
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
-
             config
                 .EnableSwagger(c => c.SingleApiVersion("v1", "SignalR server test API"))
                 .EnableSwaggerUi();
