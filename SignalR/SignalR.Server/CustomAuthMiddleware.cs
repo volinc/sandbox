@@ -17,8 +17,11 @@ namespace SignalR.Server
             if (context.Request.Headers.TryGetValue("Authorization", out var values))
             {
                 var value = values.SingleOrDefault();
-                var userName = value.Split(new[] { " " }, 1, StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
-            
+
+                var userName = value?.Split(new[] { " " }, 2, StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
+                if (userName == null)
+                    return;
+
                 var identity = new GenericIdentity(userName);
                 context.Request.User = new GenericPrincipal(identity, null);
             }

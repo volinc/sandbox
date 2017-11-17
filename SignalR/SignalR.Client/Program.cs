@@ -39,6 +39,8 @@ namespace SignalR.Client
             builder.RegisterType<ConnectivityService>().SingleInstance();
             builder.RegisterType<ApiConfig>().SingleInstance();
             builder.RegisterType<TokenStore>().SingleInstance();
+            builder.RegisterType<OAuthMessageHandler>().SingleInstance();
+            builder.RegisterType<OAuthMessageHandlerFactory>().SingleInstance();
 
             return builder.Build();
         }

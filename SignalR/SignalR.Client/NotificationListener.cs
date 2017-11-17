@@ -93,7 +93,7 @@ namespace SignalR.Client
                 if (_hubConnection.State != ConnectionState.Disconnected)
                     return;
 
-                await _hubConnection.Start(_clientTransport);                
+                await _hubConnection.Start(_clientTransport);
             }
             catch (Exception exception)
             {                

@@ -8,6 +8,7 @@ using Owin;
 using SignalR.Server.SignalR;
 using System.Reflection;
 using System.Web.Http;
+using Swashbuckle.Application;
 
 namespace SignalR.Server
 {
@@ -33,6 +34,10 @@ namespace SignalR.Server
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            config
+                .EnableSwagger(c => c.SingleApiVersion("v1", "SignalR server test API"))
+                .EnableSwaggerUi();
 
             hubConfiguration.Resolver = new AutofacDependencyResolver(container);
             hubConfiguration.EnableDetailedErrors = true;
