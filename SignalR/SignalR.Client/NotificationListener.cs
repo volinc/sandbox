@@ -78,10 +78,7 @@ namespace SignalR.Client
             Console.WriteLine($"{stateChange.OldState} -> {stateChange.NewState}");
         }
 
-        private static void HubConnectionOnReceived(string s)
-        {
-            Console.WriteLine(s);
-        }
+        private static void HubConnectionOnReceived(string s) => Console.WriteLine($"{nameof(HubConnectionOnReceived)}: s");
 
         private async Task EstablishConnectionAsync()
         {            
@@ -124,6 +121,6 @@ namespace SignalR.Client
             }
         }
 
-        private static Task Delay(TimeSpan? delay = null) => Task.Delay(delay ?? TimeSpan.FromSeconds(2));              
+        private static Task Delay() => Task.Delay(TimeSpan.FromSeconds(2));              
     }    
 }
