@@ -96,7 +96,7 @@ namespace SignalR.Client
             catch (Exception exception)
             {                
                 Console.Error.WriteLine(exception.Message);                
-            }                                        
+            }
         }
         
         private void SubscribeHubProxy()
