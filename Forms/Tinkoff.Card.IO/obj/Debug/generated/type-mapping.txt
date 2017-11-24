@@ -1,0 +1,8 @@
+ru/tinkoff/acquiring/sdk/card/io/BuildConfig = RU.Tinkoff.Acquiring.Sdk.Card.IO.BuildConfig
+  <init>()V = .ctor()
+  APPLICATION_ID = ApplicationId
+  BUILD_TYPE = BuildType
+  DEBUG = Debug
+  FLAVOR = Flavor
+  VERSION_CODE = VersionCode
+  VERSION_NAME = VersionName

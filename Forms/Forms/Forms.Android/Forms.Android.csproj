@@ -222,6 +222,14 @@
     <AndroidResource Include="Resources\values\theme.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Tinkoff.Ui\Tinkoff.Ui.csproj">
+      <Project>{7fa62271-5d3d-49bd-9511-0a905acbaf28}</Project>
+      <Name>Tinkoff.Ui</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tinkoff\Tinkoff.csproj">
+      <Project>{5f435e8a-85c5-457a-897c-742bc24231e4}</Project>
+      <Name>Tinkoff</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Forms\Forms.csproj">
       <Project>{7c8c9813-2dc6-4ac1-886e-9699b288ecbc}</Project>
       <Name>Forms</Name>

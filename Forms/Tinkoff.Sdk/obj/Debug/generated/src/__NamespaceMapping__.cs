@@ -1,0 +1,5 @@
+[assembly:global::Android.Runtime.NamespaceMapping (Java = "android.support.v7.appcompat", Managed="Android.Support.V7.Appcompat")]
+[assembly:global::Android.Runtime.NamespaceMapping (Java = "ru.tinkoff.acquiring.sdk", Managed="RU.Tinkoff.Acquiring.Sdk")]
+[assembly:global::Android.Runtime.NamespaceMapping (Java = "ru.tinkoff.acquiring.sdk.views", Managed="RU.Tinkoff.Acquiring.Sdk.Views")]
+[assembly:global::Android.Runtime.NamespaceMapping (Java = "ru.tinkoff.core.log", Managed="RU.Tinkoff.Core.Log")]
+[assembly:global::Android.Runtime.NamespaceMapping (Java = "ru.tinkoff.core.log.internal", Managed="RU.Tinkoff.Core.Log.Internal")]

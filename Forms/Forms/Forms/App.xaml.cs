@@ -29,7 +29,7 @@ namespace Forms
             ViewModelFactory = _container.Resolve<ViewModelFactory>();
 
             MainPage = new LoadingPage();
-        }        
+        }
 
         public void Dispose()
         {
@@ -60,7 +60,7 @@ namespace Forms
         {
             await Task.Delay(TimeSpan.FromSeconds(3));
 
-            MainPage = new TinkoffPage();
+            MainPage = new TrackingPage();
         }
     }
 }
