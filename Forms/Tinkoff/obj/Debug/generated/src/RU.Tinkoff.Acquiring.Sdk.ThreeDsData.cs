@@ -38,83 +38,46 @@ namespace RU.Tinkoff.Acquiring.Sdk {
 
 		protected ThreeDsData (IntPtr javaReference, JniHandleOwnership transfer) : base (javaReference, transfer) {}
 
-		static IntPtr id_ctor_Ljava_lang_String_Ljava_lang_String_Ljava_lang_String_Ljava_lang_String_;
-		// Metadata.xml XPath constructor reference: path="/api/package[@name='ru.tinkoff.acquiring.sdk']/class[@name='ThreeDsData']/constructor[@name='ThreeDsData' and count(parameter)=4 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.String'] and parameter[3][@type='java.lang.String'] and parameter[4][@type='java.lang.String']]"
-		[Register (".ctor", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V", "")]
-		public unsafe ThreeDsData (string p0, string p1, string p2, string p3)
-			: base (IntPtr.Zero, JniHandleOwnership.DoNotTransfer)
-		{
-			if (((global::Java.Lang.Object) this).Handle != IntPtr.Zero)
-				return;
-
-			IntPtr native_p0 = JNIEnv.NewString (p0);
-			IntPtr native_p1 = JNIEnv.NewString (p1);
-			IntPtr native_p2 = JNIEnv.NewString (p2);
-			IntPtr native_p3 = JNIEnv.NewString (p3);
-			try {
-				JValue* __args = stackalloc JValue [4];
-				__args [0] = new JValue (native_p0);
-				__args [1] = new JValue (native_p1);
-				__args [2] = new JValue (native_p2);
-				__args [3] = new JValue (native_p3);
-				if (((object) this).GetType () != typeof (ThreeDsData)) {
-					SetHandle (
-							global::Android.Runtime.JNIEnv.StartCreateInstance (((object) this).GetType (), "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V", __args),
-							JniHandleOwnership.TransferLocalRef);
-					global::Android.Runtime.JNIEnv.FinishCreateInstance (((global::Java.Lang.Object) this).Handle, "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V", __args);
-					return;
-				}
-
-				if (id_ctor_Ljava_lang_String_Ljava_lang_String_Ljava_lang_String_Ljava_lang_String_ == IntPtr.Zero)
-					id_ctor_Ljava_lang_String_Ljava_lang_String_Ljava_lang_String_Ljava_lang_String_ = JNIEnv.GetMethodID (class_ref, "<init>", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V");
-				SetHandle (
-						global::Android.Runtime.JNIEnv.StartCreateInstance (class_ref, id_ctor_Ljava_lang_String_Ljava_lang_String_Ljava_lang_String_Ljava_lang_String_, __args),
-						JniHandleOwnership.TransferLocalRef);
-				JNIEnv.FinishCreateInstance (((global::Java.Lang.Object) this).Handle, class_ref, id_ctor_Ljava_lang_String_Ljava_lang_String_Ljava_lang_String_Ljava_lang_String_, __args);
-			} finally {
-				JNIEnv.DeleteLocalRef (native_p0);
-				JNIEnv.DeleteLocalRef (native_p1);
-				JNIEnv.DeleteLocalRef (native_p2);
-				JNIEnv.DeleteLocalRef (native_p3);
-			}
-		}
-
-		static IntPtr id_ctor_Ljava_lang_Long_Ljava_lang_String_Ljava_lang_String_Ljava_lang_String_;
-		// Metadata.xml XPath constructor reference: path="/api/package[@name='ru.tinkoff.acquiring.sdk']/class[@name='ThreeDsData']/constructor[@name='ThreeDsData' and count(parameter)=4 and parameter[1][@type='java.lang.Long'] and parameter[2][@type='java.lang.String'] and parameter[3][@type='java.lang.String'] and parameter[4][@type='java.lang.String']]"
-		[Register (".ctor", "(Ljava/lang/Long;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V", "")]
-		public unsafe ThreeDsData (global::Java.Lang.Long p0, string p1, string p2, string p3)
+		static IntPtr id_ctor_Ljava_lang_Long_Ljava_lang_String_Ljava_lang_Long_Ljava_lang_String_Ljava_lang_String_Ljava_lang_String_;
+		// Metadata.xml XPath constructor reference: path="/api/package[@name='ru.tinkoff.acquiring.sdk']/class[@name='ThreeDsData']/constructor[@name='ThreeDsData' and count(parameter)=6 and parameter[1][@type='java.lang.Long'] and parameter[2][@type='java.lang.String'] and parameter[3][@type='java.lang.Long'] and parameter[4][@type='java.lang.String'] and parameter[5][@type='java.lang.String'] and parameter[6][@type='java.lang.String']]"
+		[Register (".ctor", "(Ljava/lang/Long;Ljava/lang/String;Ljava/lang/Long;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V", "")]
+		public unsafe ThreeDsData (global::Java.Lang.Long p0, string p1, global::Java.Lang.Long p2, string p3, string p4, string p5)
 			: base (IntPtr.Zero, JniHandleOwnership.DoNotTransfer)
 		{
 			if (((global::Java.Lang.Object) this).Handle != IntPtr.Zero)
 				return;
 
 			IntPtr native_p1 = JNIEnv.NewString (p1);
-			IntPtr native_p2 = JNIEnv.NewString (p2);
 			IntPtr native_p3 = JNIEnv.NewString (p3);
+			IntPtr native_p4 = JNIEnv.NewString (p4);
+			IntPtr native_p5 = JNIEnv.NewString (p5);
 			try {
-				JValue* __args = stackalloc JValue [4];
+				JValue* __args = stackalloc JValue [6];
 				__args [0] = new JValue (p0);
 				__args [1] = new JValue (native_p1);
-				__args [2] = new JValue (native_p2);
+				__args [2] = new JValue (p2);
 				__args [3] = new JValue (native_p3);
+				__args [4] = new JValue (native_p4);
+				__args [5] = new JValue (native_p5);
 				if (((object) this).GetType () != typeof (ThreeDsData)) {
 					SetHandle (
-							global::Android.Runtime.JNIEnv.StartCreateInstance (((object) this).GetType (), "(Ljava/lang/Long;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V", __args),
+							global::Android.Runtime.JNIEnv.StartCreateInstance (((object) this).GetType (), "(Ljava/lang/Long;Ljava/lang/String;Ljava/lang/Long;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V", __args),
 							JniHandleOwnership.TransferLocalRef);
-					global::Android.Runtime.JNIEnv.FinishCreateInstance (((global::Java.Lang.Object) this).Handle, "(Ljava/lang/Long;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V", __args);
+					global::Android.Runtime.JNIEnv.FinishCreateInstance (((global::Java.Lang.Object) this).Handle, "(Ljava/lang/Long;Ljava/lang/String;Ljava/lang/Long;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V", __args);
 					return;
 				}
 
-				if (id_ctor_Ljava_lang_Long_Ljava_lang_String_Ljava_lang_String_Ljava_lang_String_ == IntPtr.Zero)
-					id_ctor_Ljava_lang_Long_Ljava_lang_String_Ljava_lang_String_Ljava_lang_String_ = JNIEnv.GetMethodID (class_ref, "<init>", "(Ljava/lang/Long;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V");
+				if (id_ctor_Ljava_lang_Long_Ljava_lang_String_Ljava_lang_Long_Ljava_lang_String_Ljava_lang_String_Ljava_lang_String_ == IntPtr.Zero)
+					id_ctor_Ljava_lang_Long_Ljava_lang_String_Ljava_lang_Long_Ljava_lang_String_Ljava_lang_String_Ljava_lang_String_ = JNIEnv.GetMethodID (class_ref, "<init>", "(Ljava/lang/Long;Ljava/lang/String;Ljava/lang/Long;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V");
 				SetHandle (
-						global::Android.Runtime.JNIEnv.StartCreateInstance (class_ref, id_ctor_Ljava_lang_Long_Ljava_lang_String_Ljava_lang_String_Ljava_lang_String_, __args),
+						global::Android.Runtime.JNIEnv.StartCreateInstance (class_ref, id_ctor_Ljava_lang_Long_Ljava_lang_String_Ljava_lang_Long_Ljava_lang_String_Ljava_lang_String_Ljava_lang_String_, __args),
 						JniHandleOwnership.TransferLocalRef);
-				JNIEnv.FinishCreateInstance (((global::Java.Lang.Object) this).Handle, class_ref, id_ctor_Ljava_lang_Long_Ljava_lang_String_Ljava_lang_String_Ljava_lang_String_, __args);
+				JNIEnv.FinishCreateInstance (((global::Java.Lang.Object) this).Handle, class_ref, id_ctor_Ljava_lang_Long_Ljava_lang_String_Ljava_lang_Long_Ljava_lang_String_Ljava_lang_String_Ljava_lang_String_, __args);
 			} finally {
 				JNIEnv.DeleteLocalRef (native_p1);
-				JNIEnv.DeleteLocalRef (native_p2);
 				JNIEnv.DeleteLocalRef (native_p3);
+				JNIEnv.DeleteLocalRef (native_p4);
+				JNIEnv.DeleteLocalRef (native_p5);
 			}
 		}
 
@@ -152,69 +115,35 @@ namespace RU.Tinkoff.Acquiring.Sdk {
 			}
 		}
 
-		static Delegate cb_isAttaching;
+		static Delegate cb_getAmount;
 #pragma warning disable 0169
-		static Delegate GetIsAttachingHandler ()
+		static Delegate GetGetAmountHandler ()
 		{
-			if (cb_isAttaching == null)
-				cb_isAttaching = JNINativeWrapper.CreateDelegate ((Func<IntPtr, IntPtr, bool>) n_IsAttaching);
-			return cb_isAttaching;
+			if (cb_getAmount == null)
+				cb_getAmount = JNINativeWrapper.CreateDelegate ((Func<IntPtr, IntPtr, IntPtr>) n_GetAmount);
+			return cb_getAmount;
 		}
 
-		static bool n_IsAttaching (IntPtr jnienv, IntPtr native__this)
+		static IntPtr n_GetAmount (IntPtr jnienv, IntPtr native__this)
 		{
 			global::RU.Tinkoff.Acquiring.Sdk.ThreeDsData __this = global::Java.Lang.Object.GetObject<global::RU.Tinkoff.Acquiring.Sdk.ThreeDsData> (jnienv, native__this, JniHandleOwnership.DoNotTransfer);
-			return __this.IsAttaching;
+			return JNIEnv.ToLocalJniHandle (__this.Amount);
 		}
 #pragma warning restore 0169
 
-		static IntPtr id_isAttaching;
-		public virtual unsafe bool IsAttaching {
-			// Metadata.xml XPath method reference: path="/api/package[@name='ru.tinkoff.acquiring.sdk']/class[@name='ThreeDsData']/method[@name='isAttaching' and count(parameter)=0]"
-			[Register ("isAttaching", "()Z", "GetIsAttachingHandler")]
+		static IntPtr id_getAmount;
+		public virtual unsafe global::Java.Lang.Long Amount {
+			// Metadata.xml XPath method reference: path="/api/package[@name='ru.tinkoff.acquiring.sdk']/class[@name='ThreeDsData']/method[@name='getAmount' and count(parameter)=0]"
+			[Register ("getAmount", "()Ljava/lang/Long;", "GetGetAmountHandler")]
 			get {
-				if (id_isAttaching == IntPtr.Zero)
-					id_isAttaching = JNIEnv.GetMethodID (class_ref, "isAttaching", "()Z");
+				if (id_getAmount == IntPtr.Zero)
+					id_getAmount = JNIEnv.GetMethodID (class_ref, "getAmount", "()Ljava/lang/Long;");
 				try {
 
 					if (((object) this).GetType () == ThresholdType)
-						return JNIEnv.CallBooleanMethod (((global::Java.Lang.Object) this).Handle, id_isAttaching);
+						return global::Java.Lang.Object.GetObject<global::Java.Lang.Long> (JNIEnv.CallObjectMethod (((global::Java.Lang.Object) this).Handle, id_getAmount), JniHandleOwnership.TransferLocalRef);
 					else
-						return JNIEnv.CallNonvirtualBooleanMethod (((global::Java.Lang.Object) this).Handle, ThresholdClass, JNIEnv.GetMethodID (ThresholdClass, "isAttaching", "()Z"));
-				} finally {
-				}
-			}
-		}
-
-		static Delegate cb_isPayment;
-#pragma warning disable 0169
-		static Delegate GetIsPaymentHandler ()
-		{
-			if (cb_isPayment == null)
-				cb_isPayment = JNINativeWrapper.CreateDelegate ((Func<IntPtr, IntPtr, bool>) n_IsPayment);
-			return cb_isPayment;
-		}
-
-		static bool n_IsPayment (IntPtr jnienv, IntPtr native__this)
-		{
-			global::RU.Tinkoff.Acquiring.Sdk.ThreeDsData __this = global::Java.Lang.Object.GetObject<global::RU.Tinkoff.Acquiring.Sdk.ThreeDsData> (jnienv, native__this, JniHandleOwnership.DoNotTransfer);
-			return __this.IsPayment;
-		}
-#pragma warning restore 0169
-
-		static IntPtr id_isPayment;
-		public virtual unsafe bool IsPayment {
-			// Metadata.xml XPath method reference: path="/api/package[@name='ru.tinkoff.acquiring.sdk']/class[@name='ThreeDsData']/method[@name='isPayment' and count(parameter)=0]"
-			[Register ("isPayment", "()Z", "GetIsPaymentHandler")]
-			get {
-				if (id_isPayment == IntPtr.Zero)
-					id_isPayment = JNIEnv.GetMethodID (class_ref, "isPayment", "()Z");
-				try {
-
-					if (((object) this).GetType () == ThresholdType)
-						return JNIEnv.CallBooleanMethod (((global::Java.Lang.Object) this).Handle, id_isPayment);
-					else
-						return JNIEnv.CallNonvirtualBooleanMethod (((global::Java.Lang.Object) this).Handle, ThresholdClass, JNIEnv.GetMethodID (ThresholdClass, "isPayment", "()Z"));
+						return global::Java.Lang.Object.GetObject<global::Java.Lang.Long> (JNIEnv.CallNonvirtualObjectMethod (((global::Java.Lang.Object) this).Handle, ThresholdClass, JNIEnv.GetMethodID (ThresholdClass, "getAmount", "()Ljava/lang/Long;")), JniHandleOwnership.TransferLocalRef);
 				} finally {
 				}
 			}
@@ -288,6 +217,40 @@ namespace RU.Tinkoff.Acquiring.Sdk {
 			}
 		}
 
+		static Delegate cb_getOrderId;
+#pragma warning disable 0169
+		static Delegate GetGetOrderIdHandler ()
+		{
+			if (cb_getOrderId == null)
+				cb_getOrderId = JNINativeWrapper.CreateDelegate ((Func<IntPtr, IntPtr, IntPtr>) n_GetOrderId);
+			return cb_getOrderId;
+		}
+
+		static IntPtr n_GetOrderId (IntPtr jnienv, IntPtr native__this)
+		{
+			global::RU.Tinkoff.Acquiring.Sdk.ThreeDsData __this = global::Java.Lang.Object.GetObject<global::RU.Tinkoff.Acquiring.Sdk.ThreeDsData> (jnienv, native__this, JniHandleOwnership.DoNotTransfer);
+			return JNIEnv.NewString (__this.OrderId);
+		}
+#pragma warning restore 0169
+
+		static IntPtr id_getOrderId;
+		public virtual unsafe string OrderId {
+			// Metadata.xml XPath method reference: path="/api/package[@name='ru.tinkoff.acquiring.sdk']/class[@name='ThreeDsData']/method[@name='getOrderId' and count(parameter)=0]"
+			[Register ("getOrderId", "()Ljava/lang/String;", "GetGetOrderIdHandler")]
+			get {
+				if (id_getOrderId == IntPtr.Zero)
+					id_getOrderId = JNIEnv.GetMethodID (class_ref, "getOrderId", "()Ljava/lang/String;");
+				try {
+
+					if (((object) this).GetType () == ThresholdType)
+						return JNIEnv.GetString (JNIEnv.CallObjectMethod (((global::Java.Lang.Object) this).Handle, id_getOrderId), JniHandleOwnership.TransferLocalRef);
+					else
+						return JNIEnv.GetString (JNIEnv.CallNonvirtualObjectMethod (((global::Java.Lang.Object) this).Handle, ThresholdClass, JNIEnv.GetMethodID (ThresholdClass, "getOrderId", "()Ljava/lang/String;")), JniHandleOwnership.TransferLocalRef);
+				} finally {
+				}
+			}
+		}
+
 		static Delegate cb_getPaReq;
 #pragma warning disable 0169
 		static Delegate GetGetPaReqHandler ()
@@ -351,40 +314,6 @@ namespace RU.Tinkoff.Acquiring.Sdk {
 						return global::Java.Lang.Object.GetObject<global::Java.Lang.Long> (JNIEnv.CallObjectMethod (((global::Java.Lang.Object) this).Handle, id_getPaymentId), JniHandleOwnership.TransferLocalRef);
 					else
 						return global::Java.Lang.Object.GetObject<global::Java.Lang.Long> (JNIEnv.CallNonvirtualObjectMethod (((global::Java.Lang.Object) this).Handle, ThresholdClass, JNIEnv.GetMethodID (ThresholdClass, "getPaymentId", "()Ljava/lang/Long;")), JniHandleOwnership.TransferLocalRef);
-				} finally {
-				}
-			}
-		}
-
-		static Delegate cb_getRequestKey;
-#pragma warning disable 0169
-		static Delegate GetGetRequestKeyHandler ()
-		{
-			if (cb_getRequestKey == null)
-				cb_getRequestKey = JNINativeWrapper.CreateDelegate ((Func<IntPtr, IntPtr, IntPtr>) n_GetRequestKey);
-			return cb_getRequestKey;
-		}
-
-		static IntPtr n_GetRequestKey (IntPtr jnienv, IntPtr native__this)
-		{
-			global::RU.Tinkoff.Acquiring.Sdk.ThreeDsData __this = global::Java.Lang.Object.GetObject<global::RU.Tinkoff.Acquiring.Sdk.ThreeDsData> (jnienv, native__this, JniHandleOwnership.DoNotTransfer);
-			return JNIEnv.NewString (__this.RequestKey);
-		}
-#pragma warning restore 0169
-
-		static IntPtr id_getRequestKey;
-		public virtual unsafe string RequestKey {
-			// Metadata.xml XPath method reference: path="/api/package[@name='ru.tinkoff.acquiring.sdk']/class[@name='ThreeDsData']/method[@name='getRequestKey' and count(parameter)=0]"
-			[Register ("getRequestKey", "()Ljava/lang/String;", "GetGetRequestKeyHandler")]
-			get {
-				if (id_getRequestKey == IntPtr.Zero)
-					id_getRequestKey = JNIEnv.GetMethodID (class_ref, "getRequestKey", "()Ljava/lang/String;");
-				try {
-
-					if (((object) this).GetType () == ThresholdType)
-						return JNIEnv.GetString (JNIEnv.CallObjectMethod (((global::Java.Lang.Object) this).Handle, id_getRequestKey), JniHandleOwnership.TransferLocalRef);
-					else
-						return JNIEnv.GetString (JNIEnv.CallNonvirtualObjectMethod (((global::Java.Lang.Object) this).Handle, ThresholdClass, JNIEnv.GetMethodID (ThresholdClass, "getRequestKey", "()Ljava/lang/String;")), JniHandleOwnership.TransferLocalRef);
 				} finally {
 				}
 			}

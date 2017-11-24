@@ -25,10 +25,6 @@ namespace RU.Tinkoff.Acquiring.Sdk.Requests {
 		[Register ("CHARGE_FLAG")]
 		public const string ChargeFlag = (string) "chargeFlag";
 
-		// Metadata.xml XPath field reference: path="/api/package[@name='ru.tinkoff.acquiring.sdk.requests']/class[@name='AcquiringRequest']/field[@name='CHECK_TYPE']"
-		[Register ("CHECK_TYPE")]
-		public const string CheckType = (string) "CheckType";
-
 		// Metadata.xml XPath field reference: path="/api/package[@name='ru.tinkoff.acquiring.sdk.requests']/class[@name='AcquiringRequest']/field[@name='CUSTOMER_KEY']"
 		[Register ("CUSTOMER_KEY")]
 		public const string CustomerKey = (string) "CustomerKey";
@@ -109,10 +105,6 @@ namespace RU.Tinkoff.Acquiring.Sdk.Requests {
 		// Metadata.xml XPath field reference: path="/api/package[@name='ru.tinkoff.acquiring.sdk.requests']/class[@name='AcquiringRequest']/field[@name='RECURRENT']"
 		[Register ("RECURRENT")]
 		public const string Recurrent = (string) "Recurrent";
-
-		// Metadata.xml XPath field reference: path="/api/package[@name='ru.tinkoff.acquiring.sdk.requests']/class[@name='AcquiringRequest']/field[@name='REQUEST_KEY']"
-		[Register ("REQUEST_KEY")]
-		public const string RequestKey = (string) "RequestKey";
 
 		// Metadata.xml XPath field reference: path="/api/package[@name='ru.tinkoff.acquiring.sdk.requests']/class[@name='AcquiringRequest']/field[@name='SEND_EMAIL']"
 		[Register ("SEND_EMAIL")]

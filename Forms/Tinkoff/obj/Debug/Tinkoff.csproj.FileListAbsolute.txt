@@ -3,4 +3,3 @@ C:\Sandbox\Forms\Tinkoff\bin\Debug\Tinkoff.dll
 C:\Sandbox\Forms\Tinkoff\bin\Debug\Tinkoff.pdb
 C:\Sandbox\Forms\Tinkoff\obj\Debug\Tinkoff.dll
 C:\Sandbox\Forms\Tinkoff\obj\Debug\Tinkoff.pdb
-C:\Sandbox\Forms\Tinkoff\obj\Debug\Tinkoff.csprojResolveAssemblyReference.cache

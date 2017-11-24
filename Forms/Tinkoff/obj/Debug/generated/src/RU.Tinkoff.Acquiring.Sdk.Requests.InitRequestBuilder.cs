@@ -74,24 +74,6 @@ namespace RU.Tinkoff.Acquiring.Sdk.Requests {
 			}
 		}
 
-		static IntPtr id_addData_Ljava_util_Map_;
-		// Metadata.xml XPath method reference: path="/api/package[@name='ru.tinkoff.acquiring.sdk.requests']/class[@name='InitRequestBuilder']/method[@name='addData' and count(parameter)=1 and parameter[1][@type='java.util.Map&lt;java.lang.String, java.lang.String&gt;']]"
-		[Register ("addData", "(Ljava/util/Map;)Lru/tinkoff/acquiring/sdk/requests/InitRequestBuilder;", "")]
-		public unsafe global::RU.Tinkoff.Acquiring.Sdk.Requests.InitRequestBuilder AddData (global::System.Collections.Generic.IDictionary<string, string> p0)
-		{
-			if (id_addData_Ljava_util_Map_ == IntPtr.Zero)
-				id_addData_Ljava_util_Map_ = JNIEnv.GetMethodID (class_ref, "addData", "(Ljava/util/Map;)Lru/tinkoff/acquiring/sdk/requests/InitRequestBuilder;");
-			IntPtr native_p0 = global::Android.Runtime.JavaDictionary<string, string>.ToLocalJniHandle (p0);
-			try {
-				JValue* __args = stackalloc JValue [1];
-				__args [0] = new JValue (native_p0);
-				global::RU.Tinkoff.Acquiring.Sdk.Requests.InitRequestBuilder __ret = global::Java.Lang.Object.GetObject<global::RU.Tinkoff.Acquiring.Sdk.Requests.InitRequestBuilder> (JNIEnv.CallObjectMethod (((global::Java.Lang.Object) this).Handle, id_addData_Ljava_util_Map_, __args), JniHandleOwnership.TransferLocalRef);
-				return __ret;
-			} finally {
-				JNIEnv.DeleteLocalRef (native_p0);
-			}
-		}
-
 		static IntPtr id_setAmount_J;
 		// Metadata.xml XPath method reference: path="/api/package[@name='ru.tinkoff.acquiring.sdk.requests']/class[@name='InitRequestBuilder']/method[@name='setAmount' and count(parameter)=1 and parameter[1][@type='long']]"
 		[Register ("setAmount", "(J)Lru/tinkoff/acquiring/sdk/requests/InitRequestBuilder;", "")]

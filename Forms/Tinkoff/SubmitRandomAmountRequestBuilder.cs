@@ -5,6 +5,6 @@ namespace RU.Tinkoff.Acquiring.Sdk.Requests
 {
     public partial class SubmitRandomAmountRequestBuilder
     {
-        protected override Object RawRequest { get; }
+        //protected override Object RawRequest { get; }
     }
 }

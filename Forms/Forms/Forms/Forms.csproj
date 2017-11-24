@@ -13,10 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Tinkoff.Ui\Tinkoff.Ui.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Update="Views\TinkoffPage.xaml.cs">
       <DependentUpon>TinkoffPage.xaml</DependentUpon>
     </Compile>

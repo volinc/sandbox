@@ -67,20 +67,6 @@ namespace RU.Tinkoff.Acquiring.Sdk.Responses {
 			}
 		}
 
-		static IntPtr id_getCardId;
-		public unsafe string CardId {
-			// Metadata.xml XPath method reference: path="/api/package[@name='ru.tinkoff.acquiring.sdk.responses']/class[@name='ChargeResponse']/method[@name='getCardId' and count(parameter)=0]"
-			[Register ("getCardId", "()Ljava/lang/String;", "GetGetCardIdHandler")]
-			get {
-				if (id_getCardId == IntPtr.Zero)
-					id_getCardId = JNIEnv.GetMethodID (class_ref, "getCardId", "()Ljava/lang/String;");
-				try {
-					return JNIEnv.GetString (JNIEnv.CallObjectMethod (((global::Java.Lang.Object) this).Handle, id_getCardId), JniHandleOwnership.TransferLocalRef);
-				} finally {
-				}
-			}
-		}
-
 		static IntPtr id_getOrderId;
 		public unsafe string OrderId {
 			// Metadata.xml XPath method reference: path="/api/package[@name='ru.tinkoff.acquiring.sdk.responses']/class[@name='ChargeResponse']/method[@name='getOrderId' and count(parameter)=0]"

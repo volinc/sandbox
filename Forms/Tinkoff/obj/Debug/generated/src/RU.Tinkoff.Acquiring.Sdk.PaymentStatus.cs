@@ -48,19 +48,6 @@ namespace RU.Tinkoff.Acquiring.Sdk {
 			}
 		}
 
-		static IntPtr COMPLETED_jfieldId;
-
-		// Metadata.xml XPath field reference: path="/api/package[@name='ru.tinkoff.acquiring.sdk']/class[@name='PaymentStatus']/field[@name='COMPLETED']"
-		[Register ("COMPLETED")]
-		public static global::RU.Tinkoff.Acquiring.Sdk.PaymentStatus Completed {
-			get {
-				if (COMPLETED_jfieldId == IntPtr.Zero)
-					COMPLETED_jfieldId = JNIEnv.GetStaticFieldID (class_ref, "COMPLETED", "Lru/tinkoff/acquiring/sdk/PaymentStatus;");
-				IntPtr __ret = JNIEnv.GetStaticObjectField (class_ref, COMPLETED_jfieldId);
-				return global::Java.Lang.Object.GetObject<global::RU.Tinkoff.Acquiring.Sdk.PaymentStatus> (__ret, JniHandleOwnership.TransferLocalRef);
-			}
-		}
-
 		static IntPtr CONFIRMED_jfieldId;
 
 		// Metadata.xml XPath field reference: path="/api/package[@name='ru.tinkoff.acquiring.sdk']/class[@name='PaymentStatus']/field[@name='CONFIRMED']"
@@ -96,19 +83,6 @@ namespace RU.Tinkoff.Acquiring.Sdk {
 				if (FORMSHOWED_jfieldId == IntPtr.Zero)
 					FORMSHOWED_jfieldId = JNIEnv.GetStaticFieldID (class_ref, "FORMSHOWED", "Lru/tinkoff/acquiring/sdk/PaymentStatus;");
 				IntPtr __ret = JNIEnv.GetStaticObjectField (class_ref, FORMSHOWED_jfieldId);
-				return global::Java.Lang.Object.GetObject<global::RU.Tinkoff.Acquiring.Sdk.PaymentStatus> (__ret, JniHandleOwnership.TransferLocalRef);
-			}
-		}
-
-		static IntPtr LOOP_CHECKING_jfieldId;
-
-		// Metadata.xml XPath field reference: path="/api/package[@name='ru.tinkoff.acquiring.sdk']/class[@name='PaymentStatus']/field[@name='LOOP_CHECKING']"
-		[Register ("LOOP_CHECKING")]
-		public static global::RU.Tinkoff.Acquiring.Sdk.PaymentStatus LoopChecking {
-			get {
-				if (LOOP_CHECKING_jfieldId == IntPtr.Zero)
-					LOOP_CHECKING_jfieldId = JNIEnv.GetStaticFieldID (class_ref, "LOOP_CHECKING", "Lru/tinkoff/acquiring/sdk/PaymentStatus;");
-				IntPtr __ret = JNIEnv.GetStaticObjectField (class_ref, LOOP_CHECKING_jfieldId);
 				return global::Java.Lang.Object.GetObject<global::RU.Tinkoff.Acquiring.Sdk.PaymentStatus> (__ret, JniHandleOwnership.TransferLocalRef);
 			}
 		}

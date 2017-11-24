@@ -60,7 +60,7 @@ namespace Forms
         {
             await Task.Delay(TimeSpan.FromSeconds(3));
 
-            MainPage = new TrackingPage();
+            MainPage = new TinkoffPage();
         }
     }
 }
