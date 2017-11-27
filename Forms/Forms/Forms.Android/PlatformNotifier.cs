@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Android.App;
+using Android.Content;
 using Forms.Infrastructure;
-using RU.Tinkoff.Acquiring.Sdk;
 
 namespace Forms.Droid
 {
@@ -15,10 +15,10 @@ namespace Forms.Droid
 
             var context = Application.Context;
 
-            //var dialogIntent = new Intent(context, typeof(OfferActivity));
-            //dialogIntent.AddFlags(ActivityFlags.ReorderToFront | ActivityFlags.NewTask);
+            var dialogIntent = new Intent(context, typeof(OfferActivity));
+            dialogIntent.AddFlags(ActivityFlags.ReorderToFront | ActivityFlags.NewTask);
 
-            //context.StartActivity(dialogIntent);
+            context.StartActivity(dialogIntent);
             
             return true;
         }

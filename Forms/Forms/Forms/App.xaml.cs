@@ -43,7 +43,7 @@ namespace Forms
             var builder = new ContainerBuilder();
 
             builder.RegisterType<TrackingViewModel>().InstancePerDependency();
-            builder.RegisterType<ViewModelFactory>().SingleInstance();
+            builder.RegisterType<ViewModelFactory>().AsSelf().SingleInstance();
 
             foreach (var module in modules)
                 builder.RegisterModule(module);
@@ -60,7 +60,7 @@ namespace Forms
         {
             await Task.Delay(TimeSpan.FromSeconds(3));
 
-            MainPage = new TinkoffPage();
+            MainPage = new TrackingPage();
         }
     }
 }
