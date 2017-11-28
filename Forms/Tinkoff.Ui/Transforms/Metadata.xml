@@ -1,9 +1,0 @@
-﻿<metadata>
-
-  <attr path="/api/package[@name='ru.tinkoff.acquiring.sdk']/interface[@name='OnPaymentListener']/method[@name='onSuccess']"
-        name="argsType">PaymentListenerSuccessEventArgs</attr>
-
-  <attr path="/api/package[@name='ru.tinkoff.acquiring.sdk']/interface[@name='OnPaymentListener']/method[@name='onError']"
-        name="argsType">PaymentListenerErrorEventArgs</attr>
-
-</metadata>

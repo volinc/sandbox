@@ -1,5 +1,0 @@
-﻿<metadata>
-
-  <attr path="/api/package[@name='ru.tinkoff.acquiring.sdk.requests']/class[@name='AcquiringRequestBuilder']" name="visibility">public</attr>
-
-</metadata>

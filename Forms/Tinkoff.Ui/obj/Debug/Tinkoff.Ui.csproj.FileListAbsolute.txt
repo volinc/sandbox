@@ -1,6 +1,0 @@
-C:\Sandbox\Forms\Tinkoff.Ui\bin\Debug\Tinkoff.Ui.dll
-C:\Sandbox\Forms\Tinkoff.Ui\bin\Debug\Tinkoff.Ui.pdb
-C:\Sandbox\Forms\Tinkoff.Ui\obj\Debug\Tinkoff.Ui.csproj.CoreCompileInputs.cache
-C:\Sandbox\Forms\Tinkoff.Ui\obj\Debug\Tinkoff.Ui.dll
-C:\Sandbox\Forms\Tinkoff.Ui\obj\Debug\Tinkoff.Ui.pdb
-C:\Sandbox\Forms\Tinkoff.Ui\obj\Debug\Tinkoff.Ui.csprojResolveAssemblyReference.cache

@@ -1,5 +1,0 @@
-C:\Sandbox\Forms\Tinkoff.Sdk\bin\Debug\Tinkoff.Sdk.dll
-C:\Sandbox\Forms\Tinkoff.Sdk\bin\Debug\Tinkoff.Sdk.pdb
-C:\Sandbox\Forms\Tinkoff.Sdk\obj\Debug\Tinkoff.Sdk.csproj.CoreCompileInputs.cache
-C:\Sandbox\Forms\Tinkoff.Sdk\obj\Debug\Tinkoff.Sdk.dll
-C:\Sandbox\Forms\Tinkoff.Sdk\obj\Debug\Tinkoff.Sdk.pdb

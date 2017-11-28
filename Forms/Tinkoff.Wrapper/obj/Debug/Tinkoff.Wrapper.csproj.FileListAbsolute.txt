@@ -1,0 +1,5 @@
+C:\Sandbox\Forms\Tinkoff.Wrapper\bin\Debug\Tinkoff.Wrapper.dll
+C:\Sandbox\Forms\Tinkoff.Wrapper\bin\Debug\Tinkoff.Wrapper.pdb
+C:\Sandbox\Forms\Tinkoff.Wrapper\obj\Debug\Tinkoff.Wrapper.csproj.CoreCompileInputs.cache
+C:\Sandbox\Forms\Tinkoff.Wrapper\obj\Debug\Tinkoff.Wrapper.dll
+C:\Sandbox\Forms\Tinkoff.Wrapper\obj\Debug\Tinkoff.Wrapper.pdb

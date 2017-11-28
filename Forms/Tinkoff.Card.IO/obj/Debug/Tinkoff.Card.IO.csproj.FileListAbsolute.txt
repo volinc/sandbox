@@ -1,5 +1,0 @@
-C:\Sandbox\Forms\Tinkoff.Card.IO\bin\Debug\Tinkoff.Card.IO.dll
-C:\Sandbox\Forms\Tinkoff.Card.IO\bin\Debug\Tinkoff.Card.IO.pdb
-C:\Sandbox\Forms\Tinkoff.Card.IO\obj\Debug\Tinkoff.Card.IO.csproj.CoreCompileInputs.cache
-C:\Sandbox\Forms\Tinkoff.Card.IO\obj\Debug\Tinkoff.Card.IO.dll
-C:\Sandbox\Forms\Tinkoff.Card.IO\obj\Debug\Tinkoff.Card.IO.pdb
