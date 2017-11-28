@@ -2,9 +2,7 @@
 using Forms.Helpers;
 using Forms.Infrastructure;
 using Forms.Services;
-using Forms.Views;
 using Xamarin.Forms;
-using PropertyChanged;
 
 namespace Forms.ViewModels
 {
@@ -52,32 +50,8 @@ namespace Forms.ViewModels
 
         public int Second { get; set; }
 
-        //https://github.com/Fody/PropertyChanged/wiki/Options
-        [AlsoNotifyFor(nameof(IsCommandEnabled))]
-        public override bool IsBusy
-        {
-            get => base.IsBusy;
-            set => base.IsBusy = value;
-        }
-
         public bool IsCommandEnabled => !IsBusy;
-
-        public ICommand ShowMultiSelectionCommand => new Command(async () =>
-        {
-            if (IsBusy) return;
-
-            try
-            {
-                IsBusy = true;
-
-                await Application.Current.MainPage.Navigation.PushModalAsync(new MultiSelectionPage());
-            }
-            finally
-            {
-                IsBusy = false;
-            }
-        });
-
+        
         public ICommand CheckPermissionsCommand => new Command(async () =>
         {
             if (IsBusy) return;
