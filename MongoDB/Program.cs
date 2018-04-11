@@ -16,7 +16,7 @@ namespace MongoDB
             Run();
 
             var ticks = new List<long>();
-            for (var i = 0; i < 1000; i++)
+            for (var i = 0; i < 10; i++)
             {
                 sw.Start();
                 Run();
