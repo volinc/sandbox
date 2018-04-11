@@ -26,7 +26,7 @@ namespace SQLite
             using (var connection = new SQLiteConnection("driver.db"))
             {
                 var random = new Random();
-                var previousIndex = connection.Table<OrderLocation>().Max(x => x.Index);
+                var previousIndex = ReadMaxIndex(connection);
                 connection.Insert(new OrderLocation
                 {
                     Index = ++previousIndex,
@@ -35,7 +35,13 @@ namespace SQLite
                 });                
             }            
         }
-        
+
+        //private static int ReadPreviousIndex(SQLiteConnection connection)
+        //    => !connection.Table<OrderLocation>().Any() ? 0 : connection.Table<OrderLocation>().Max(x => x.Index);
+
+        private static int ReadMaxIndex(SQLiteConnection connection)
+            => connection.Table<OrderLocation>().Max(x => (int?)x.Index) ?? 0;
+
         private static IReadOnlyList<OrderLocation> ReadAll(IEnumerable<Gap> gaps)
         {
             using (var connection = new SQLiteConnection("driver.db"))
