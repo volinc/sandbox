@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
@@ -26,7 +27,11 @@ namespace MongoDB
 
             var database = mongoClient.GetDatabase(DatabaseName);
             var points = database.GetCollection<OrderTrackPoint>(CollectionName);
-
+            
+            //var commandDocument = BsonDocument.Parse("{shardCollection: \"orderTracks\", key: { OrderId: \"hashed\" }}");
+            //var command = new BsonDocumentCommand<BsonDocument>(commandDocument);
+            //var resultDocument = database.RunCommand(command);
+            
             var indexKeys = Builders<OrderTrackPoint>.IndexKeys.Combine(
                 Builders<OrderTrackPoint>.IndexKeys.Ascending(x => x.OrderId),
                 Builders<OrderTrackPoint>.IndexKeys.Ascending(x => x.Index));
