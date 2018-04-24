@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
@@ -81,6 +80,15 @@ namespace MongoDB
             var points = database.GetCollection<OrderTrackPoint>(CollectionName);
 
             points.DeleteMany(x => x.OrderId == orderId);
+        }
+
+        public void UpdateAllByOrderId(long orderId, IEnumerable<OrderTrackPoint> set)
+        {
+            var database = mongoClient.GetDatabase(DatabaseName);
+            var points = database.GetCollection<OrderTrackPoint>(CollectionName);
+            
+            points.DeleteMany(x => x.OrderId == orderId);
+            points.InsertMany(set);
         }
     }
 }
