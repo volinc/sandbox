@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27428.2027
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLite", "SQLite\SQLite.csproj", "{9B079D1E-FBA3-44FD-A819-DFF360349BF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoDB", "MongoDB\MongoDB.csproj", "{063396E9-69FA-414D-893E-70EA9E7A7A85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MongoDB", "MongoDB\MongoDB.csproj", "{063396E9-69FA-414D-893E-70EA9E7A7A85}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SqlitePclLock", "SqlitePclLock\SqlitePclLock.csproj", "{48B56F50-63D8-4C5C-9376-31D8AB387690}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{063396E9-69FA-414D-893E-70EA9E7A7A85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{063396E9-69FA-414D-893E-70EA9E7A7A85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{063396E9-69FA-414D-893E-70EA9E7A7A85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48B56F50-63D8-4C5C-9376-31D8AB387690}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48B56F50-63D8-4C5C-9376-31D8AB387690}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48B56F50-63D8-4C5C-9376-31D8AB387690}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48B56F50-63D8-4C5C-9376-31D8AB387690}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
