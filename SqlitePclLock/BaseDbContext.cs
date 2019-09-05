@@ -5,18 +5,20 @@
 
     public class BaseDbContext
     {
-        private readonly object sync = new object();
 
         public BaseDbContext(string fileName)
         {
-            DatabasePath = Path.Combine("./", fileName);
+            DatabasePath = Path.Combine(Directory.GetCurrentDirectory(), fileName);
         }
 
         public string DatabasePath { get; }
 
-        public SQLiteConnection CreateConnection() 
+        public SQLiteConnection CreateConnection()
         {
-            return new SQLiteConnection(DatabasePath);                            
+            return new SQLiteConnection(DatabasePath, SQLiteOpenFlags.Create
+                                                      | SQLiteOpenFlags.ReadWrite
+                                                      | SQLiteOpenFlags.FullMutex
+                                                      | SQLiteOpenFlags.SharedCache);
         }
     }
 }
