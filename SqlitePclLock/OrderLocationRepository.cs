@@ -13,7 +13,19 @@
 
         public new void DeleteAll()
         {
-            SharedConnection.Execute("DELETE FROM sqlite_sequence WHERE name = 'OrderLocationSqLite';");
+            var connection = SharedConnection;
+            try
+            { 
+                connection.BeginTransaction();
+                connection.DeleteAll<OrderLocationSqLite>();
+                var tableName = connection.GetMapping<OrderLocationSqLite>().TableName;
+                connection.Execute($"DELETE FROM sqlite_sequence WHERE name = '{tableName}';");
+                connection.Commit();
+            }
+            catch
+            {
+                connection.Rollback();
+            }
         }
 
         public OrderLocation Create(long orderId, Location location, DateTimeOffset timestamp, double speed, double heading)
