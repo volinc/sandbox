@@ -1,11 +1,10 @@
-﻿using System.Threading;
-
-namespace SqlitePclLock
+﻿namespace SqlitePclLock
 {
     using System;
     using System.Linq;
     using System.Threading.Tasks;
     using Taxys.Geometry;
+    using System.Threading;
 
     internal class Program
     {
@@ -15,29 +14,29 @@ namespace SqlitePclLock
             var orderLocationRepository = new OrderLocationRepository(orderDbContext);
 
             orderLocationRepository.DeleteAll();
+            var max = orderLocationRepository.ReadMaxIndexOrNull();
 
             var tasks = Enumerable.Range(1, 1000).Select(x => RunAsync(orderLocationRepository));
 
-            await Task.WhenAll(tasks).ConfigureAwait(false);
+            await Task.WhenAll(tasks);
 
-            var all = orderLocationRepository.ReadAll();
-
-            Console.WriteLine("Done");
-            Console.ReadLine();
+            await Console.Out.WriteLineAsync("Done");
+            await Console.In.ReadLineAsync();
         }
 
 
-        private static Task RunAsync(OrderLocationRepository orderLocationRepository)
+        private static async Task RunAsync(OrderLocationRepository orderLocationRepository)
         {
-            return Task.Run(() =>
+            await Task.Run(() => 
             {
                 var location = new Location(0, 0);
                 orderLocationRepository.Create(1, location, DateTimeOffset.UtcNow, 0, 0);
-                orderLocationRepository.ReadAll();
+                //orderLocationRepository.ReadAll();
                 //orderLocationRepository.DeleteAll();
 
-                Console.WriteLine($"Done {Thread.CurrentThread.ManagedThreadId} {Thread.CurrentThread.IsBackground}");
-            });
+                Console.Out.WriteLine($"Done {Thread.CurrentThread.ManagedThreadId} {Thread.CurrentThread.IsBackground}");
+
+            }).ConfigureAwait(false);
         }
     }
 }

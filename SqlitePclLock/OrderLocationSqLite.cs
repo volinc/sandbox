@@ -6,12 +6,11 @@
     [Table("OrderLocation")]
     public class OrderLocationSqLite
     {
-        [Unique]
+        [PrimaryKey, AutoIncrement]
         public int Index { get; set; }
         
         public long OrderId { get; set; }
 
-        [Unique]
         public DateTimeOffset Timestamp { get; set; }
         
         public double Latitude { get; set; }

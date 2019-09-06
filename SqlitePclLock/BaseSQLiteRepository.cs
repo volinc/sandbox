@@ -4,44 +4,15 @@
 
     public abstract class BaseSQLiteRepository<T> where T : class, new()
     {
-        private readonly object _init = new object();
-        private SQLiteConnection connection;
-
-        private SQLiteConnection Connection
-        {
-            get
-            {
-                if (connection != null)
-                    return connection;
-
-                connection = DbContext.CreateConnection();
-
-                return connection;
-            }
-        }
-
-        protected virtual SQLiteConnection SharedConnection
-        {
-            get
-            {
-                lock (_init)
-                {
-                    Connection.CreateTable<T>();
-                    return Connection;
-                }
-            }
-        }
-
-        protected BaseDbContext DbContext { get; }
+        private readonly BaseDbContext dbContext;
 
         protected BaseSQLiteRepository(BaseDbContext dbContext)
         {
-            DbContext = dbContext;
+            this.dbContext = dbContext;
         }
 
-        protected virtual void DeleteAll()
-        {
-            Connection.DropTable<T>();
-        }
+        protected virtual SQLiteConnection Connection => dbContext.Connection;
+
+        public virtual void DeleteAll() => Connection.DeleteAll<T>();
     }
 }
