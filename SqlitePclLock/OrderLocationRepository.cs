@@ -61,40 +61,37 @@
 
         public int? ReadMaxIndexOrNull()
         {
-            var value = ReadMaxIndex();
-            return value == 0 
-                ? (int?)null 
-                : value;
+            lock (sync)
+            {
+                var value = ReadMaxIndex();
+                return value == 0
+                    ? (int?)null
+                    : value;
+            }
         }
 
         private int ReadMaxIndex()
         {
-            lock (sync)
-            {
-                if (index > 0)
-                    return index;
-
-                var data = SharedConnection.Table<OrderLocationSqLite>()
-                                           .LastOrDefault();
-
-                if (data != null)
-                   index = data.Index;
-
+            if (index > 0)
                 return index;
-            }
+
+            var data = SharedConnection.Table<OrderLocationSqLite>()
+                                       .LastOrDefault();
+
+            return data != null ? data.Index : 0;
         }
 
         public IReadOnlyList<OrderTrackPoint> ReadAllInGaps(IReadOnlyCollection<OrderTrackGap> gaps)
         {
             lock (sync)
             {
-                var locations = SharedConnection.Table<OrderLocationSqLite>()
-                                                .ToArray();
+                var set = SharedConnection.Table<OrderLocationSqLite>()
+                                          .ToArray();
 
                 var allInGaps = new List<OrderLocationSqLite>();
                 foreach (var gap in gaps)
                 {
-                    var allInGap = locations.Where(x => gap.BeginIndex <= x.Index && x.Index <= gap.EndIndex);
+                    var allInGap = set.Where(x => gap.BeginIndex <= x.Index && x.Index <= gap.EndIndex);
                     allInGaps.AddRange(allInGap);
                 }
 
