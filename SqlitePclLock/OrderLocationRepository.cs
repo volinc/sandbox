@@ -7,78 +7,100 @@
 
     public class OrderLocationRepository : BaseSQLiteRepository<OrderLocationSqLite>
     {
+        private readonly object sync = new object();
+        private int index = 0;
+
         public OrderLocationRepository(OrderDbContext dbContext) : base(dbContext)
         {
         }
 
         public new void DeleteAll()
         {
-            var connection = SharedConnection;
-            try
-            { 
-                connection.BeginTransaction();
-                connection.DeleteAll<OrderLocationSqLite>();
-                var tableName = connection.GetMapping<OrderLocationSqLite>().TableName;
-                connection.Execute($"DELETE FROM sqlite_sequence WHERE name = '{tableName}';");
-                connection.Commit();
-            }
-            catch
+            lock (sync)
             {
-                connection.Rollback();
+                SharedConnection.DeleteAll<OrderLocationSqLite>();
+                index = 0;
             }
         }
 
         public OrderLocation Create(long orderId, Location location, DateTimeOffset timestamp, double speed, double heading)
         {
-            var data = new OrderLocationSqLite
+            lock (sync)
             {
-                OrderId = orderId,
-                Latitude = location.Latitude,
-                Longitude = location.Longitude,
-                Timestamp = timestamp,
-                Speed = speed,
-                Heading = heading
-            };
+                var i = ReadMaxIndex() + 1;
+                var data = new OrderLocationSqLite
+                {
+                    Index = i,
+                    OrderId = orderId,
+                    Latitude = location.Latitude,
+                    Longitude = location.Longitude,
+                    Timestamp = timestamp,
+                    Speed = speed,
+                    Heading = heading
+                };
 
-            SharedConnection.Insert(data);
+                SharedConnection.Insert(data);
+                index = data.Index;
 
-            return data.ToOrderLocation();
+                return data.ToOrderLocation();
+            }
         }
-
 
         public IReadOnlyCollection<OrderTrackPoint> ReadAll()
         {
-            var set = SharedConnection.Table<OrderLocationSqLite>()
-                                    .OrderBy(x => x.Index)
-                                    .ToArray();
+            lock (sync)
+            {
+                var set = SharedConnection.Table<OrderLocationSqLite>()
+                                          .OrderBy(x => x.Index)
+                                          .ToArray();
 
-            return set.Select(x => x.ToOrderTrackPoint())
+                return set.Select(x => x.ToOrderTrackPoint())
                           .ToArray();
+            }
         }
 
         public int? ReadMaxIndexOrNull()
         {
-            var lastLocation = SharedConnection.Table<OrderLocationSqLite>()
-                                         .OrderByDescending(x => x.Index)
-                                         .FirstOrDefault();
+            var value = ReadMaxIndex();
+            return value == 0 
+                ? (int?)null 
+                : value;
+        }
 
-            return lastLocation?.Index;
+        private int ReadMaxIndex()
+        {
+            lock (sync)
+            {
+                if (index > 0)
+                    return index;
+
+                var data = SharedConnection.Table<OrderLocationSqLite>()
+                                           .LastOrDefault();
+
+                if (data != null)
+                   index = data.Index;
+
+                return index;
+            }
         }
 
         public IReadOnlyList<OrderTrackPoint> ReadAllInGaps(IReadOnlyCollection<OrderTrackGap> gaps)
         {
-            var locations = SharedConnection.Table<OrderLocationSqLite>()
-                                      .ToArray();
-
-            var allInGaps = new List<OrderLocationSqLite>();
-            foreach (var gap in gaps)
+            lock (sync)
             {
-                var allInGap = locations.Where(x => gap.BeginIndex <= x.Index && x.Index <= gap.EndIndex);
-                allInGaps.AddRange(allInGap);
-            }
+                var locations = SharedConnection.Table<OrderLocationSqLite>()
+                                                .ToArray();
 
-            return allInGaps.Select(x => x.ToOrderTrackPoint())
-                            .ToArray();
+                var allInGaps = new List<OrderLocationSqLite>();
+                foreach (var gap in gaps)
+                {
+                    var allInGap = locations.Where(x => gap.BeginIndex <= x.Index && x.Index <= gap.EndIndex);
+                    allInGaps.AddRange(allInGap);
+                }
+
+                return allInGaps.Select(x => x.ToOrderTrackPoint())
+                                .ToArray();
+            }
         }
     }
 }

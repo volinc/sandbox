@@ -6,7 +6,7 @@
     [Table("OrderLocation")]
     public class OrderLocationSqLite
     {
-        [PrimaryKey, AutoIncrement]
+        [Unique]
         public int Index { get; set; }
         
         public long OrderId { get; set; }

@@ -15,8 +15,11 @@ namespace SqlitePclLock
             var orderLocationRepository = new OrderLocationRepository(orderDbContext);
 
             orderLocationRepository.DeleteAll();
+            var max = orderLocationRepository.ReadMaxIndexOrNull();
+
             var location = new Location(0, 0);
             orderLocationRepository.Create(1, location, DateTimeOffset.UtcNow, 0, 0);
+            
             orderLocationRepository.DeleteAll();
             orderLocationRepository.Create(1, location, DateTimeOffset.UtcNow, 0, 0);
             var all = orderLocationRepository.ReadAll();
