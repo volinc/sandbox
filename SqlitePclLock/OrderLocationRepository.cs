@@ -13,68 +13,83 @@
 
         public override void DeleteAll()
         {
-            try
+            using (var connection = CreateConnection())
             {
-                Connection.BeginTransaction();
-                var map = Connection.GetMapping<OrderLocationSqLite>();
-                Connection.DeleteAll(map);
-                Connection.Execute($"DELETE FROM sqlite_sequence WHERE name = '{map.TableName}';");
-                Connection.Commit();
-            }
-            catch
-            {
-                Connection.Rollback();
+                try
+                {
+                    connection.BeginTransaction();
+                    var map = connection.GetMapping<OrderLocationSqLite>();
+                    connection.DeleteAll(map);
+                    connection.Execute($"DELETE FROM sqlite_sequence WHERE name = '{map.TableName}';");
+                    connection.Commit();
+                }
+                catch
+                {
+                    connection.Rollback();
+                }
             }
         }
 
         public OrderLocation Create(long orderId, Location location, DateTimeOffset timestamp, double speed, double heading)
         {
-            var data = new OrderLocationSqLite
+            using (var connection = CreateConnection())
             {
-                OrderId = orderId,
-                Latitude = location.Latitude,
-                Longitude = location.Longitude,
-                Timestamp = timestamp,
-                Speed = speed,
-                Heading = heading
-            };
+                var data = new OrderLocationSqLite
+                {
+                    OrderId = orderId,
+                    Latitude = location.Latitude,
+                    Longitude = location.Longitude,
+                    Timestamp = timestamp,
+                    Speed = speed,
+                    Heading = heading
+                };
 
-            Connection.Insert(data);
+                connection.Insert(data);
 
-            return data.ToOrderLocation();
+                return data.ToOrderLocation();
+            }
         }
 
         public IReadOnlyCollection<OrderTrackPoint> ReadAll()
         {
-            var set = Connection.Table<OrderLocationSqLite>()
-                                .OrderBy(x => x.Index)
-                                .ToArray();
+            using (var connection = CreateConnection())
+            {
+                var set = connection.Table<OrderLocationSqLite>()
+                                    .OrderBy(x => x.Index)
+                                    .ToArray();
 
-            return set.Select(x => x.ToOrderTrackPoint())
-                      .ToArray();
+                return set.Select(x => x.ToOrderTrackPoint())
+                          .ToArray();
+            }
         }
 
         public int? ReadMaxIndexOrNull()
         {
-            return Connection.Table<OrderLocationSqLite>()
-                             .Max(x => (int?)x.Index)
-                             .GetValueOrDefault();
+            using (var connection = CreateConnection())
+            {
+                return connection.Table<OrderLocationSqLite>()
+                                 .Max(x => (int?)x.Index)
+                                 .GetValueOrDefault();
+            }
         }
 
         public IReadOnlyList<OrderTrackPoint> ReadAllInGaps(IReadOnlyCollection<OrderTrackGap> gaps)
         {
-            var set = Connection.Table<OrderLocationSqLite>()
-                                .ToArray();
-
-            var allInGaps = new List<OrderLocationSqLite>();
-            foreach (var gap in gaps)
+            using (var connection = CreateConnection())
             {
-                var allInGap = set.Where(x => gap.BeginIndex <= x.Index && x.Index <= gap.EndIndex);
-                allInGaps.AddRange(allInGap);
-            }
+                var set = connection.Table<OrderLocationSqLite>()
+                                    .ToArray();
 
-            return allInGaps.Select(x => x.ToOrderTrackPoint())
-                            .ToArray();
+                var allInGaps = new List<OrderLocationSqLite>();
+                foreach (var gap in gaps)
+                {
+                    var allInGap = set.Where(x => gap.BeginIndex <= x.Index && x.Index <= gap.EndIndex);
+                    allInGaps.AddRange(allInGap);
+                }
+
+                return allInGaps.Select(x => x.ToOrderTrackPoint())
+                                .ToArray();
+            }
         }
     }
 }

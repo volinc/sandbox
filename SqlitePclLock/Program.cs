@@ -8,7 +8,7 @@
 
     internal class Program
     {
-        private async static Task Main()
+        private static async Task Main()
         {
             var orderDbContext = new OrderDbContext();
             var orderLocationRepository = new OrderLocationRepository(orderDbContext);
@@ -31,8 +31,8 @@
             {
                 var location = new Location(0, 0);
                 orderLocationRepository.Create(1, location, DateTimeOffset.UtcNow, 0, 0);
-                //orderLocationRepository.ReadAll();
-                //orderLocationRepository.DeleteAll();
+                orderLocationRepository.ReadAll();
+                orderLocationRepository.DeleteAll();
 
                 Console.Out.WriteLine($"Done {Thread.CurrentThread.ManagedThreadId} {Thread.CurrentThread.IsBackground}");
 
