@@ -8,7 +8,7 @@
 
     internal class Program
     {
-        private async static Task Main()
+        private static async Task Main()
         {
             var orderDbContext = new OrderDbContext();
             var orderLocationRepository = new OrderLocationRepository(orderDbContext);
@@ -19,6 +19,7 @@
             var tasks = Enumerable.Range(1, 1000).Select(x => RunAsync(orderLocationRepository));
 
             await Task.WhenAll(tasks);
+
             await Console.Out.WriteLineAsync("Done");
             await Console.In.ReadLineAsync();
         }
@@ -31,9 +32,9 @@
                 var location = new Location(0, 0);
                 orderLocationRepository.Create(1, location, DateTimeOffset.UtcNow, 0, 0);
                 orderLocationRepository.ReadAll();
-                //orderLocationRepository.DeleteAll();
+                orderLocationRepository.DeleteAll();
 
-                //Console.Out.WriteLine($"Done {Thread.CurrentThread.ManagedThreadId} {Thread.CurrentThread.IsBackground}");
+                Console.Out.WriteLine($"Done {Thread.CurrentThread.ManagedThreadId} {Thread.CurrentThread.IsBackground}");
 
             }).ConfigureAwait(false);
         }

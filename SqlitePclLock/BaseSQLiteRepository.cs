@@ -11,8 +11,14 @@
             this.dbContext = dbContext;
         }
 
-        protected virtual SQLiteConnection Connection => dbContext.Connection;
+        protected virtual SQLiteConnection CreateConnection() => dbContext.CreateConnection();
 
-        public virtual void DeleteAll() => Connection.DeleteAll<T>();
+        public virtual void DeleteAll()
+        {
+            using (var connection = CreateConnection())
+            {
+                connection.DeleteAll<T>();
+            }
+        }
     }
 }
