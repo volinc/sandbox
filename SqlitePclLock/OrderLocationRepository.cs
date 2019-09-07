@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading;
     using Taxys.Geometry;
 
     public class OrderLocationRepository : BaseSQLiteRepository<OrderLocationSqLite>
@@ -15,15 +16,15 @@
         {
             try
             {
-                Connection.BeginTransaction();
+                //Connection.BeginTransaction();
                 var map = Connection.GetMapping<OrderLocationSqLite>();
                 Connection.DeleteAll(map);
                 Connection.Execute($"DELETE FROM sqlite_sequence WHERE name = '{map.TableName}';");
-                Connection.Commit();
+                //Connection.Commit();
             }
             catch
             {
-                Connection.Rollback();
+                //Connection.Rollback();
             }
         }
 

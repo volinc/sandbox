@@ -19,7 +19,6 @@
             var tasks = Enumerable.Range(1, 1000).Select(x => RunAsync(orderLocationRepository));
 
             await Task.WhenAll(tasks);
-
             await Console.Out.WriteLineAsync("Done");
             await Console.In.ReadLineAsync();
         }
@@ -31,10 +30,10 @@
             {
                 var location = new Location(0, 0);
                 orderLocationRepository.Create(1, location, DateTimeOffset.UtcNow, 0, 0);
-                //orderLocationRepository.ReadAll();
+                orderLocationRepository.ReadAll();
                 //orderLocationRepository.DeleteAll();
 
-                Console.Out.WriteLine($"Done {Thread.CurrentThread.ManagedThreadId} {Thread.CurrentThread.IsBackground}");
+                //Console.Out.WriteLine($"Done {Thread.CurrentThread.ManagedThreadId} {Thread.CurrentThread.IsBackground}");
 
             }).ConfigureAwait(false);
         }

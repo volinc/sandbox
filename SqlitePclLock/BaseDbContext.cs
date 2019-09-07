@@ -5,7 +5,7 @@
 
     public abstract class BaseDbContext
     {
-        private readonly static object sync = new object();
+        private readonly object sync = new object();
 
         public BaseDbContext(string fileName)
         {
@@ -15,6 +15,7 @@
         public string DatabasePath { get; }
 
         private SQLiteConnection connection;
+        private bool isInitialized;
         public virtual SQLiteConnection Connection
         {
             get
@@ -27,10 +28,12 @@
                     if (connection != null)
                         return connection;
 
-                    //var openFlags = SQLiteOpenFlags.Create | SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.FullMutex | SQLiteOpenFlags.SharedCache;
-                    //connection = new SQLiteConnection(DatabasePath, openFlags);
                     connection = new SQLiteConnection(DatabasePath);
-                    CreateSchema(connection);
+                    if (!isInitialized)
+                    {
+                        CreateSchema(connection);
+                        isInitialized = true;
+                    }
                     return connection;
                 }
             }
