@@ -40,6 +40,8 @@
         {
             return Task.Run(() => 
             {
+                Thread.Sleep(1100);
+
                 var location = new Location(0, 0);
                 orderLocationRepository.Create(1, location, DateTimeOffset.UtcNow, 0, 0);
                 orderLocationRepository.ReadAll();
