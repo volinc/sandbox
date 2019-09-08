@@ -21,9 +21,15 @@
             var tasks = Enumerable.Range(1, 1000).Select(x => RunAsync(orderLocationRepository, cancellationToken));
             
             var task = Task.WhenAll(tasks).ContinueWith(t =>
-            {                
+            {
                 if (t.IsFaulted)
+                {
                     Console.WriteLine("Faulted");
+                    Console.WriteLine();
+                    var ae = t.Exception.Flatten().InnerExceptions.FirstOrDefault();
+                    Console.WriteLine(ae);
+                }
+
                 if (t.IsCompletedSuccessfully)
                     Console.WriteLine("Completed");
             });
@@ -40,8 +46,6 @@
         {
             return Task.Run(() => 
             {
-                Thread.Sleep(1100);
-
                 var location = new Location(0, 0);
                 orderLocationRepository.Create(1, location, DateTimeOffset.UtcNow, 0, 0);
                 orderLocationRepository.ReadAll();
