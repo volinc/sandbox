@@ -1,6 +1,7 @@
 ﻿namespace SqlitePclLock
 {
     using SQLite;
+    using System;
     using System.IO;
 
     public abstract class BaseDbContext
@@ -20,6 +21,7 @@
             lock (sync)
             {                                
                 var connection = new SQLiteConnection(DatabasePath);
+                //connection.BusyTimeout = TimeSpan.FromSeconds(30);
                 if (!isInitialized)
                 {
                     CreateSchema(connection);
