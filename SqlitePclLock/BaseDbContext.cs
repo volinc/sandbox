@@ -1,7 +1,6 @@
 ﻿namespace SqlitePclLock
 {
     using SQLite;
-    using System;
     using System.IO;
 
     public abstract class BaseDbContext

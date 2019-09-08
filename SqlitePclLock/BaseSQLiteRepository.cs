@@ -4,14 +4,14 @@
 
     public abstract class BaseSQLiteRepository<T> where T : class, new()
     {
-        private readonly BaseDbContext dbContext;
+        protected BaseDbContext DbContext { get; }
 
         protected BaseSQLiteRepository(BaseDbContext dbContext)
         {
-            this.dbContext = dbContext;
+            this.DbContext = dbContext;
         }
 
-        protected virtual SQLiteConnection CreateConnection() => dbContext.CreateConnection();
+        protected virtual SQLiteConnection CreateConnection() => DbContext.CreateConnection();
 
         public virtual void DeleteAll()
         {
