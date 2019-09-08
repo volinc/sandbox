@@ -8,35 +8,45 @@
 
     internal class Program
     {
-        private static async Task Main()
+        private static void Main()
         {
+            var cancellation = new CancellationTokenSource();
+            var cancellationToken = cancellation.Token;
+
             var orderDbContext = new OrderDbContext();
             var orderLocationRepository = new OrderLocationRepository(orderDbContext);
-
             orderLocationRepository.DeleteAll();
             var max = orderLocationRepository.ReadMaxIndexOrNull();
 
-            var tasks = Enumerable.Range(1, 1000).Select(x => RunAsync(orderLocationRepository));
+            var tasks = Enumerable.Range(1, 1000).Select(x => RunAsync(orderLocationRepository, cancellationToken));
+            
+            var task = Task.WhenAll(tasks).ContinueWith(t =>
+            {                
+                if (t.IsFaulted)
+                    Console.WriteLine("Faulted");
+                if (t.IsCompletedSuccessfully)
+                    Console.WriteLine("Completed");
+            });
 
-            await Task.WhenAll(tasks);
-
-            await Console.Out.WriteLineAsync("Done");
-            await Console.In.ReadLineAsync();
+            Console.ReadLine();
+            if (!task.IsCompleted)
+            {
+                cancellation.Cancel();
+                Console.WriteLine("Canceled");
+            }
         }
 
-
-        private static async Task RunAsync(OrderLocationRepository orderLocationRepository)
+        private static Task RunAsync(OrderLocationRepository orderLocationRepository, CancellationToken cancellationToken)
         {
-            await Task.Run(() => 
+            return Task.Run(() => 
             {
                 var location = new Location(0, 0);
                 orderLocationRepository.Create(1, location, DateTimeOffset.UtcNow, 0, 0);
                 orderLocationRepository.ReadAll();
                 orderLocationRepository.DeleteAll();
-
                 Console.Out.WriteLine($"Done {Thread.CurrentThread.ManagedThreadId} {Thread.CurrentThread.IsBackground}");
 
-            }).ConfigureAwait(false);
+            }, cancellationToken);
         }
     }
 }
