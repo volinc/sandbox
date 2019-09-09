@@ -23,7 +23,6 @@
 
         }
 
-
         public void Create(long orderId, Location location, DateTimeOffset timestamp, double speed, double heading)
         {
             var data = new OrderLocationRealm

@@ -49,7 +49,7 @@
                 var location = new Location(0, 0);
                 orderLocationRepository.Create(1, location, DateTimeOffset.UtcNow, 0, 0);
                 var m = orderLocationRepository.ReadAll();
-                orderLocationRepository.DeleteAll();
+                //orderLocationRepository.DeleteAll();
                 Console.WriteLine($"Done {Thread.CurrentThread.ManagedThreadId} {Thread.CurrentThread.IsBackground} {m.Last().Index}");
 
             }, cancellationToken);
