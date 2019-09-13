@@ -16,7 +16,7 @@
             var orderDbContext = new OrderDbContext();
             var orderLocationRepository = new OrderLocationRepository(orderDbContext);
             orderLocationRepository.DeleteAll();
-            //var max = orderLocationRepository.ReadMaxIndexOrNull();
+            var max = orderLocationRepository.ReadMaxIndexOrNull();
 
             var tasks = Enumerable.Range(1, 1000).Select(x => RunAsync(orderLocationRepository, cancellationToken));
 

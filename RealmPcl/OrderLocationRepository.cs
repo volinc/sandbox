@@ -6,7 +6,6 @@
     using System;
     using System.Collections.Generic;
 
-    //todo: ??? Мейби как-то по-другому
     public class LocationCounter : RealmObject
     {
         [PrimaryKey]
@@ -66,12 +65,24 @@
             {
                 conn.Refresh();
 
-                var set = conn.All<OrderLocationRealm>()
-                    .OrderBy(x => x.Index)
-                    .ToArray();
+                return conn.All<OrderLocationRealm>()
+                           .OrderBy(x => x.Index)
+                           .AsEnumerable()
+                           .Select(x => x.ToOrderTrackPoint())
+                           .ToArray();
+            }
+        }
 
-                return set.Select(x => x.ToOrderTrackPoint())
-                    .ToArray();
+        public int? ReadMaxIndexOrNull()
+        {
+            using (var conn = Connection)
+            {
+                conn.Refresh();
+
+                return conn.All<OrderLocationRealm>()
+                           .OrderBy(x => x.Index)                           
+                           .LastOrDefault()
+                           ?.Index;
             }
         }
 
