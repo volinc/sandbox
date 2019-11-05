@@ -8,7 +8,7 @@
     {
         private static void Main()
         {
-            var book = new Book("abc");
+            var book = Book.Create("abc");
             var bytes = MessagePackSerializer.Serialize(book, ContractlessStandardResolver.Instance);
             book = MessagePackSerializer.Deserialize<Book>(bytes, ContractlessStandardResolver.Instance);
             Console.WriteLine(book.Author);
@@ -23,5 +23,10 @@
         }
 
         public string Author { get; }
+
+        public static Book Create(string author)
+        {
+            return new Book(author);
+        }
     }
 }
