@@ -1,34 +1,32 @@
 ﻿namespace ServiceProviderTest
-{    
+{
     using Microsoft.Extensions.DependencyInjection;
     using System;
-    
+
     internal class Program
     {
         private static void Main()
         {            
             var services = new ServiceCollection();
-            services.AddScoped<Book>();
-            services.AddSingleton<Func<Book>>(sp => sp.GetRequiredService<Book>);                                
-            var serviceProvider = services.BuildServiceProvider();
+            services.AddScopeAccessor();
 
-            Run(serviceProvider);
+            services.AddSingleton(sp => sp.GetRequiredFunc<Book>())
+                    .AddScoped<Book>();
+                
+            Run(services.BuildServiceProvider());                
+            
             Console.ReadLine();
         }
 
         private static void Run(IServiceProvider serviceProvider)
-        {
-            var book = serviceProvider.GetRequiredService<Book>();            
-            Console.WriteLine(book);
+        {            
+            Console.WriteLine(serviceProvider.GetRequiredService<Book>());
+            Console.WriteLine(serviceProvider.GetRequiredService<Func<Book>>()());
 
-            var bookFactory = serviceProvider.GetRequiredService<Func<Book>>();
-            var book0 = bookFactory();
-            Console.WriteLine(book0);
+            using (var accessor = serviceProvider.CreateScopeAccessor())
+                Console.WriteLine(accessor.ScopeServices.GetRequiredService<Func<Book>>()());            
 
-            using var scope1 = serviceProvider.CreateScope();
-            var bookFactory1 = scope1.ServiceProvider.GetRequiredService<Func<Book>>();
-            var book1 = bookFactory();
-            Console.WriteLine(book1);
+            Console.WriteLine(serviceProvider.GetRequiredService<Func<Book>>()());
         }
     }
 
