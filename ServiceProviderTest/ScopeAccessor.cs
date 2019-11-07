@@ -3,29 +3,28 @@
     using Microsoft.Extensions.DependencyInjection;
     using System;
 
-    public class ScopeAccessor : IScopeAccessor
-    {                
-        private readonly IServiceProvider serviceProvider;
+    internal class ScopeAccessor : IScopeAccessor
+    {
         private IServiceScope serviceScope;
 
-        public ScopeAccessor(IServiceProvider serviceProvider)
-        {
-            this.serviceProvider = serviceProvider;
-        }        
+        public Guid Id { get; } = Guid.NewGuid();
 
-        public IServiceProvider ScopeServices => serviceScope?.ServiceProvider ?? serviceProvider;
+        public IServiceProvider ScopeServices => serviceScope?.ServiceProvider;
         
-        public void CreateScope()
+        internal void Init(IServiceScope scope)
         {
             if (serviceScope != null)
-                return;
+                throw new InvalidOperationException("Scope already set.");
 
-            serviceScope = serviceProvider.CreateScope();            
+            serviceScope = scope;            
         }
 
         public void Dispose()
         {
-            serviceScope?.Dispose();
+            if (serviceScope == null)
+                return;
+            
+            serviceScope.Dispose();
             serviceScope = null;
         }
     }

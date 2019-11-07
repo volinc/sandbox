@@ -10,8 +10,9 @@
             if (serviceProvider == null)
                 throw new ArgumentNullException(nameof(serviceProvider));
 
-            var scopeAccessor = serviceProvider.GetRequiredService<ScopeAccessor>();
-            scopeAccessor.CreateScope();
+            var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope();
+            var scopeAccessor = serviceScope.ServiceProvider.GetRequiredService<ScopeAccessor>();
+            scopeAccessor.Init(serviceScope);
 
             return scopeAccessor;
         }
@@ -22,6 +23,9 @@
                 throw new ArgumentNullException(nameof(serviceProvider));
 
             var scopeAccessor = serviceProvider.GetRequiredService<ScopeAccessor>();
+            if (scopeAccessor.ScopeServices == null)
+                return serviceProvider.GetRequiredService<T>;
+
             return () => scopeAccessor.ScopeServices.GetRequiredService<T>();
         }
     }
