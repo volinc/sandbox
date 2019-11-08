@@ -1,4 +1,6 @@
-﻿namespace ServiceProviderTest
+﻿using System.Threading.Tasks;
+
+namespace ServiceProviderTest
 {
     using Microsoft.Extensions.DependencyInjection;
     using System;
@@ -8,39 +10,48 @@
         private static void Main()
         {            
             var services = new ServiceCollection();
+            
             services.AddScopeAccessor();
 
-            services.AddScoped(sp => sp.GetRequiredFunc<Book>())
-                    .AddScoped<Book>();
+            services.AddScoped<Book>()
+                    .AddScoped(sp => sp.GetRequiredFunc<Book>())
+                    .AddSingleton<BookService>();
                 
-            Run(services.BuildServiceProvider());                
+            Run(services.BuildServiceProvider());
             
             Console.ReadLine();
         }
 
         private static void Run(IServiceProvider serviceProvider)
-        {            
-            Console.WriteLine("root\t\t\t\t\t{0}", serviceProvider.GetRequiredService<Book>());
-            Console.WriteLine("root func\t\t\t\t{0}", serviceProvider.GetRequiredService<Func<Book>>()());
+        {
+            Console.WriteLine("{0} root", serviceProvider.GetRequiredService<Book>());
+            Console.WriteLine("{0} root func", serviceProvider.GetRequiredService<Func<Book>>()());
+            Console.WriteLine("{0} service func", serviceProvider.GetRequiredService<BookService>().Create());
 
-            using (var accessor0 = serviceProvider.CreateScopeAccessor())
+            Task.Run(async () =>
             {
-                Console.WriteLine($"{nameof(accessor0)} {accessor0.Id}\t{accessor0.ScopeServices.GetRequiredService<Func<Book>>()()}");
+                Console.WriteLine("1 {0} root", serviceProvider.GetRequiredService<Book>());
+                using var scope1 = serviceProvider.CreateContextScope();
+                Console.WriteLine("1 {0} {1} func", scope1.ServiceProvider.GetRequiredService<Func<Book>>()(), nameof(scope1));
+                Console.WriteLine("1 {0} {1} service func", scope1.ServiceProvider.GetRequiredService<BookService>().Create(), nameof(scope1));
 
-                using (var accessor1 = serviceProvider.CreateScopeAccessor())
-                {
-                    Console.WriteLine($"{nameof(accessor1)} {accessor1.Id}\t\t{accessor1.ScopeServices.GetRequiredService<Func<Book>>()()}");
-                }
-
-                Console.WriteLine($"{nameof(accessor0)} {accessor0.Id}\t{accessor0.ScopeServices.GetRequiredService<Func<Book>>()()}");
-            }
-
-            using (var accessor2 = serviceProvider.CreateScopeAccessor())
-            {
-                Console.WriteLine($"{nameof(accessor2)} {accessor2.Id}\t{accessor2.ScopeServices.GetRequiredService<Func<Book>>()()}");
-            }
-
-            Console.WriteLine("root func\t\t\t\t{0}", serviceProvider.GetRequiredService<Func<Book>>()());
+                Console.WriteLine(await scope1.ServiceProvider.GetRequiredService<BookService>().CreateAsync());
+            });
         }
+
+        //private static void NewMethod(ContextScope scope1)
+        //{
+        //    Console.WriteLine("1 {0} {1} func", scope1.ServiceProvider.GetRequiredService<Func<Book>>()(), nameof(scope1));
+        //    Console.WriteLine("1 {0} {1} service func", scope1.ServiceProvider.GetRequiredService<BookService>().Create(),
+        //        nameof(scope1));
+        //    Console.WriteLine("1 {0} {1} service func", scope1.ServiceProvider.GetRequiredService<BookService>().Create(),
+        //        nameof(scope1));
+
+        //    //Console.WriteLine("2 {0} root", serviceProvider.GetRequiredService<Book>());
+        //    //using var scope2 = serviceProvider.CreateContextScope();
+        //    //Console.WriteLine("2 {0} {1} func", scope2.ServiceProvider.GetRequiredService<Func<Book>>()(), nameof(scope2));
+        //    //Console.WriteLine("2 {0} {1} service func", scope2.ServiceProvider.GetRequiredService<BookService>().Create(), nameof(scope2));
+        //    //Console.WriteLine("2 {0} {1} service func", scope2.ServiceProvider.GetRequiredService<BookService>().Create(), nameof(scope2));
+        //}
     }
 }

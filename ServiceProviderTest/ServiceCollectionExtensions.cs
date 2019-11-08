@@ -11,7 +11,7 @@
             if (services == null)
                 throw new ArgumentNullException(nameof(services));
 
-            services.TryAddScoped<ScopeAccessor>();
+            services.TryAddSingleton<ContextScope>();
 
             return services;
         }

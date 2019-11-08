@@ -3,10 +3,8 @@
     using System;
 
     public class Book
-    {        
-        public Book() { Number = Guid.NewGuid(); }
-        
-        public Guid Number { get; }
+    {
+        public Guid Number { get; } = Guid.NewGuid();
 
         public override string ToString() => $"Book {Number}";
     }

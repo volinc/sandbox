@@ -5,16 +5,14 @@
 
     public static class ServiceProviderExtensions
     {
-        public static IScopeAccessor CreateScopeAccessor(this IServiceProvider serviceProvider)
+        public static ContextScope CreateContextScope(this IServiceProvider serviceProvider)
         {
             if (serviceProvider == null)
                 throw new ArgumentNullException(nameof(serviceProvider));
 
-            var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope();
-            var scopeAccessor = serviceScope.ServiceProvider.GetRequiredService<ScopeAccessor>();
-            scopeAccessor.Init(serviceScope);
-
-            return scopeAccessor;
+            var contextScope = serviceProvider.GetRequiredService<ContextScope>();
+            contextScope.Init();
+            return contextScope;
         }
 
         public static Func<T> GetRequiredFunc<T>(this IServiceProvider serviceProvider)
@@ -22,11 +20,9 @@
             if (serviceProvider == null)
                 throw new ArgumentNullException(nameof(serviceProvider));
 
-            var scopeAccessor = serviceProvider.GetRequiredService<ScopeAccessor>();
-            if (scopeAccessor.ScopeServices == null)
-                return serviceProvider.GetRequiredService<T>;
-
-            return () => scopeAccessor.ScopeServices.GetRequiredService<T>();
+            var scopeAccessor = serviceProvider.GetRequiredService<ContextScope>();
+            
+            return () => scopeAccessor.ServiceProvider.GetRequiredService<T>();
         }
     }
 }
