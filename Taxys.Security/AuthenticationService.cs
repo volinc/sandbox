@@ -223,17 +223,13 @@
 
         public async Task<MiniUser> AuthenticateAsync(AccessTokenRequest request, string audience, ValidateAsync validate)
         {
-            switch (request.GrantType)
+            return request.GrantType switch
             {
-                case GrantPassword:
-                    return await GetGrantPasswordAsync(request, audience, validate);
-                case GrantRefreshToken:
-                    return await GetGrantRefreshTokenAsync(request);
-                case GrantPasswordless:
-                    return await GetGrantPasswordless(request, audience, validate);
-                default:
-                    throw new AuthenticationException("Incorrect grant type.");
-            }
+                GrantPassword => await GetGrantPasswordAsync(request, audience, validate),
+                GrantRefreshToken => await GetGrantRefreshTokenAsync(request),
+                GrantPasswordless => await GetGrantPasswordless(request, audience, validate),
+                _ => throw new AuthenticationException("Incorrect grant type."),
+            };
         }
 
         private async Task<MiniUser> GetGrantPasswordAsync(AccessTokenRequest request, string audience, ValidateAsync validate)
