@@ -23,6 +23,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceProviderTest", "Serv
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutofacTest", "AutofacTest\AutofacTest.csproj", "{04A1B546-E84D-4B23-99DF-4F7D0AC7D1E4}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreAuthorization", "AspNetCoreAuthorization\AspNetCoreAuthorization.csproj", "{7371F23E-C5B3-48B9-907C-1EE86FC0CFB4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Taxys.Security", "Taxys.Security\Taxys.Security.csproj", "{1D3990EE-9BEE-44EA-96DC-386CA28DDC30}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DateTimeOffsetTest", "DateTimeOffsetTest\DateTimeOffsetTest.csproj", "{3A7ADCDE-C41B-46EA-9F5A-0DCFE1C9ECA9}"
 EndProject
 Global
@@ -71,6 +75,14 @@ Global
 		{04A1B546-E84D-4B23-99DF-4F7D0AC7D1E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04A1B546-E84D-4B23-99DF-4F7D0AC7D1E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04A1B546-E84D-4B23-99DF-4F7D0AC7D1E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7371F23E-C5B3-48B9-907C-1EE86FC0CFB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7371F23E-C5B3-48B9-907C-1EE86FC0CFB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7371F23E-C5B3-48B9-907C-1EE86FC0CFB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7371F23E-C5B3-48B9-907C-1EE86FC0CFB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D3990EE-9BEE-44EA-96DC-386CA28DDC30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D3990EE-9BEE-44EA-96DC-386CA28DDC30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D3990EE-9BEE-44EA-96DC-386CA28DDC30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D3990EE-9BEE-44EA-96DC-386CA28DDC30}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3A7ADCDE-C41B-46EA-9F5A-0DCFE1C9ECA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3A7ADCDE-C41B-46EA-9F5A-0DCFE1C9ECA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A7ADCDE-C41B-46EA-9F5A-0DCFE1C9ECA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
