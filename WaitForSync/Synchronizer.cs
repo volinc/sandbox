@@ -15,8 +15,8 @@
 
         private static async Task SynchronizeIntenalAsync(string value)
         {
-            var delay = Random.Next(5, 100);
-            await Task.Delay(delay);
+            //var delay = Random.Next(5, 100);
+            //await Task.Delay(delay);
             await Console.Out.WriteLineAsync(value);
         }
     }
