@@ -7,9 +7,8 @@
     {
         private static void Main()
         {
-            const string htmlString = @"Подтверждение регистрации Агрегатора
-
-<html>
+            const string htmlString = 
+@"<html>
 <head>
 <title></title>
 </head>
