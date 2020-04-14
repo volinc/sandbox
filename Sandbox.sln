@@ -31,7 +31,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DateTimeOffsetTest", "DateT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WaitForSync", "WaitForSync\WaitForSync.csproj", "{D2623B14-97DA-46A0-B98A-0C72BE796CBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlToPlainText", "HtmlToPlainText\HtmlToPlainText.csproj", "{7C3307C8-B351-4082-B943-258507AC2E2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HtmlToPlainText", "HtmlToPlainText\HtmlToPlainText.csproj", "{7C3307C8-B351-4082-B943-258507AC2E2F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
