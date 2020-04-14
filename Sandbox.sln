@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WaitForSync", "WaitForSync\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HtmlToPlainText", "HtmlToPlainText\HtmlToPlainText.csproj", "{7C3307C8-B351-4082-B943-258507AC2E2F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SendGridTest", "SendGridTest\SendGridTest.csproj", "{5B678D9D-386C-47A8-B88E-157FAD9C5189}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,6 +97,10 @@ Global
 		{D2623B14-97DA-46A0-B98A-0C72BE796CBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2623B14-97DA-46A0-B98A-0C72BE796CBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2623B14-97DA-46A0-B98A-0C72BE796CBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B678D9D-386C-47A8-B88E-157FAD9C5189}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B678D9D-386C-47A8-B88E-157FAD9C5189}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B678D9D-386C-47A8-B88E-157FAD9C5189}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B678D9D-386C-47A8-B88E-157FAD9C5189}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7C3307C8-B351-4082-B943-258507AC2E2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7C3307C8-B351-4082-B943-258507AC2E2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C3307C8-B351-4082-B943-258507AC2E2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
