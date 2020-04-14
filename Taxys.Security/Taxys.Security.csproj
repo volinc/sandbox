@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="jose-jwt" Version="2.5.0" />
-    <PackageReference Include="MessagePack" Version="1.8.74" />
+    <PackageReference Include="MessagePack" Version="1.9.11" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authorization.Policy" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
